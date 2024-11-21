@@ -62,8 +62,24 @@ public class SinglePlayer implements PushAndPopGameSubScene {
         var gridpane = new GridPane();
 
         ImageView map_image = new ImageView(FXGL.image("map.png"));
-        map_image.setFitWidth(gameScene.getAppWidth());
-        map_image.setFitHeight(gameScene.getAppHeight());
+
+        double width = map_image.getBoundsInLocal().getWidth();
+        double height = map_image.getBoundsInLocal().getHeight();
+
+        double new_width = gameScene.getAppHeight()/height*width;
+        double new_height = gameScene.getAppHeight();
+
+        map_image.setFitWidth(new_width);
+        map_image.setFitHeight(new_height);
+
+        map_image.setLayoutX((gameScene.getAppWidth() - new_width)/2);
+        map_image.setLayoutY(0);
+
+        ImageView background = new ImageView(FXGL.image("background.jpg"));
+        background.setFitWidth(gameScene.getAppWidth());
+        background.setFitHeight(gameScene.getAppHeight());
+
+        gameScene.addUINode(background);
 
         gameScene.addUINode(map_image);
     }

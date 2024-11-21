@@ -77,6 +77,9 @@ public class MultiPlayerSelector implements PushAndPopGameSubScene {
 
         gameScene.addUINode(map_image);
 
+        gridpane.setHgap(30);
+        gridpane.setVgap(30);
+
         gameScene.addUINode(gridpane);
     }
 }

@@ -78,6 +78,9 @@ public class MainMenu implements ReplaceableGameScene {
         map_image.setFitWidth(gameScene.getAppWidth());
         map_image.setFitHeight(gameScene.getAppHeight());
 
+        gridpane.setHgap(30);
+        gridpane.setVgap(30);
+
         gameScene.addUINode(map_image);
 
         gameScene.addUINode(gridpane);

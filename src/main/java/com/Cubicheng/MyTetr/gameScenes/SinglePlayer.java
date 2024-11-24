@@ -80,7 +80,7 @@ public class SinglePlayer implements PushAndPopGameSubScene {
         map_texture.setFitHeight(new_height);
 
         var mapEntity = new EntityBuilder()
-                .at(0, 0)
+                .at((gameScene.getAppWidth() - new_width) / 2, 0)
                 .view(map_texture)
                 .zIndex(Integer.MIN_VALUE)
                 .build();

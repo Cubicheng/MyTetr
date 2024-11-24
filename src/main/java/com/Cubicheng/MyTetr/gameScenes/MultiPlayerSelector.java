@@ -1,6 +1,6 @@
-package com.MyTetr.Cubicheng.gameScenes;
+package com.Cubicheng.MyTetr.gameScenes;
 
-import com.MyTetr.Cubicheng.GameApp;
+import com.Cubicheng.MyTetr.GameApp;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.input.Input;

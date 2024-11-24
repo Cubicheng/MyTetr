@@ -1,5 +1,10 @@
-package com.MyTetr.Cubicheng;
+package com.Cubicheng.MyTetr;
 
+import com.Cubicheng.MyTetr.gameScenes.MainMenu;
+import com.Cubicheng.MyTetr.gameScenes.MultiPlayer;
+import com.Cubicheng.MyTetr.gameScenes.MultiPlayerSelector;
+import com.Cubicheng.MyTetr.gameScenes.SinglePlayer;
+import com.Cubicheng.MyTetr.gameWorld.PropertyKey;
 import com.almasb.fxgl.app.GameSettings;
 import com.whitewoodcity.fxgl.app.GameApplication;
 import com.whitewoodcity.fxgl.app.ReplaceableGameSceneBuilder;
@@ -7,8 +12,8 @@ import com.whitewoodcity.fxgl.dsl.FXGL;
 import com.whitewoodcity.fxgl.service.ReplaceableGameScene;
 import com.whitewoodcity.fxgl.service.XGameScene;
 import javafx.stage.Screen;
-import com.MyTetr.Cubicheng.gameWorld.*;
-import com.MyTetr.Cubicheng.gameScenes.*;
+import com.Cubicheng.MyTetr.gameWorld.*;
+import com.Cubicheng.MyTetr.gameScenes.*;
 
 public class GameApp extends GameApplication {
 

@@ -1,33 +1,25 @@
-package com.MyTetr.Cubicheng.gameScenes;
+package com.Cubicheng.MyTetr.gameScenes;
 
-import com.MyTetr.Cubicheng.Application;
-import com.MyTetr.Cubicheng.GameApp;
+import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.GameApp;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
-import com.almasb.fxgl.time.LocalTimer;
 import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.XInput;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import com.almasb.fxgl.dsl.FXGL;
-import javafx.stage.Screen;
-import javafx.util.Duration;
 
-
-import java.util.List;
 import java.util.Optional;
 
-public class SinglePlayer implements PushAndPopGameSubScene {
-    public static final String SCENE_NAME = "Single_Player";
+public class MultiPlayer implements PushAndPopGameSubScene{
+    public static final String SCENE_NAME = "Multi_Player";
 
     private GameWorld gameWorld;
     private Entity player;

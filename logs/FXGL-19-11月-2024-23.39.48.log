@@ -30,7 +30,7 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 23:39:46.028 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Scaled size: 1500.0 x 1000.0
 23:39:46.028 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Scaled ratio: (1.0, 1.0)
 23:39:46.032 [FXGL Background Thread 1 ] DEBUG Engine               - Initializing environment variables
-23:39:46.061 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class com.MyTetr.Cubicheng.GameApp
+23:39:46.061 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class com.Cubicheng.MyTetr.GameApp
 23:39:46.061 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Applying CSS: fxgl_dark.css
 23:39:46.062 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/css/fxgl_dark.css
 23:39:46.073 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Initializing application scenes
@@ -306,7 +306,7 @@ java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)
 	at java.base/java.util.Objects.checkIndex(Objects.java:385)
 	at java.base/java.util.ArrayList.get(ArrayList.java:427)
-	at MyTetr/com.MyTetr.Cubicheng.gameScenes.MainMenu.lambda$initInput$0(MainMenu.java:31)
+	at MyTetr/gameScenes.com.Cubicheng.MyTetr.MainMenu.lambda$initInput$0(MainMenu.java:31)
 	at com.whitewoodcity.fxcity@0.1.1-SNAPSHOT/com.whitewoodcity.fxgl.app.GameApplication$1.onActionBegin(GameApplication.java:57)
 	at com.almasb.fxgl.core@17.3/com.almasb.fxgl.input.UserAction.begin$fxgl_core(UserAction.kt:37)
 	at com.almasb.fxgl.core@17.3/com.almasb.fxgl.input.Input.handlePressed(Input.kt:375)

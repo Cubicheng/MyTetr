@@ -1,18 +1,15 @@
-package com.MyTetr.Cubicheng;
+package com.Cubicheng.MyTetr;
 
-import com.MyTetr.Cubicheng.gameScenes.MainMenu;
+import com.Cubicheng.MyTetr.gameScenes.MainMenu;
 import com.whitewoodcity.atlantafx.base.theme.CityDark;
 import com.whitewoodcity.fxgl.service.FillService;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import com.MyTetr.Cubicheng.gameWorld.*;
-import com.MyTetr.Cubicheng.gameScenes.*;
 
 import java.awt.*;
 

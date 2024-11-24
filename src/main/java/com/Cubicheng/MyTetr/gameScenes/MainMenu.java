@@ -1,20 +1,26 @@
-package com.MyTetr.Cubicheng.gameScenes;
+package com.Cubicheng.MyTetr.gameScenes;
 
 
+import com.Cubicheng.MyTetr.Application;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.dsl.FXGL;
 import com.whitewoodcity.fxgl.service.ReplaceableGameScene;
 import com.whitewoodcity.fxgl.service.XInput;
+import javafx.scene.control.ButtonType;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
+import javafx.scene.control.Alert;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import com.MyTetr.Cubicheng.GameApp;
+import com.Cubicheng.MyTetr.GameApp;
 
 public class MainMenu implements ReplaceableGameScene {
     public static final String SCENE_NAME = "MainMenu";
@@ -22,7 +28,19 @@ public class MainMenu implements ReplaceableGameScene {
     @Override
     public XInput initInput(Map<KeyCode, Runnable> keyPresses, Map<KeyCode, Runnable> keyReleases, Map<KeyCode, Runnable> keyActions) {
         var input = new XInput(keyPresses, keyReleases, keyActions);
-
+        List.of(KeyCode.ESCAPE).forEach(keyCode ->
+                input.onActionBegin(keyCode, () -> {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Sure to leave?");
+                    alert.setContentText("You 'll lose your progress.");
+                    alert.initOwner(Application.getStage());
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+                        System.exit(0);
+                    }
+                })
+        );
 
         return input;
     }
@@ -74,14 +92,11 @@ public class MainMenu implements ReplaceableGameScene {
         gridpane.setTranslateX(FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth() * 2 / 3);
         gridpane.setTranslateY(FXGL.getAppCenter().getY() * 1.2);
 
-        ImageView map_image = new ImageView(FXGL.image("background.jpg"));
-        map_image.setFitWidth(gameScene.getAppWidth());
-        map_image.setFitHeight(gameScene.getAppHeight());
+        var background = FXGL.image("background.jpg");
+        gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
         gridpane.setHgap(30);
         gridpane.setVgap(30);
-
-        gameScene.addUINode(map_image);
 
         gameScene.addUINode(gridpane);
     }

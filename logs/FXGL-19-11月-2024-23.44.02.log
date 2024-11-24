@@ -30,7 +30,7 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 23:43:59.361 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Scaled size: 1500.0 x 1000.0
 23:43:59.361 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Scaled ratio: (1.0, 1.0)
 23:43:59.365 [FXGL Background Thread 1 ] DEBUG Engine               - Initializing environment variables
-23:43:59.396 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class com.MyTetr.Cubicheng.GameApp
+23:43:59.396 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class com.Cubicheng.MyTetr.GameApp
 23:43:59.396 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Applying CSS: fxgl_dark.css
 23:43:59.397 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/css/fxgl_dark.css
 23:43:59.410 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Initializing application scenes
@@ -306,7 +306,7 @@ java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)
 	at java.base/java.util.Objects.checkIndex(Objects.java:385)
 	at java.base/java.util.ArrayList.get(ArrayList.java:427)
-	at MyTetr/com.MyTetr.Cubicheng.gameScenes.MainMenu.lambda$initUI$3(MainMenu.java:61)
+	at MyTetr/gameScenes.com.Cubicheng.MyTetr.MainMenu.lambda$initUI$3(MainMenu.java:61)
 	at javafx.base@21.0.1/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
 	at javafx.base@21.0.1/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
 	at javafx.base@21.0.1/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
@@ -432,7 +432,7 @@ java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 23:44:02.504 [FXGL Background Thread 3 ] DEBUG Engine               - urlGithub: https://github.com/AlmasB/FXGL
 23:44:02.504 [FXGL Background Thread 3 ] DEBUG Engine               - urlLeaderboard: http://fxgl-top.herokuapp.com/
 23:44:02.504 [FXGL Background Thread 3 ] DEBUG Engine               - urlPOM: https://raw.githubusercontent.com/AlmasB/FXGL/release/README.md
-23:44:02.504 [FXGL Background Thread 3 ] DEBUG Engine               - userAppClass: class com.MyTetr.Cubicheng.GameApp
+23:44:02.504 [FXGL Background Thread 3 ] DEBUG Engine               - userAppClass: class com.Cubicheng.MyTetr.GameApp
 23:44:02.504 [FXGL Background Thread 3 ] DEBUG Engine               - version: 0.0
 23:44:02.504 [FXGL Background Thread 3 ] DEBUG Engine               - versionCheckDays: 7
 23:44:02.504 [FXGL Background Thread 3 ] DEBUG Engine               - width: 1500

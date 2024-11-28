@@ -21,13 +21,6 @@ public class GameMapComponent extends Component {
     @Override
     public void onAdded() {
         next_queue = new NextQueue();
-    }
-
-    public int get_next_piece(){
-        return next_queue.get_next_piece();
-    }
-
-    public GameMapComponent() {
         for (int i = 0; i < MAP_HEIGHT; i++) {
             Vector<Integer> row = new Vector<>(MAP_WIDTH);
             for (int j = 0; j < MAP_WIDTH; j++) {
@@ -35,6 +28,14 @@ public class GameMapComponent extends Component {
             }
             playfiled.add(row);
         }
+    }
+
+    public int get_next_piece(){
+        return next_queue.get_next_piece();
+    }
+
+    public Vector< Vector<Integer> > get_playfiled(){
+        return playfiled;
     }
 
     public static EntityBuilder builder(Component... components) {

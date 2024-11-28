@@ -104,8 +104,11 @@ public class SinglePlayer implements PushAndPopGameSubScene, FrontlineService {
         List.of(KeyCode.LEFT).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::move_left));
         List.of(KeyCode.DOWN).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::move_down));
         List.of(KeyCode.SPACE).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::on_drop));
+        List.of(KeyCode.Z).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::left_rotate));
+        List.of(KeyCode.UP).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::right_rotate));
 
-        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN, KeyCode.SPACE).forEach(keyCode -> input.onActionBegin(keyCode, onePiece.getComponent(OnePieceComponent.class)::reset_is_moved));
+
+        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN, KeyCode.SPACE, KeyCode.Z, KeyCode.UP).forEach(keyCode -> input.onActionBegin(keyCode, onePiece.getComponent(OnePieceComponent.class)::reset_is_moved));
     }
 
     @Override

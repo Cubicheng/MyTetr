@@ -2,7 +2,9 @@ package com.Cubicheng.MyTetr.gameScenes;
 
 import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.gameWorld.FrontlineService;
 import com.Cubicheng.MyTetr.gameWorld.Type;
+import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.OnePieceComponent;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.EntityBuilder;
@@ -27,15 +29,14 @@ import java.util.List;
 
 import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
 
-
 import java.util.Optional;
 
-public class SinglePlayer implements PushAndPopGameSubScene {
+public class SinglePlayer implements PushAndPopGameSubScene, FrontlineService {
     public static final String SCENE_NAME = "Single_Player";
 
     private GameWorld gameWorld;
     private Entity onePiece;
-
+    private Entity gameMap;
 
     @Override
     public void initGame(GameWorld gameWorld, XInput input) {
@@ -93,18 +94,22 @@ public class SinglePlayer implements PushAndPopGameSubScene {
         var background = FXGL.image("back1.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
+        gameMap = GameMapComponent.of(new SpawnData(0, 0));
+        gameWorld.addEntity(gameMap);
+
         onePiece = OnePieceComponent.of(new SpawnData(0, 0));
-
         gameWorld.addEntity(onePiece);
-
 
         List.of(KeyCode.RIGHT).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::move_right));
         List.of(KeyCode.LEFT).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::move_left));
         List.of(KeyCode.DOWN).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::move_down));
+        List.of(KeyCode.SPACE).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::on_drop));
 
+        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN, KeyCode.SPACE).forEach(keyCode -> input.onActionBegin(keyCode, onePiece.getComponent(OnePieceComponent.class)::reset_is_moved));
+    }
 
-        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN).forEach(keyCode -> input.onActionBegin(keyCode, onePiece.getComponent(OnePieceComponent.class)::reset_is_moved));
-
-
+    @Override
+    public GameWorld get_game_world() {
+        return gameWorld;
     }
 }

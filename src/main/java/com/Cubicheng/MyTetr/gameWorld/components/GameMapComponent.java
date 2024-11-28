@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.components;
 
+import com.Cubicheng.MyTetr.gameWorld.NextQueue;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
@@ -14,6 +15,17 @@ import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
 public class GameMapComponent extends Component {
 
     private Vector< Vector<Integer> > playfiled = new Vector<>(MAP_HEIGHT);
+
+    private NextQueue next_queue;
+
+    @Override
+    public void onAdded() {
+        next_queue = new NextQueue();
+    }
+
+    public int get_next_piece(){
+        return next_queue.get_next_piece();
+    }
 
     public GameMapComponent() {
         for (int i = 0; i < MAP_HEIGHT; i++) {
@@ -37,6 +49,10 @@ public class GameMapComponent extends Component {
     }
 
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
-        return builder.build();
+        return builder
+                .type(Type.GameMap)
+                .with(new GameMapComponent())
+                .with(components)
+                .build();
     }
 }

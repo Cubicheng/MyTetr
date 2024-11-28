@@ -82,7 +82,7 @@ public class MainMenu implements ReplaceableGameScene {
             FXGL.<GameApp>getAppCast().push(SinglePlayer.SCENE_NAME);
         });
 
-        multiPlayerbtn.setOnMouseClicked(_2 -> {
+        multiPlayerbtn.setOnMouseClicked(_1 -> {
             FXGL.<GameApp>getAppCast().push(MultiPlayerSelector.SCENE_NAME);
         });
 

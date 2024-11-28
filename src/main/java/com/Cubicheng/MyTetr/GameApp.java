@@ -61,17 +61,14 @@ public class GameApp extends GameApplication {
             case SinglePlayer.SCENE_NAME -> new SinglePlayer();
             case MultiPlayerSelector.SCENE_NAME -> new MultiPlayerSelector();
             case MultiPlayer.SCENE_NAME -> new MultiPlayer();
-//      case Index.SCENE_NAME ->  new Index();
-//      case PlatformGame.SCENE_NAME -> new PlatformGame();
-//      case RogueLikeGame.SCENE_NAME -> new RogueLikeGame();
             default -> throw new RuntimeException("Wrong GameScene type");
         };
     }
 
-//  public FrontlineService getFrontlineService() {
-//    var app = gameScenes.getLast();
-//    if (app instanceof FrontlineService frontlineService)
-//      return frontlineService;
-//    else return null;
-//  }
+    public FrontlineService getFrontlineService() {
+        var app = gameScenes.getLast();
+        if (app instanceof FrontlineService frontlineService) {
+            return frontlineService;
+        } else return null;
+    }
 }

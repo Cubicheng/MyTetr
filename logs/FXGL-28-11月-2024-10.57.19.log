@@ -317,8 +317,8 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 10:57:17.136 [JavaFX Application Thread] DEBUG LoopRunner           - Stopping loop
 10:57:17.139 [JavaFX Application Thread] FATAL FXGLApplication      - Uncaught Exception:
 java.lang.NullPointerException: Cannot read field "techomino" because "this.techomino" is null
-	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.OnePieceComponent.check_collide(OnePieceComponent.java:135)
-	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.OnePieceComponent.move_right(OnePieceComponent.java:158)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.piece.OnePieceComponent.check_collide(OnePieceComponent.java:135)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.piece.OnePieceComponent.move_right(OnePieceComponent.java:158)
 	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.dsl.KeyInputBuilder$2.onAction(KeyInputBuilder.kt:53)
 	at com.almasb.fxgl.core@17.3/com.almasb.fxgl.input.UserAction.action$fxgl_core(UserAction.kt:38)
 	at com.almasb.fxgl.core@17.3/com.almasb.fxgl.input.Input.update(Input.kt:288)

@@ -308,12 +308,12 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 16:05:22.738 [JavaFX Application Thread] DEBUG LoopRunner           - Stopping loop
 16:05:22.739 [JavaFX Application Thread] FATAL FXGLApplication      - Uncaught Exception:
 java.lang.NullPointerException: Cannot invoke "com.almasb.fxgl.time.LocalTimer.capture()" because "this.das_timer" is null
-	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.OnePieceComponent.onAdded(OnePieceComponent.java:38)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.piece.OnePieceComponent.onAdded(OnePieceComponent.java:38)
 	at com.almasb.fxgl.entity@17.3/com.almasb.fxgl.entity.Entity.addComponentNoChecks(Entity.java:401)
 	at com.almasb.fxgl.entity@17.3/com.almasb.fxgl.entity.Entity.addComponent(Entity.java:393)
 	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.dsl.EntityBuilder.with(EntityBuilder.kt:202)
-	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.OnePieceComponent.of(OnePieceComponent.java:57)
-	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.OnePieceComponent.of(OnePieceComponent.java:51)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.piece.OnePieceComponent.of(OnePieceComponent.java:57)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.piece.OnePieceComponent.of(OnePieceComponent.java:51)
 	at MyTetr/com.Cubicheng.MyTetr.gameScenes.SinglePlayer.initUI(SinglePlayer.java:96)
 	at com.whitewoodcity.fxcity@0.1.1-SNAPSHOT/com.whitewoodcity.fxgl.service.PushAndPopGameSubScene.decorate(PushAndPopGameSubScene.java:26)
 	at com.whitewoodcity.fxcity@0.1.1-SNAPSHOT/com.whitewoodcity.fxgl.service.PushAndPopGameSubScene.pushSubScene(PushAndPopGameSubScene.java:68)

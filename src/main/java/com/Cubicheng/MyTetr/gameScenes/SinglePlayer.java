@@ -3,9 +3,9 @@ package com.Cubicheng.MyTetr.gameScenes;
 import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameWorld.FrontlineService;
-import com.Cubicheng.MyTetr.gameWorld.Type;
-import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
-import com.Cubicheng.MyTetr.gameWorld.components.OnePieceComponent;
+import com.Cubicheng.MyTetr.gameWorld.components.*;
+import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
+import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.entity.Entity;
@@ -14,12 +14,10 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.texture.Texture;
-import com.whitewoodcity.fxgl.app.ImageData;
 import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.XInput;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import com.almasb.fxgl.dsl.FXGL;
@@ -35,7 +33,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, FrontlineService {
     public static final String SCENE_NAME = "Single_Player";
 
     private GameWorld gameWorld;
-    private Entity onePiece;
+    private Entity movablePiece,ghostPiece;
     private Entity gameMap;
 
     @Override
@@ -89,7 +87,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, FrontlineService {
         gameWorld.addEntity(mapEntity);
 
         startX = startX * new_width + (gameScene.getAppWidth() - new_width) / 2;
-        startY = startY * new_height;
+        startY = startY * new_height - BLOCK_SIZE;
 
         var background = FXGL.image("back1.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
@@ -97,18 +95,23 @@ public class SinglePlayer implements PushAndPopGameSubScene, FrontlineService {
         gameMap = GameMapComponent.of(new SpawnData(0, 0));
         gameWorld.addEntity(gameMap);
 
-        onePiece = OnePieceComponent.of(new SpawnData(0, 0));
-        gameWorld.addEntity(onePiece);
+        movablePiece = MovablePieceComponent.of(new SpawnData(0, 0));
+        gameWorld.addEntity(movablePiece);
 
-        List.of(KeyCode.RIGHT).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::move_right));
-        List.of(KeyCode.LEFT).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::move_left));
-        List.of(KeyCode.DOWN).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::move_down));
-        List.of(KeyCode.SPACE).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::on_drop));
-        List.of(KeyCode.Z).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::left_rotate));
-        List.of(KeyCode.UP).forEach(keyCode -> input.onAction(keyCode, onePiece.getComponent(OnePieceComponent.class)::right_rotate));
+        ghostPiece = GhostPieceComponent.of(new SpawnData(0, 0));
+        gameWorld.addEntity(ghostPiece);
+
+        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN, KeyCode.SPACE, KeyCode.Z, KeyCode.UP).forEach(keyCode -> input.onActionBegin(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::reset_is_moved));
+
+        List.of(KeyCode.RIGHT).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_right));
+        List.of(KeyCode.LEFT).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_left));
+        List.of(KeyCode.DOWN).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_down));
+        List.of(KeyCode.SPACE).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::on_drop));
+        List.of(KeyCode.Z).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::left_rotate));
+        List.of(KeyCode.UP).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::right_rotate));
 
 
-        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN, KeyCode.SPACE, KeyCode.Z, KeyCode.UP).forEach(keyCode -> input.onActionBegin(keyCode, onePiece.getComponent(OnePieceComponent.class)::reset_is_moved));
+
     }
 
     @Override

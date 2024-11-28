@@ -39,7 +39,7 @@ public class GameMapComponent extends Component {
     }
 
     public static EntityBuilder builder(Component... components) {
-        var builder = FXGL.entityBuilder().type(Type.OnePiece);
+        var builder = FXGL.entityBuilder().type(Type.GameMap);
         for (var component : components)
             builder.with(component);
         return builder;
@@ -51,8 +51,8 @@ public class GameMapComponent extends Component {
 
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
-                .type(Type.GameMap)
                 .with(new GameMapComponent())
+                .type(Type.GameMap)
                 .with(components)
                 .build();
     }

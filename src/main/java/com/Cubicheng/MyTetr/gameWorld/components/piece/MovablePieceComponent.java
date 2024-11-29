@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
+import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.util.Pair;
@@ -11,7 +12,6 @@ import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.image.ImageView;
 
 import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
-import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
 
 public class MovablePieceComponent extends OnePieceComponent {
 
@@ -33,7 +33,6 @@ public class MovablePieceComponent extends OnePieceComponent {
     public void onUpdate(double tpf) {
         if (techomino == null) {
             get_next_piece();
-            update_entity_position();
         }
     }
 
@@ -43,12 +42,15 @@ public class MovablePieceComponent extends OnePieceComponent {
             System.out.println("gameMap is null");
             return;
         }
-        int next_id = gameMap.getComponent(GameMapComponent.class).get_next_piece();
-        techominoType = int2techominoType.get(next_id);
-        techomino = int2techomino.get(next_id);
-        now_texture = new ImageView(texture[next_id].image());
+        techominoType = gameMap.getComponent(GameMapComponent.class).get_next_piece();
+        techomino = int2techomino.get(techominoType);
+        now_texture = new ImageView(ImageBuffer.texture[techominoType].image());
         rotate_index = 0;
 
+        x = 4;
+        y = 20;
+
+        update_entity_position();
         update_texture();
     }
 
@@ -74,6 +76,7 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     public void on_drop() {
         if (!is_moved) {
+            get_entity(Type.GameMap).getComponent(GameMapComponent.class).add_piece();
             get_next_piece();
             is_moved = true;
         }

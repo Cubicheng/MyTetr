@@ -2,7 +2,8 @@ package com.Cubicheng.MyTetr.gameScenes;
 
 import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.GameApp;
-import com.Cubicheng.MyTetr.gameWorld.FrontlineService;
+import com.Cubicheng.MyTetr.gameWorld.GetService;
+import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.*;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
@@ -29,7 +30,7 @@ import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
 
 import java.util.Optional;
 
-public class SinglePlayer implements PushAndPopGameSubScene, FrontlineService {
+public class SinglePlayer implements PushAndPopGameSubScene, GetService {
     public static final String SCENE_NAME = "Single_Player";
 
     private GameWorld gameWorld;
@@ -87,7 +88,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, FrontlineService {
         gameWorld.addEntity(mapEntity);
 
         startX = startX * new_width + (gameScene.getAppWidth() - new_width) / 2;
-        startY = startY * new_height - BLOCK_SIZE;
+        startY = startY * new_height;
 
         var background = FXGL.image("back1.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
@@ -117,5 +118,15 @@ public class SinglePlayer implements PushAndPopGameSubScene, FrontlineService {
     @Override
     public GameWorld get_game_world() {
         return gameWorld;
+    }
+
+    @Override
+    public Entity get_entity(Type type, int id) {
+        return get_game_world().getEntitiesByType(type).get(id);
+    }
+
+    @Override
+    public Entity get_entity(Type type) {
+        return get_game_world().getEntitiesByType(type).getFirst();
     }
 }

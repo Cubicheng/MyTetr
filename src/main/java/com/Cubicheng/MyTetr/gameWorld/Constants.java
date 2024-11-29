@@ -19,16 +19,6 @@ public class Constants {
     public static final Techomino TECHOMINO_O = new Techomino_O();
     public static final Techomino TECHOMINO_I = new Techomino_I();
 
-    public static Map<Integer,TechominoType> int2techominoType = Map.of(
-            0, TechominoType.I,
-            1, TechominoType.J,
-            2, TechominoType.L,
-            3, TechominoType.O,
-            4, TechominoType.S,
-            5, TechominoType.T,
-            6, TechominoType.Z
-    );
-
     public static Map<Integer,Techomino> int2techomino = Map.of(
             0, TECHOMINO_I,
             1, TECHOMINO_J,

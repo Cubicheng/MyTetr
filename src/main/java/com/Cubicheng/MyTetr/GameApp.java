@@ -13,7 +13,6 @@ import com.whitewoodcity.fxgl.service.ReplaceableGameScene;
 import com.whitewoodcity.fxgl.service.XGameScene;
 import javafx.stage.Screen;
 import com.Cubicheng.MyTetr.gameWorld.*;
-import com.Cubicheng.MyTetr.gameScenes.*;
 
 public class GameApp extends GameApplication {
 
@@ -65,10 +64,14 @@ public class GameApp extends GameApplication {
         };
     }
 
-    public FrontlineService getFrontlineService() {
+    public GetService getFrontlineService() {
         var app = gameScenes.getLast();
-        if (app instanceof FrontlineService frontlineService) {
+        if (app instanceof GetService frontlineService) {
             return frontlineService;
         } else return null;
+    }
+
+    public Object get_last_gameScene(){
+        return gameScenes.getLast();
     }
 }

@@ -3,7 +3,6 @@ package com.Cubicheng.MyTetr.gameWorld.components.piece;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.gameWorld.techominoData.Techomino;
-import com.Cubicheng.MyTetr.gameWorld.techominoData.TechominoType;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.entity.SpawnData;
@@ -15,25 +14,9 @@ import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.whitewoodcity.fxgl.app.ImageData;
 import javafx.scene.image.ImageView;
 
-import java.util.Optional;
-import java.util.OptionalInt;
-
 import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
 
 public class OnePieceComponent extends Component {
-
-    protected static final ImageData[] texture = {
-            new ImageData("block_0.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_1.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_2.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_3.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_4.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_5.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_6.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_7.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_8.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_9.png", BLOCK_SIZE, BLOCK_SIZE)
-    };
 
     protected ImageView now_texture;
 
@@ -41,7 +24,7 @@ public class OnePieceComponent extends Component {
 
     protected int rotate_index = 0;
 
-    protected TechominoType techominoType;
+    protected int techominoType;
     protected Techomino techomino;
 
     double opacity = 1.0;
@@ -62,6 +45,10 @@ public class OnePieceComponent extends Component {
         return techomino;
     }
 
+    public int get_techomino_type(){
+        return techominoType;
+    }
+
     @Override
     public void onAdded() {
         x = 4;
@@ -70,7 +57,7 @@ public class OnePieceComponent extends Component {
 
     protected void update_entity_position() {
         getEntity().setX(startX + x * BLOCK_SIZE);
-        getEntity().setY(startY + (20 - y) * BLOCK_SIZE);
+        getEntity().setY(startY + (19 - y) * BLOCK_SIZE);
     }
 
     protected GameWorld get_GameWorld() {
@@ -78,11 +65,11 @@ public class OnePieceComponent extends Component {
     }
 
     protected Entity get_entity(Type type, int id) {
-        return get_GameWorld().getEntitiesByType(type).get(id);
+        return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type, id);
     }
 
     protected Entity get_entity(Type type) {
-        return get_GameWorld().getEntitiesByType(type).getFirst();
+        return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type);
     }
 
     protected void update_texture() {
@@ -109,7 +96,7 @@ public class OnePieceComponent extends Component {
 
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
-                .at(startX + 4 * BLOCK_SIZE, startY)
+                .at(startX + 4 * BLOCK_SIZE, startY - BLOCK_SIZE)
                 .with(new OnePieceComponent())
                 .type(Type.OnePiece)
                 .with(components)
@@ -128,7 +115,7 @@ public class OnePieceComponent extends Component {
             int yy = techomino.techomino[rotate_index][i].second() + y;
             if (xx < 0 || xx >= MAP_WIDTH || yy < 0)
                 return false;
-            if (gameMap.getComponent(GameMapComponent.class).get_playfiled().get(yy).get(xx) != 0) {
+            if (gameMap.getComponent(GameMapComponent.class).get_playfiled().get(yy).get(xx) != -1) {
                 return false;
             }
         }

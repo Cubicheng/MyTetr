@@ -1,6 +1,9 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
+import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.gameScenes.MainMenu;
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
+import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
@@ -8,9 +11,10 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.image.ImageView;
+import com.Cubicheng.MyTetr.gameWorld.Constants;
 
-import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
-import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
+import static com.Cubicheng.MyTetr.gameWorld.Constants.MAP_HEIGHT;
+import static com.Cubicheng.MyTetr.gameWorld.Constants.MAP_WIDTH;
 
 public class GhostPieceComponent extends OnePieceComponent {
 
@@ -18,7 +22,7 @@ public class GhostPieceComponent extends OnePieceComponent {
     public void onAdded() {
         x = 4;
         y = 20;
-        now_texture = new ImageView(texture[9].image());
+        now_texture = new ImageView(ImageBuffer.texture[9].image());
         opacity = ConfigVars.ghost_piece_opacity;
     }
 
@@ -42,8 +46,12 @@ public class GhostPieceComponent extends OnePieceComponent {
                 .build();
     }
 
+
     @Override
     public void onUpdate(double tpf) {
+        if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == MainMenu.class) {
+            return;
+        }
         Entity movablePiece = get_entity(Type.MovablePiece);
         assert movablePiece != null;
         this.techomino = movablePiece.getComponent(MovablePieceComponent.class).get_techomino();
@@ -55,5 +63,13 @@ public class GhostPieceComponent extends OnePieceComponent {
         }
         update_entity_position();
         update_texture();
+    }
+
+    public int getX(int id) {
+        return getX() + techomino.techomino[rotate_index][id].first();
+    }
+
+    public int getY(int id) {
+        return getY() + techomino.techomino[rotate_index][id].second();
     }
 }

@@ -7,7 +7,7 @@ import com.whitewoodcity.fxgl.service.DimensionService;
 
 import java.util.Arrays;
 
-public interface FrontlineService extends DimensionService {
+public interface GetService extends DimensionService {
 
     default void updateFrontLine() {
         updateFrontLine(FXGL.getGameWorld());
@@ -18,4 +18,8 @@ public interface FrontlineService extends DimensionService {
     }
 
     public GameWorld get_game_world();
+
+    public Entity get_entity(Type type, int id);
+
+    public Entity get_entity(Type type);
 }

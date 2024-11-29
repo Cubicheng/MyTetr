@@ -50,6 +50,7 @@ public class MovablePieceComponent extends OnePieceComponent {
         x = 4;
         y = 20;
 
+        update_next_pieces();
         update_entity_position();
         update_texture();
     }
@@ -74,7 +75,16 @@ public class MovablePieceComponent extends OnePieceComponent {
                 .build();
     }
 
-    public void on_drop() {
+    private void update_next_pieces() {
+        Entity gameMap = get_entity(Type.GameMap);
+        for (int i = 0; i < 5; i++) {
+            Entity nextPiece = get_entity(Type.NextPiece,i);
+            int type = gameMap.getComponent(GameMapComponent.class).get_next_piece(i);
+            nextPiece.getComponent(NextPieceComponent.class).set_techomino(type);
+        }
+    }
+
+    public void hard_drop() {
         if (!is_moved) {
             get_entity(Type.GameMap).getComponent(GameMapComponent.class).add_piece();
             get_next_piece();
@@ -148,6 +158,14 @@ public class MovablePieceComponent extends OnePieceComponent {
     public void right_rotate() {
         if (!is_moved) {
             rotate(1);
+            is_moved = true;
+        }
+    }
+
+    public void double_ratate() {
+        System.out.println("double_ratate");
+        if (!is_moved) {
+            rotate(2);
             is_moved = true;
         }
     }

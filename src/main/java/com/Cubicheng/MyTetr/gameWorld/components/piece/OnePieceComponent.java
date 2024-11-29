@@ -22,6 +22,8 @@ public class OnePieceComponent extends Component {
 
     protected int x, y;
 
+    protected double render_dx = 0, render_dy = 0;
+
     protected int rotate_index = 0;
 
     protected int techominoType;
@@ -45,7 +47,7 @@ public class OnePieceComponent extends Component {
         return techomino;
     }
 
-    public int get_techomino_type(){
+    public int get_techomino_type() {
         return techominoType;
     }
 
@@ -77,8 +79,8 @@ public class OnePieceComponent extends Component {
         for (int i = 0; i < 4; i++) {
             ImageView imageView = new ImageView(now_texture.getImage());
             imageView.setOpacity(opacity);
-            imageView.setLayoutX(techomino.techomino[rotate_index][i].first() * BLOCK_SIZE);
-            imageView.setLayoutY(-techomino.techomino[rotate_index][i].second() * BLOCK_SIZE);
+            imageView.setLayoutX(render_dx+techomino.techomino[rotate_index][i].first() * BLOCK_SIZE);
+            imageView.setLayoutY(render_dy-techomino.techomino[rotate_index][i].second() * BLOCK_SIZE);
             getEntity().getViewComponent().addChild(imageView);
         }
     }

@@ -22,6 +22,10 @@ public class NextQueue {
         }
     }
 
+    public int get_next_piece(int id){
+        return next_queue.get(id);
+    }
+
     public int get_next_piece() {
         int tmp = next_queue.removeFirst();
         if(next_queue.size()<5){

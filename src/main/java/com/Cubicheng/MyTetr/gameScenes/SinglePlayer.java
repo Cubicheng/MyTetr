@@ -7,6 +7,7 @@ import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.*;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
+import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.entity.Entity;
@@ -34,8 +35,9 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
     public static final String SCENE_NAME = "Single_Player";
 
     private GameWorld gameWorld;
-    private Entity movablePiece,ghostPiece;
+    private Entity movablePiece, ghostPiece;
     private Entity gameMap;
+    private Entity[] nextPiece = new Entity[5];
 
     @Override
     public void initGame(GameWorld gameWorld, XInput input) {
@@ -93,7 +95,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
         var background = FXGL.image("back1.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
-        gameMap = GameMapComponent.of(new SpawnData(0, 0));
+        gameMap = GameMapComponent.of(new SpawnData(startX, startY + 19 * BLOCK_SIZE));
         gameWorld.addEntity(gameMap);
 
         movablePiece = MovablePieceComponent.of(new SpawnData(0, 0));
@@ -102,17 +104,20 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
         ghostPiece = GhostPieceComponent.of(new SpawnData(0, 0));
         gameWorld.addEntity(ghostPiece);
 
-        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN, KeyCode.SPACE, KeyCode.Z, KeyCode.UP).forEach(keyCode -> input.onActionBegin(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::reset_is_moved));
+        for (int i = 0; i < 5; i++) {
+            nextPiece[i] = NextPieceComponent.of(new SpawnData(startX + 13 * BLOCK_SIZE, startY + (3 * i + 2.4) * BLOCK_SIZE).put("next_num", i));
+            gameWorld.addEntity(nextPiece[i]);
+        }
+
+        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN, KeyCode.SPACE, KeyCode.Z, KeyCode.UP, KeyCode.A).forEach(keyCode -> input.onActionBegin(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::reset_is_moved));
 
         List.of(KeyCode.RIGHT).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_right));
         List.of(KeyCode.LEFT).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_left));
         List.of(KeyCode.DOWN).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_down));
-        List.of(KeyCode.SPACE).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::on_drop));
+        List.of(KeyCode.SPACE).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::hard_drop));
         List.of(KeyCode.Z).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::left_rotate));
         List.of(KeyCode.UP).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::right_rotate));
-
-
-
+        List.of(KeyCode.A).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::double_ratate));
     }
 
     @Override

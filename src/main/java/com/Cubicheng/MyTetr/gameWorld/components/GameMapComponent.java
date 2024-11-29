@@ -16,13 +16,15 @@ import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
 
 public class GameMapComponent extends Component {
 
-    private Vector<Vector<Integer>> playfiled = new Vector<>(MAP_HEIGHT);
+    private List<List<Integer>> playfiled = new ArrayList<>(MAP_HEIGHT);
 
     private NextQueue next_queue;
     private int y;
@@ -31,11 +33,7 @@ public class GameMapComponent extends Component {
     public void onAdded() {
         next_queue = new NextQueue();
         for (int i = 0; i < MAP_HEIGHT; i++) {
-            Vector<Integer> row = new Vector<>(MAP_WIDTH);
-            for (int j = 0; j < MAP_WIDTH; j++) {
-                row.add(-1);
-            }
-            playfiled.add(row);
+            playfiled.add(generate_new_empty_row());
         }
     }
 
@@ -43,7 +41,11 @@ public class GameMapComponent extends Component {
         return next_queue.get_next_piece();
     }
 
-    public Vector<Vector<Integer>> get_playfiled() {
+    public int get_next_piece(int id) {
+        return next_queue.get_next_piece(id);
+    }
+
+    public List<List<Integer>> get_playfiled() {
         return playfiled;
     }
 
@@ -60,7 +62,7 @@ public class GameMapComponent extends Component {
 
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
-                .at(startX, startY + 19 * BLOCK_SIZE)
+                .at(data.getX(), data.getY())
                 .with(new GameMapComponent())
                 .type(Type.GameMap)
                 .with(components)
@@ -73,6 +75,14 @@ public class GameMapComponent extends Component {
 
     private Entity get_entity(Type type) {
         return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type);
+    }
+
+    List<Integer> generate_new_empty_row(){
+        List<Integer> row = new ArrayList<>(MAP_WIDTH);
+        for (int i = 0; i < MAP_WIDTH; i++) {
+            row.add(-1);
+        }
+        return row;
     }
 
     private void update_texture() {
@@ -104,11 +114,8 @@ public class GameMapComponent extends Component {
                 }
             }
             if (!is_full) continue;
-            for (int j = i; j < MAP_HEIGHT - 1; j++) {
-                for (int k = 0; k < MAP_WIDTH; k++) {
-                    playfiled.get(j).set(k, playfiled.get(j + 1).get(k));
-                }
-            }
+            playfiled.remove(i);
+            playfiled.add(generate_new_empty_row());
             i--;
         }
     }

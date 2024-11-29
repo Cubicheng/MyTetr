@@ -76,6 +76,9 @@ public class OnePieceComponent extends Component {
     }
 
     protected void update_texture() {
+        if(techomino == null){
+            return ;
+        }
         getEntity().getViewComponent().clearChildren();
         for (int i = 0; i < 4; i++) {
             ImageView imageView = new ImageView(now_texture.getImage());

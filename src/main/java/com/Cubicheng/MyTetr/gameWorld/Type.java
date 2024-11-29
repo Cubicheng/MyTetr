@@ -5,5 +5,6 @@ public enum Type {
     GhostPiece,
     NextPiece,
     OnePiece,
+    HoldPiece,
     GameMap;
 }

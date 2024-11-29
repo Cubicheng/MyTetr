@@ -78,7 +78,7 @@ public class MovablePieceComponent extends OnePieceComponent {
     private void update_next_pieces() {
         Entity gameMap = get_entity(Type.GameMap);
         for (int i = 0; i < 5; i++) {
-            Entity nextPiece = get_entity(Type.NextPiece,i);
+            Entity nextPiece = get_entity(Type.NextPiece, i);
             int type = gameMap.getComponent(GameMapComponent.class).get_next_piece(i);
             nextPiece.getComponent(NextPieceComponent.class).set_techomino(type);
         }
@@ -87,9 +87,30 @@ public class MovablePieceComponent extends OnePieceComponent {
     public void hard_drop() {
         if (!is_moved) {
             get_entity(Type.GameMap).getComponent(GameMapComponent.class).add_piece();
+            get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_can_hold(true);
             get_next_piece();
             is_moved = true;
         }
+    }
+
+    public void hold() {
+        if (!get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).get_can_hold())
+            return;
+
+        int hold_type = get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).get_techomino_type();
+
+        get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_techomino(techominoType);
+
+        get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_can_hold(false);
+
+        techominoType = hold_type;
+        techomino = int2techomino.get(techominoType);
+        now_texture = new ImageView(ImageBuffer.texture[techominoType].image());
+        rotate_index = 0;
+        x = 4;
+        y = 20;
+        update_entity_position();
+        update_texture();
     }
 
     public void reset_is_moved() {

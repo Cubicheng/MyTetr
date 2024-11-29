@@ -5,6 +5,7 @@ import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameWorld.GetService;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.*;
+import com.Cubicheng.MyTetr.gameWorld.components.piece.HoldPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
@@ -13,8 +14,7 @@ import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.entity.SpawnData;
-import com.almasb.fxgl.input.Input;
-import com.almasb.fxgl.input.UserAction;
+import com.almasb.fxgl.input.*;
 import com.almasb.fxgl.texture.Texture;
 import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.XInput;
@@ -24,6 +24,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import com.almasb.fxgl.dsl.FXGL;
 import javafx.scene.paint.ImagePattern;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
     public static final String SCENE_NAME = "Single_Player";
 
     private GameWorld gameWorld;
-    private Entity movablePiece, ghostPiece;
+    private Entity movablePiece, ghostPiece, holdPiece;
     private Entity gameMap;
     private Entity[] nextPiece = new Entity[5];
 
@@ -43,6 +44,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
     public void initGame(GameWorld gameWorld, XInput input) {
         this.gameWorld = gameWorld;
     }
+
 
     @Override
     public XInput initInput(Input input) {
@@ -60,6 +62,15 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
                 }
             }
         }, KeyCode.ESCAPE);
+
+        input.addTriggerListener(new TriggerListener() {
+            @Override
+            protected void onKeyBegin(@NotNull KeyTrigger keyTrigger) {
+                if (keyTrigger.getKey() == KeyCode.SHIFT) {
+                    movablePiece.getComponent(MovablePieceComponent.class).hold();
+                }
+            }
+        });
         return new XInput(input);
     }
 
@@ -104,6 +115,9 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
         ghostPiece = GhostPieceComponent.of(new SpawnData(0, 0));
         gameWorld.addEntity(ghostPiece);
 
+        holdPiece = HoldPieceComponent.of(new SpawnData(startX - 3 * BLOCK_SIZE, startY + 2.4 * BLOCK_SIZE));
+        gameWorld.addEntity(holdPiece);
+
         for (int i = 0; i < 5; i++) {
             nextPiece[i] = NextPieceComponent.of(new SpawnData(startX + 13 * BLOCK_SIZE, startY + (3 * i + 2.4) * BLOCK_SIZE).put("next_num", i));
             gameWorld.addEntity(nextPiece[i]);
@@ -118,6 +132,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
         List.of(KeyCode.Z).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::left_rotate));
         List.of(KeyCode.UP).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::right_rotate));
         List.of(KeyCode.A).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::double_ratate));
+
     }
 
     @Override

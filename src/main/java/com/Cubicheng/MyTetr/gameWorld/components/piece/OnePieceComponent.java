@@ -1,6 +1,7 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
 import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.gameWorld.techominoData.Techomino;
 import com.almasb.fxgl.entity.Entity;
@@ -79,8 +80,8 @@ public class OnePieceComponent extends Component {
         for (int i = 0; i < 4; i++) {
             ImageView imageView = new ImageView(now_texture.getImage());
             imageView.setOpacity(opacity);
-            imageView.setLayoutX(render_dx+techomino.techomino[rotate_index][i].first() * BLOCK_SIZE);
-            imageView.setLayoutY(render_dy-techomino.techomino[rotate_index][i].second() * BLOCK_SIZE);
+            imageView.setLayoutX(render_dx + techomino.techomino[rotate_index][i].first() * BLOCK_SIZE);
+            imageView.setLayoutY(render_dy - techomino.techomino[rotate_index][i].second() * BLOCK_SIZE);
             getEntity().getViewComponent().addChild(imageView);
         }
     }
@@ -122,5 +123,26 @@ public class OnePieceComponent extends Component {
             }
         }
         return true;
+    }
+
+    public void set_techomino(int techominoType) {
+        this.techominoType = techominoType;
+        this.techomino = int2techomino.get(techominoType);
+        this.now_texture = new ImageView(ImageBuffer.texture[techominoType].image());
+        switch(techominoType){
+            case 0:
+                render_dx = -BLOCK_SIZE/2;
+                render_dy = -BLOCK_SIZE/2;
+                break;
+            case 3:
+                render_dx = -BLOCK_SIZE/2;
+                render_dy = 0;
+                break;
+            default:
+                render_dx = 0;
+                render_dy = 0;
+                break;
+        }
+        update_texture();
     }
 }

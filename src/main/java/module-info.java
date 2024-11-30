@@ -5,5 +5,4 @@ open module MyTetr {
     requires javafx.media;
     requires atlantafx.base;
     requires java.desktop;
-    requires annotations;
 }

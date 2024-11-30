@@ -15,8 +15,6 @@ import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
 
 public class MovablePieceComponent extends OnePieceComponent {
 
-    boolean is_moved = false;
-
     private Pair<Integer, Integer>[] kick_transation;
 
     @Override
@@ -85,12 +83,10 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     public void hard_drop() {
-        if (!is_moved) {
-            get_entity(Type.GameMap).getComponent(GameMapComponent.class).add_piece();
-            get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_can_hold(true);
-            get_next_piece();
-            is_moved = true;
-        }
+        get_entity(Type.GameMap).getComponent(GameMapComponent.class).add_piece();
+        get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_can_hold(true);
+        get_next_piece();
+
     }
 
     public void hold() {
@@ -113,38 +109,28 @@ public class MovablePieceComponent extends OnePieceComponent {
         update_texture();
     }
 
-    public void reset_is_moved() {
-        is_moved = false;
-    }
-
     public void move_left() {
-        if (!is_moved) {
-            if (check_collide(x - 1, y)) {
-                x--;
-                update_entity_position();
-            }
-            is_moved = true;
+        if (check_collide(x - 1, y)) {
+            x--;
+            update_entity_position();
         }
+
     }
 
     public void move_right() {
-        if (!is_moved) {
-            if (check_collide(x + 1, y)) {
-                x++;
-                update_entity_position();
-            }
-            is_moved = true;
+        if (check_collide(x + 1, y)) {
+            x++;
+            update_entity_position();
         }
+
     }
 
     public void move_down() {
-        if (!is_moved) {
-            if (check_collide(x, y - 1)) {
-                y--;
-                update_entity_position();
-            }
-            is_moved = true;
+        if (check_collide(x, y - 1)) {
+            y--;
+            update_entity_position();
         }
+
     }
 
     public void rotate(int option) {
@@ -170,24 +156,16 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     public void left_rotate() {
-        if (!is_moved) {
-            rotate(3);
-            is_moved = true;
-        }
+        rotate(3);
+
     }
 
     public void right_rotate() {
-        if (!is_moved) {
-            rotate(1);
-            is_moved = true;
-        }
+        rotate(1);
+
     }
 
     public void double_ratate() {
-        System.out.println("double_ratate");
-        if (!is_moved) {
-            rotate(2);
-            is_moved = true;
-        }
+        rotate(2);
     }
 }

@@ -4,8 +4,10 @@ import com.whitewoodcity.fxgl.app.ImageData;
 
 import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
 
+import com.whitewoodcity.fxgl.app.ImageData;
+
 public class ImageBuffer {
-    public static final com.whitewoodcity.fxgl.app.ImageData[] texture = {
+    public static final ImageData[] texture = {
             new ImageData("block_0.png", BLOCK_SIZE, BLOCK_SIZE),
             new ImageData("block_1.png", BLOCK_SIZE, BLOCK_SIZE),
             new ImageData("block_2.png", BLOCK_SIZE, BLOCK_SIZE),

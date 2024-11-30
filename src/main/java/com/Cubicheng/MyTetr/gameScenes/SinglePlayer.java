@@ -24,7 +24,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import com.almasb.fxgl.dsl.FXGL;
 import javafx.scene.paint.ImagePattern;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -63,9 +62,60 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
             }
         }, KeyCode.ESCAPE);
 
+        input.addAction(new UserAction("Hard_Drop") {
+            @Override
+            protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).hard_drop();
+            }
+        }, KeyCode.SPACE);
+
+        input.addAction(new UserAction("Left") {
+            @Override
+            protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).move_left();
+            }
+        }, KeyCode.LEFT);
+
+        input.addAction(new UserAction("Right") {
+            @Override
+            protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).move_right();
+            }
+        }, KeyCode.RIGHT);
+
+        input.addAction(new UserAction("Down") {
+            @Override
+            protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).move_down();
+            }
+        }, KeyCode.DOWN);
+
+        input.addAction(new UserAction("rRotate") {
+            @Override
+            protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).right_rotate();
+            }
+        }, KeyCode.UP);
+
+        input.addAction(new UserAction("lRotate") {
+            @Override
+            protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).left_rotate();
+            }
+        }, KeyCode.Z);
+
+        input.addAction(new UserAction("doubleRotate") {
+            @Override
+            protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).double_ratate();
+            }
+        }, KeyCode.A);
+
+
+
         input.addTriggerListener(new TriggerListener() {
             @Override
-            protected void onKeyBegin(@NotNull KeyTrigger keyTrigger) {
+            protected void onKeyBegin(KeyTrigger keyTrigger) {
                 if (keyTrigger.getKey() == KeyCode.SHIFT) {
                     movablePiece.getComponent(MovablePieceComponent.class).hold();
                 }
@@ -103,7 +153,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
         startX = startX * new_width + (gameScene.getAppWidth() - new_width) / 2;
         startY = startY * new_height;
 
-        var background = FXGL.image("back1.jpg");
+        var background = FXGL.image("back2.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
         gameMap = GameMapComponent.of(new SpawnData(startX, startY + 19 * BLOCK_SIZE));
@@ -122,17 +172,6 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
             nextPiece[i] = NextPieceComponent.of(new SpawnData(startX + 13 * BLOCK_SIZE, startY + (3 * i + 2.4) * BLOCK_SIZE).put("next_num", i));
             gameWorld.addEntity(nextPiece[i]);
         }
-
-        List.of(KeyCode.LEFT, KeyCode.RIGHT, KeyCode.DOWN, KeyCode.SPACE, KeyCode.Z, KeyCode.UP, KeyCode.A).forEach(keyCode -> input.onActionBegin(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::reset_is_moved));
-
-        List.of(KeyCode.RIGHT).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_right));
-        List.of(KeyCode.LEFT).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_left));
-        List.of(KeyCode.DOWN).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::move_down));
-        List.of(KeyCode.SPACE).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::hard_drop));
-        List.of(KeyCode.Z).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::left_rotate));
-        List.of(KeyCode.UP).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::right_rotate));
-        List.of(KeyCode.A).forEach(keyCode -> input.onAction(keyCode, movablePiece.getComponent(MovablePieceComponent.class)::double_ratate));
-
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.Cubicheng.MyTetr.gameWorld.NextQueue;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
+import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.OnePieceComponent;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
@@ -39,6 +40,15 @@ public class GameMapComponent extends Component {
 
     public int get_next_piece() {
         return next_queue.get_next_piece();
+    }
+
+    public void update_next_pieces() {
+        Entity gameMap = get_entity(Type.GameMap);
+        for (int i = 0; i < 5; i++) {
+            Entity nextPiece = get_entity(Type.NextPiece, i);
+            int type = gameMap.getComponent(GameMapComponent.class).get_next_piece(i);
+            nextPiece.getComponent(NextPieceComponent.class).set_techomino(type);
+        }
     }
 
     public int get_next_piece(int id) {

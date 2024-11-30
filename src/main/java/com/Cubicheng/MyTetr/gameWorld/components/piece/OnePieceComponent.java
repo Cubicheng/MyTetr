@@ -27,7 +27,7 @@ public class OnePieceComponent extends Component {
 
     protected int rotate_index = 0;
 
-    protected int techominoType;
+    protected int techominoType = -1;
     protected Techomino techomino;
 
     double opacity = 1.0;

@@ -2,6 +2,7 @@ package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
+import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -13,6 +14,8 @@ import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
 import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
 
 public class HoldPieceComponent extends OnePieceComponent {
+
+    boolean is_empty = true;
 
     @Override
     public void onAdded() {
@@ -46,11 +49,21 @@ public class HoldPieceComponent extends OnePieceComponent {
         return can_hold;
     }
 
+    @Override
+    public int get_techomino_type() {
+        if (is_empty) {
+            set_techomino(get_entity(Type.GameMap).getComponent(GameMapComponent.class).get_next_piece());
+            get_entity(Type.GameMap).getComponent(GameMapComponent.class).update_next_pieces();
+            is_empty = false;
+        }
+        return techominoType;
+    }
+
     public void set_can_hold(boolean can_hold) {
         this.can_hold = can_hold;
-        if(!can_hold){
+        if (!can_hold) {
             now_texture = new ImageView(ImageBuffer.texture[8].image());
-        }else{
+        } else {
             now_texture = new ImageView(ImageBuffer.texture[techominoType].image());
         }
         update_texture();

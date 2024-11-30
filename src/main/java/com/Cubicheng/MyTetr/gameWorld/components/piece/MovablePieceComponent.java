@@ -74,7 +74,7 @@ public class MovablePieceComponent extends OnePieceComponent {
         x = 4;
         y = 20;
 
-        update_next_pieces();
+        get_entity(Type.GameMap).getComponent(GameMapComponent.class).update_next_pieces();
         update_entity_position();
         update_texture();
     }
@@ -97,15 +97,6 @@ public class MovablePieceComponent extends OnePieceComponent {
                 .type(Type.MovablePiece)
                 .zIndex(Integer.MAX_VALUE)
                 .build();
-    }
-
-    private void update_next_pieces() {
-        Entity gameMap = get_entity(Type.GameMap);
-        for (int i = 0; i < 5; i++) {
-            Entity nextPiece = get_entity(Type.NextPiece, i);
-            int type = gameMap.getComponent(GameMapComponent.class).get_next_piece(i);
-            nextPiece.getComponent(NextPieceComponent.class).set_techomino(type);
-        }
     }
 
     public void hard_drop() {

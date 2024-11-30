@@ -44,7 +44,6 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
         this.gameWorld = gameWorld;
     }
 
-
     @Override
     public XInput initInput(Input input) {
         input.addAction(new UserAction("Escape") {
@@ -72,21 +71,38 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
         input.addAction(new UserAction("Left") {
             @Override
             protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).on_move_left_begin();
                 movablePiece.getComponent(MovablePieceComponent.class).move_left();
+            }
+
+            @Override
+            protected void onActionEnd() {
+                movablePiece.getComponent(MovablePieceComponent.class).on_move_left_end();
             }
         }, KeyCode.LEFT);
 
         input.addAction(new UserAction("Right") {
             @Override
             protected void onActionBegin() {
+                movablePiece.getComponent(MovablePieceComponent.class).on_move_right_begin();
                 movablePiece.getComponent(MovablePieceComponent.class).move_right();
+            }
+
+            @Override
+            protected void onActionEnd() {
+                movablePiece.getComponent(MovablePieceComponent.class).on_move_right_end();
             }
         }, KeyCode.RIGHT);
 
         input.addAction(new UserAction("Down") {
             @Override
             protected void onActionBegin() {
-                movablePiece.getComponent(MovablePieceComponent.class).move_down();
+                movablePiece.getComponent(MovablePieceComponent.class).on_move_down_begin();
+            }
+
+            @Override
+            protected void onActionEnd() {
+                movablePiece.getComponent(MovablePieceComponent.class).on_move_down_end();
             }
         }, KeyCode.DOWN);
 
@@ -110,7 +126,6 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
                 movablePiece.getComponent(MovablePieceComponent.class).double_ratate();
             }
         }, KeyCode.A);
-
 
 
         input.addTriggerListener(new TriggerListener() {

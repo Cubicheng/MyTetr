@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
+import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
@@ -9,13 +10,23 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
+import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.Cubicheng.MyTetr.gameWorld.ConfigVars.ARR;
+import static com.Cubicheng.MyTetr.gameWorld.ConfigVars.DAS;
 import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
 
 public class MovablePieceComponent extends OnePieceComponent {
 
     private Pair<Integer, Integer>[] kick_transation;
+
+    private Timer l_timer, r_timer, down_timer;
+
+    private long down_delta = 1500;
 
     @Override
     public void onAdded() {
@@ -25,6 +36,21 @@ public class MovablePieceComponent extends OnePieceComponent {
         for (int i = 0; i < 5; i++) {
             kick_transation[i] = new Pair<>(0, 0);
         }
+
+        TimerTask down_task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        move_down();
+                    }
+                });
+            }
+        };
+
+        down_timer = new Timer();
+        down_timer.scheduleAtFixedRate(down_task, down_delta, down_delta);
     }
 
     @Override
@@ -86,7 +112,6 @@ public class MovablePieceComponent extends OnePieceComponent {
         get_entity(Type.GameMap).getComponent(GameMapComponent.class).add_piece();
         get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_can_hold(true);
         get_next_piece();
-
     }
 
     public void hold() {
@@ -109,12 +134,90 @@ public class MovablePieceComponent extends OnePieceComponent {
         update_texture();
     }
 
+    public void on_move_left_begin() {
+        l_timer = new Timer();
+        TimerTask l_task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        move_left();
+                    }
+                });
+            }
+        };
+        l_timer.scheduleAtFixedRate(l_task, DAS, ARR);
+    }
+
+    public void on_move_right_begin() {
+        r_timer = new Timer();
+        TimerTask r_task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        move_right();
+                    }
+                });
+            }
+        };
+        r_timer.scheduleAtFixedRate(r_task, DAS, ARR);
+    }
+
+    public void on_move_left_end() {
+        l_timer.cancel();
+        l_timer.purge();
+    }
+
+    public void on_move_right_end() {
+        r_timer.cancel();
+        r_timer.purge();
+    }
+
+
+    public void on_move_down_begin(){
+        down_timer.cancel();
+        down_timer.purge();
+        TimerTask down_task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        move_down();
+                    }
+                });
+            }
+        };
+        down_timer = new Timer();
+        down_timer.scheduleAtFixedRate(down_task, 0, ConfigVars.SFD_ARR);
+    }
+
+    public void on_move_down_end(){
+        down_timer.cancel();
+        down_timer.purge();
+        down_timer = new Timer();
+        TimerTask down_task = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        move_down();
+                    }
+                });
+            }
+        };
+        down_timer.scheduleAtFixedRate(down_task, down_delta, down_delta);
+    }
+
     public void move_left() {
         if (check_collide(x - 1, y)) {
             x--;
             update_entity_position();
         }
-
     }
 
     public void move_right() {
@@ -164,6 +267,7 @@ public class MovablePieceComponent extends OnePieceComponent {
         rotate(1);
 
     }
+
 
     public void double_ratate() {
         rotate(2);

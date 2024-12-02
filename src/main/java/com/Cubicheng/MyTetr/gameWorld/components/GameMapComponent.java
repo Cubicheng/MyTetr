@@ -87,7 +87,7 @@ public class GameMapComponent extends Component {
         return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type);
     }
 
-    List<Integer> generate_new_empty_row(){
+    List<Integer> generate_new_empty_row() {
         List<Integer> row = new ArrayList<>(MAP_WIDTH);
         for (int i = 0; i < MAP_WIDTH; i++) {
             row.add(-1);

@@ -54,6 +54,11 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     @Override
+    public void onRemoved() {
+        down_timer.cancel();
+    }
+
+    @Override
     public void onUpdate(double tpf) {
         if (techomino == null) {
             get_next_piece();

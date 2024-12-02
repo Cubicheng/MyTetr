@@ -38,6 +38,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
     private Entity movablePiece, ghostPiece, holdPiece;
     private Entity gameMap;
     private Entity[] nextPiece = new Entity[5];
+    private Entity mapEntity;
 
     @Override
     public void initGame(GameWorld gameWorld, XInput input) {
@@ -56,6 +57,13 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
                 alert.initOwner(Application.getStage());
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
+                    movablePiece.removeFromWorld();
+                    holdPiece.removeFromWorld();
+                    ghostPiece.removeFromWorld();
+                    for (Entity entity : nextPiece) {
+                        entity.removeFromWorld();
+                    }
+                    gameMap.removeFromWorld();
                     FXGL.<GameApp>getAppCast().pop();
                 }
             }
@@ -142,6 +150,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
 
     @Override
     public void initUI(GameScene gameScene, XInput input) {
+
         var gridpane = new GridPane();
 
         var map_image = FXGL.image("map.png");
@@ -157,7 +166,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
         map_texture.setFitWidth(new_width);
         map_texture.setFitHeight(new_height);
 
-        var mapEntity = new EntityBuilder()
+        mapEntity = new EntityBuilder()
                 .at((gameScene.getAppWidth() - new_width) / 2, 0)
                 .view(map_texture)
                 .zIndex(Integer.MIN_VALUE)
@@ -165,26 +174,27 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
 
         gameWorld.addEntity(mapEntity);
 
-        startX = startX * new_width + (gameScene.getAppWidth() - new_width) / 2;
-        startY = startY * new_height;
+        if(!is_startXY_set) {
+            startX = startX * new_width + (gameScene.getAppWidth() - new_width) / 2;
+            startY = startY * new_height;
+            is_startXY_set = true;
+        }
 
         var background = FXGL.image("back2.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
         gameMap = GameMapComponent.of(new SpawnData(startX, startY + 19 * BLOCK_SIZE));
-        gameWorld.addEntity(gameMap);
-
         movablePiece = MovablePieceComponent.of(new SpawnData(0, 0));
-        gameWorld.addEntity(movablePiece);
-
         ghostPiece = GhostPieceComponent.of(new SpawnData(0, 0));
-        gameWorld.addEntity(ghostPiece);
-
         holdPiece = HoldPieceComponent.of(new SpawnData(startX - 3 * BLOCK_SIZE, startY + 2.4 * BLOCK_SIZE));
-        gameWorld.addEntity(holdPiece);
+
+        System.out.println(gameMap);
+        System.out.println(movablePiece);
+
+        gameWorld.addEntities(gameMap, movablePiece, ghostPiece, holdPiece);
 
         for (int i = 0; i < 5; i++) {
-            nextPiece[i] = NextPieceComponent.of(new SpawnData(startX + 13 * BLOCK_SIZE, startY + (3 * i + 2.4) * BLOCK_SIZE).put("next_num", i));
+            nextPiece[i] = NextPieceComponent.of(new SpawnData(startX + 13 * BLOCK_SIZE, startY + (3 * i + 2.4) * BLOCK_SIZE));
             gameWorld.addEntity(nextPiece[i]);
         }
     }

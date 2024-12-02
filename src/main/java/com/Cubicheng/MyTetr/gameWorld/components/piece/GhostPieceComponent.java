@@ -46,7 +46,6 @@ public class GhostPieceComponent extends OnePieceComponent {
                 .build();
     }
 
-
     @Override
     public void onUpdate(double tpf) {
         if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == MainMenu.class) {

@@ -65,9 +65,9 @@ public class GameApp extends GameApplication {
     }
 
     public GetService getFrontlineService() {
-        var app = gameScenes.getLast();
-        if (app instanceof GetService frontlineService) {
-            return frontlineService;
+        var app = get_last_gameScene();
+        if (app instanceof GetService getService) {
+            return getService;
         } else return null;
     }
 

@@ -21,11 +21,6 @@ public class NextPieceComponent extends OnePieceComponent {
         return builder;
     }
 
-    @Override
-    public void onUpdate(double tpf) {
-        super.onUpdate(tpf);
-    }
-
     public static Entity of(SpawnData data, Component... components) {
         return of(builder(), data, components);
     }

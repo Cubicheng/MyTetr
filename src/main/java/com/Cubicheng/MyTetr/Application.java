@@ -26,13 +26,13 @@ public class Application extends javafx.application.Application implements FillS
         int width = gd.getDisplayMode().getWidth();
         int height = gd.getDisplayMode().getHeight();
 
-        stage.setWidth(width);
-        stage.setHeight(height);
+        stage.setWidth(width/2);
+        stage.setHeight(height/2);
 
         var stackpane = new StackPane();
         stage.setScene(new Scene(stackpane));
 
-        stage.setFullScreen(true);
+//        stage.setFullScreen(true);
         stage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.SHORTCUT_DOWN));
         stage.setFullScreenExitHint("");
 

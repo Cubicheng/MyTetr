@@ -10,6 +10,7 @@ public class Constants {
     public static final double BLOCK_SIZE = 47/1.75;
     public static double startX = (double) 1035 / 2520;
     public static double startY = (double) 390 / 1680;
+    public static boolean is_startXY_set = false;
 
     public static final Techomino TECHOMINO_S = new Techomino_S();
     public static final Techomino TECHOMINO_Z = new Techomino_Z();

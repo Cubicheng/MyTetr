@@ -11,10 +11,6 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.image.ImageView;
-import com.Cubicheng.MyTetr.gameWorld.Constants;
-
-import static com.Cubicheng.MyTetr.gameWorld.Constants.MAP_HEIGHT;
-import static com.Cubicheng.MyTetr.gameWorld.Constants.MAP_WIDTH;
 
 public class GhostPieceComponent extends OnePieceComponent {
 
@@ -62,7 +58,7 @@ public class GhostPieceComponent extends OnePieceComponent {
         rotate_index = movablePiece.getComponent(MovablePieceComponent.class).get_rotate_index();
         x = movablePiece.getComponent(MovablePieceComponent.class).getX();
         y = movablePiece.getComponent(MovablePieceComponent.class).getY();
-        while (check_collide(x, y - 1)) {
+        while (can_move_to(x, y - 1)) {
             y--;
         }
         update_entity_position();

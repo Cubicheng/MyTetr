@@ -1,19 +1,15 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
 import com.Cubicheng.MyTetr.GameApp;
-import com.Cubicheng.MyTetr.gameWorld.Constants;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.gameWorld.techominoData.Techomino;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
-import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 
 import com.Cubicheng.MyTetr.gameWorld.Type;
-import com.whitewoodcity.fxgl.app.ImageData;
 import javafx.scene.image.ImageView;
 
 import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
@@ -27,6 +23,10 @@ public class OnePieceComponent extends Component {
     protected double render_dx = 0, render_dy = 0;
 
     protected int rotate_index = 0;
+
+    public void setOpacity(double opacity) {
+        this.opacity = opacity;
+    }
 
     protected int techominoType;
     protected Techomino techomino;
@@ -98,7 +98,7 @@ public class OnePieceComponent extends Component {
         }
     }
 
-    protected boolean check_collide(int x, int y) {
+    protected boolean can_move_to(int x, int y) {
         Entity gameMap = get_entity(Type.GameMap);
         if (gameMap == null) {
             System.out.println("gameMap is null");

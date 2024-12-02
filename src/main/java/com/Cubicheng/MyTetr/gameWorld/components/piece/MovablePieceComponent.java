@@ -1,7 +1,7 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
-import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
+import com.Cubicheng.MyTetr.gameWorld.Constants;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
@@ -27,7 +27,12 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     private Timer l_timer, r_timer, down_timer;
 
+    private double blink_time = 0;
+    private int blink_break_cnt = 0;
+
     private long down_delta = 1500;
+
+    private boolean is_collided = false;
 
     public MovablePieceComponent(double x, double y) {
         super(x, y);
@@ -64,14 +69,36 @@ public class MovablePieceComponent extends OnePieceComponent {
         down_timer.cancel();
     }
 
+    private boolean check_bottom_collide() {
+        return y == get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).getY();
+
+    }
+
     @Override
     public void onUpdate(double tpf) {
         if (techomino == null) {
             get_next_piece();
         }
+        if (check_bottom_collide()) {
+            opacity = 0.8 + 0.2 * Math.cos(2 * Math.PI * blink_time);
+            blink_time += tpf;
+            get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setOpacity(0.0);
+            update_texture();
+        } else {
+            if (blink_time != 0) {
+                opacity = 1.0;
+                blink_time = 0;
+                get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setOpacity(ConfigVars.ghost_piece_opacity);
+                update_texture();
+            }
+        }
+        if (blink_time > SOFT_DROP_TIME) {
+            hard_drop();
+        }
     }
 
     private void get_next_piece() {
+        is_collided = false;
         Entity gameMap = get_entity(Type.GameMap);
         if (gameMap == null) {
             System.out.println("gameMap is null");
@@ -179,7 +206,7 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
 
-    public void on_move_down_begin(){
+    public void on_move_down_begin() {
         down_timer.cancel();
         down_timer.purge();
         TimerTask down_task = new TimerTask() {
@@ -197,7 +224,7 @@ public class MovablePieceComponent extends OnePieceComponent {
         down_timer.scheduleAtFixedRate(down_task, 0, ConfigVars.SFD_ARR);
     }
 
-    public void on_move_down_end(){
+    public void on_move_down_end() {
         down_timer.cancel();
         down_timer.purge();
         down_timer = new Timer();
@@ -215,15 +242,29 @@ public class MovablePieceComponent extends OnePieceComponent {
         down_timer.scheduleAtFixedRate(down_task, down_delta, down_delta);
     }
 
+    private void blink_break() {
+        if (blink_time != 0) {
+            blink_break_cnt++;
+            blink_time = 0;
+            if (blink_break_cnt == 15) {
+                hard_drop();
+                get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setOpacity(ConfigVars.ghost_piece_opacity);
+                blink_break_cnt = 0;
+            }
+        }
+    }
+
     public void move_left() {
-        if (check_collide(x - 1, y)) {
+        if (can_move_to(x - 1, y)) {
+            blink_break();
             x--;
             update_entity_position();
         }
     }
 
     public void move_right() {
-        if (check_collide(x + 1, y)) {
+        if (can_move_to(x + 1, y)) {
+            blink_break();
             x++;
             update_entity_position();
         }
@@ -231,7 +272,8 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     public void move_down() {
-        if (check_collide(x, y - 1)) {
+        if (can_move_to(x, y - 1)) {
+            blink_break();
             y--;
             update_entity_position();
         }
@@ -249,9 +291,10 @@ public class MovablePieceComponent extends OnePieceComponent {
         for (int i = 0; i < 5; i++) {
             int xx = x + kick_transation[i].first();
             int yy = y + kick_transation[i].second();
-            if (check_collide(xx, yy)) {
+            if (can_move_to(xx, yy)) {
                 x = xx;
                 y = yy;
+                blink_break();
                 update_entity_position();
                 update_texture();
                 return;
@@ -267,7 +310,6 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     public void right_rotate() {
         rotate(1);
-
     }
 
 

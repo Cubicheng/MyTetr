@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
+import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
@@ -16,6 +17,10 @@ import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
 public class HoldPieceComponent extends OnePieceComponent {
 
     boolean is_empty = true;
+
+    public HoldPieceComponent(double x, double y) {
+        super(x, y);
+    }
 
     @Override
     public void onAdded() {
@@ -36,7 +41,7 @@ public class HoldPieceComponent extends OnePieceComponent {
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
                 .at(data.getX(), data.getY())
-                .with(new HoldPieceComponent())
+                .with(new HoldPieceComponent(data.get("startX"), data.get("startY")))
                 .type(Type.HoldPiece)
                 .with(components)
                 .zIndex(Integer.MAX_VALUE)

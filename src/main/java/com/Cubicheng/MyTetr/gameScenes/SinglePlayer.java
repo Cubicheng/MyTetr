@@ -150,10 +150,10 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
 
         var gridpane = new GridPane();
 
-        var background = FXGL.image("back2.jpg");
+        var background = FXGL.image("back3.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
-        player = new Player(gameScene,gameWorld);
+        player = new Player(gameScene, gameWorld, 0, 0);
     }
 
     @Override

@@ -14,6 +14,10 @@ import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
 
 public class NextPieceComponent extends OnePieceComponent {
 
+    public NextPieceComponent(double x, double y) {
+        super(x, y);
+    }
+
     public static EntityBuilder builder(Component... components) {
         var builder = FXGL.entityBuilder().type(Type.NextPiece);
         for (var component : components)
@@ -28,7 +32,7 @@ public class NextPieceComponent extends OnePieceComponent {
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
                 .at(data.getX(), data.getY())
-                .with(new NextPieceComponent())
+                .with(new NextPieceComponent(data.get("startX"), data.get("startY")))
                 .type(Type.NextPiece)
                 .with(components)
                 .zIndex(Integer.MAX_VALUE)

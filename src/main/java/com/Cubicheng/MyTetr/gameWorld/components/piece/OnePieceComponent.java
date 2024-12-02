@@ -1,6 +1,7 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
 import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.gameWorld.Constants;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.gameWorld.techominoData.Techomino;
@@ -29,6 +30,14 @@ public class OnePieceComponent extends Component {
 
     protected int techominoType;
     protected Techomino techomino;
+
+    protected double startX;
+    protected double startY;
+
+    public OnePieceComponent(double x,double y){
+        startX = x;
+        startY = y;
+    }
 
     double opacity = 1.0;
 
@@ -87,27 +96,6 @@ public class OnePieceComponent extends Component {
             imageView.setLayoutY(render_dy - techomino.techomino[rotate_index][i].second() * BLOCK_SIZE);
             getEntity().getViewComponent().addChild(imageView);
         }
-    }
-
-    public static EntityBuilder builder(Component... components) {
-        var builder = FXGL.entityBuilder().type(Type.OnePiece);
-        for (var component : components)
-            builder.with(component);
-        return builder;
-    }
-
-    public static Entity of(SpawnData data, Component... components) {
-        return of(builder(), data, components);
-    }
-
-    public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
-        return builder
-                .at(startX + 4 * BLOCK_SIZE, startY - BLOCK_SIZE)
-                .with(new OnePieceComponent())
-                .type(Type.OnePiece)
-                .with(components)
-                .zIndex(Integer.MAX_VALUE)
-                .build();
     }
 
     protected boolean check_collide(int x, int y) {

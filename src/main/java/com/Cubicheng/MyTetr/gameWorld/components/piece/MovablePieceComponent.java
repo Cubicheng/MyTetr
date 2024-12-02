@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
+import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
@@ -28,10 +29,15 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     private long down_delta = 1500;
 
+    public MovablePieceComponent(double x, double y) {
+        super(x, y);
+    }
+
     @Override
     public void onAdded() {
         x = 4;
         y = 20;
+
         kick_transation = new Pair[5];
         for (int i = 0; i < 5; i++) {
             kick_transation[i] = new Pair<>(0, 0);
@@ -97,7 +103,7 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
-                .with(new MovablePieceComponent())
+                .with(new MovablePieceComponent(data.get("startX"), data.get("startY")))
                 .with(components)
                 .type(Type.MovablePiece)
                 .zIndex(Integer.MAX_VALUE)

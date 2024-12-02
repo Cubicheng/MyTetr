@@ -18,12 +18,17 @@ import static com.Cubicheng.MyTetr.gameWorld.Constants.MAP_WIDTH;
 
 public class GhostPieceComponent extends OnePieceComponent {
 
+    public GhostPieceComponent(double x, double y) {
+        super(x, y);
+    }
+
     @Override
     public void onAdded() {
         x = 4;
         y = 20;
         now_texture = new ImageView(ImageBuffer.texture[9].image());
         opacity = ConfigVars.ghost_piece_opacity;
+
     }
 
     public static EntityBuilder builder(Component... components) {
@@ -39,7 +44,7 @@ public class GhostPieceComponent extends OnePieceComponent {
 
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
-                .with(new GhostPieceComponent())
+                .with(new GhostPieceComponent(data.get("startX"), data.get("startY")))
                 .with(components)
                 .type(Type.GhostPiece)
                 .zIndex(Integer.MAX_VALUE - 10)

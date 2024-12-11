@@ -1,0 +1,193 @@
+package com.Cubicheng.MyTetr.gameScenes;
+
+import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.ConfigData;
+import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
+import com.Cubicheng.MyTetr.gameWorld.Constants;
+import com.almasb.fxgl.app.scene.GameScene;
+import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.input.Input;
+import com.almasb.fxgl.input.UserAction;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
+import com.whitewoodcity.fxgl.service.XInput;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Text;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
+
+public class ConfigScene implements PushAndPopGameSubScene {
+    public static final String SCENE_NAME = "CONFIG";
+
+    private static final double VISIBILITY_DELTA = 0.01;
+
+    private ConfigData configData;
+
+    @Override
+    public XInput initInput(Input input) {
+        input.addAction(new UserAction("Escape") {
+            @Override
+            protected void onActionBegin() {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("保存修改吗？");
+                alert.initOwner(Application.getStage());
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    try {
+                        objectMapper.writeValue(new File(Constants.config_file_path), configData);
+                        ConfigVars.update_config_from_json();
+                    } catch (IOException e) {
+                        System.err.println("读取或写入JSON文件出错：" + e.getMessage());
+                    }
+                }
+                FXGL.<GameApp>getAppCast().pop();
+            }
+        }, KeyCode.ESCAPE);
+        return new XInput(input);
+    }
+
+    @Override
+    public void initUI(GameScene gameScene, XInput input) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            configData = objectMapper.readValue(new File(Constants.config_file_path), ConfigData.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        var background = FXGL.image("background.jpg");
+        gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
+
+        var gridpane = new GridPane();
+
+        var header = new Text("设置");
+        header.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(50));
+
+        gridpane.add(header, 1, 0);
+
+        var das_text = new Text("启动快速横移的时间");
+        das_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+
+        var das_slider = new Slider();
+        das_slider.setMin(17);
+        das_slider.setMax(333);
+        das_slider.setValue(configData.getDas());
+
+        var das_value = new Text(String.valueOf((long) das_slider.getValue()) + "ms");
+        das_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+
+        das_slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number old_val, Number new_val) {
+                long roundedValue = Math.round(new_val.doubleValue());
+                das_slider.setValue(roundedValue);
+                das_value.setText(String.valueOf(roundedValue) + "ms");
+                configData.setDas(roundedValue);
+            }
+        });
+
+        var hbox1 = new HBox();
+
+        hbox1.getChildren().addAll(das_text, das_slider, das_value);
+
+        var arr_text = new Text("快速横移时间间隔");
+        arr_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+
+        var arr_slider = new Slider();
+        arr_slider.setMin(1);
+        arr_slider.setMax(83);
+        arr_slider.setValue(configData.getArr());
+        arr_slider.setMinorTickCount(1);
+
+        var arr_value = new Text(String.valueOf((long) arr_slider.getValue()) + "ms");
+        arr_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+
+        arr_slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number old_val, Number new_val) {
+                long roundedValue = Math.round(new_val.doubleValue());
+                arr_slider.setValue(roundedValue);
+                configData.setArr(roundedValue);
+                arr_value.setText(String.valueOf(roundedValue) + "ms");
+            }
+        });
+
+        var hbox2 = new HBox();
+        hbox2.getChildren().addAll(arr_text, arr_slider, arr_value);
+
+        var sfd_arr_text = new Text("快速下降时间间隔");
+        sfd_arr_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+
+        var sfd_arr_slider = new Slider();
+        sfd_arr_slider.setMin(1);
+        sfd_arr_slider.setMax(100);
+        sfd_arr_slider.setValue(configData.getSfd_ARR());
+
+        var sfd_arr_value = new Text(String.valueOf((long) sfd_arr_slider.getValue()) + "ms");
+        sfd_arr_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+
+        sfd_arr_slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number old_val, Number new_val) {
+                long roundedValue = Math.round(new_val.doubleValue());
+                sfd_arr_slider.setValue(roundedValue);
+                configData.setSfd_ARR(roundedValue);
+                sfd_arr_value.setText(String.valueOf(roundedValue) + "ms");
+            }
+        });
+
+        var hbox3 = new HBox();
+        hbox3.getChildren().addAll(sfd_arr_text, sfd_arr_slider, sfd_arr_value);
+
+        var visibility_text = new Text("幽灵块能见度");
+        visibility_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+
+        var visibility_slider = new Slider();
+        visibility_slider.setMin(0);
+        visibility_slider.setMax(1);
+        visibility_slider.setValue(configData.getGhost_piece_visibility());
+
+        var visibility_value = new Text(String.valueOf((long) (visibility_slider.getValue() * 100)) + "%");
+        visibility_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+
+        visibility_slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number old_val, Number new_val) {
+                double roundedValue = Math.round(new_val.doubleValue() / VISIBILITY_DELTA) * VISIBILITY_DELTA;
+                visibility_slider.setValue(roundedValue);
+                configData.setGhost_piece_visibility(roundedValue);
+                visibility_value.setText(String.valueOf((long) (roundedValue * 100)) + "%");
+            }
+        });
+
+        var hbox4 = new HBox();
+        hbox4.getChildren().addAll(visibility_text, visibility_slider, visibility_value);
+
+        gridpane.add(hbox1, 1, 1);
+        gridpane.add(hbox2, 1, 2);
+        gridpane.add(hbox3, 1, 3);
+        gridpane.add(hbox4, 1, 4);
+
+        gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) / 2);
+        gridpane.setTranslateY(FXGL.getAppCenter().getY());
+
+        gridpane.setHgap(30);
+        gridpane.setVgap(30);
+
+        gameScene.addUINode(gridpane);
+    }
+}

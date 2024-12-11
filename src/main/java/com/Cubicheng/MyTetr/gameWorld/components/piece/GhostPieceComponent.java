@@ -23,7 +23,7 @@ public class GhostPieceComponent extends OnePieceComponent {
         x = 4;
         y = 20;
         now_texture = new ImageView(ImageBuffer.texture[9].image());
-        opacity = ConfigVars.ghost_piece_opacity;
+        visibility = ConfigVars.ghost_piece_visibility;
 
     }
 

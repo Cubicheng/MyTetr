@@ -49,9 +49,9 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
             @Override
             protected void onActionBegin() {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Warning");
-                alert.setHeaderText("Sure to forgive?");
-                alert.setContentText("You 'll lose your progress.");
+                alert.setTitle("警告");
+                alert.setHeaderText("确认退出吗？");
+                alert.setContentText("你将会失去你的进度。");
                 alert.initOwner(Application.getStage());
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {

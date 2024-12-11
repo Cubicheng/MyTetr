@@ -10,7 +10,7 @@ public class Constants {
     public static final double BLOCK_SIZE = 47/1.75;
     public static double startX = (double) 1035 / 2520;
     public static double startY = (double) 390 / 1680;
-    public static double SOFT_DROP_TIME = 1.0;
+    public static double SOFT_DROP_TIME = 0.75;
 
     public static final Techomino TECHOMINO_S = new Techomino_S();
     public static final Techomino TECHOMINO_Z = new Techomino_Z();
@@ -19,6 +19,8 @@ public class Constants {
     public static final Techomino TECHOMINO_T = new Techomino_T();
     public static final Techomino TECHOMINO_O = new Techomino_O();
     public static final Techomino TECHOMINO_I = new Techomino_I();
+
+    public static final String config_file_path = "config/config.json";
 
     public static Map<Integer,Techomino> int2techomino = Map.of(
             0, TECHOMINO_I,

@@ -1,7 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
-import com.Cubicheng.MyTetr.gameWorld.Constants;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
@@ -41,7 +40,7 @@ public class MovablePieceComponent extends OnePieceComponent {
     @Override
     public void onAdded() {
         x = 4;
-        y = 20;
+        y = 21;
 
         kick_transation = new Pair[5];
         for (int i = 0; i < 5; i++) {
@@ -80,15 +79,15 @@ public class MovablePieceComponent extends OnePieceComponent {
             get_next_piece();
         }
         if (check_bottom_collide()) {
-            opacity = 0.8 + 0.2 * Math.cos(2 * Math.PI * blink_time);
+            visibility = 0.8 + 0.2 * Math.cos(2 * Math.PI * blink_time);
             blink_time += tpf;
-            get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setOpacity(0.0);
+            get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setVisibility(0.0);
             update_texture();
         } else {
             if (blink_time != 0) {
-                opacity = 1.0;
+                visibility = 1.0;
                 blink_time = 0;
-                get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setOpacity(ConfigVars.ghost_piece_opacity);
+                get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setVisibility(ConfigVars.ghost_piece_visibility);
                 update_texture();
             }
         }
@@ -110,7 +109,7 @@ public class MovablePieceComponent extends OnePieceComponent {
         rotate_index = 0;
 
         x = 4;
-        y = 20;
+        y = 21;
 
         get_entity(Type.GameMap).getComponent(GameMapComponent.class).update_next_pieces();
         update_entity_position();
@@ -248,7 +247,7 @@ public class MovablePieceComponent extends OnePieceComponent {
             blink_time = 0;
             if (blink_break_cnt == 15) {
                 hard_drop();
-                get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setOpacity(ConfigVars.ghost_piece_opacity);
+                get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setVisibility(ConfigVars.ghost_piece_visibility);
                 blink_break_cnt = 0;
             }
         }

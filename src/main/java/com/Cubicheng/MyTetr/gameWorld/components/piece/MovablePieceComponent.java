@@ -4,7 +4,7 @@ import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
-import com.Cubicheng.MyTetr.util.Pair;
+import com.Cubicheng.MyTetr.Pair;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;

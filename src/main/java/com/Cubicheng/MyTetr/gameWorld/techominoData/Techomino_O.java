@@ -1,6 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.techominoData;
 
-import com.Cubicheng.MyTetr.util.Pair;
+import com.Cubicheng.MyTetr.Pair;
 
 public class Techomino_O extends Techomino{
     public Techomino_O() {

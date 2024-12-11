@@ -28,6 +28,8 @@ public class ServerWaitScene implements PushAndPopGameSubScene {
         return new XInput(input);
     }
 
+    private String server_ip = "127.0.0.1";
+
     @Override
     public void initUI(GameScene gameScene, XInput input) {
         try {
@@ -38,8 +40,8 @@ public class ServerWaitScene implements PushAndPopGameSubScene {
 
         var gridpane = new GridPane();
 
-        var serverbtn = new Text("Server IP: 127.0.0.0");
-        serverbtn.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        var server_title = new Text("房间 IP: " + server_ip);
+        server_title.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
 
         gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) / 2);
         gridpane.setTranslateY(FXGL.getAppCenter().getY() * 1.2);
@@ -50,7 +52,7 @@ public class ServerWaitScene implements PushAndPopGameSubScene {
 
         gameScene.addUINode(map_image);
 
-        gridpane.add(serverbtn, 0, 0);
+        gridpane.add(server_title, 0, 0);
 
         gridpane.setHgap(30);
         gridpane.setVgap(30);

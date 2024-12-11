@@ -1,6 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.techominoData;
 
-import com.Cubicheng.MyTetr.util.Pair;
+import com.Cubicheng.MyTetr.Pair;
 
 public class Techomino {
     public Pair<Integer, Integer>[][] techomino = new Pair[4][4];

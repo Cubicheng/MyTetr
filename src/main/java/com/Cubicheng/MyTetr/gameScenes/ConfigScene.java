@@ -14,6 +14,7 @@ import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.XInput;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -74,18 +75,21 @@ public class ConfigScene implements PushAndPopGameSubScene {
 
         var gridpane = new GridPane();
 
+        gridpane.setPadding(new Insets(10, 10, 10, 10));
+
         var header = new Text("设置");
         header.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(50));
 
         gridpane.add(header, 1, 0);
 
-        var das_text = new Text("启动快速横移的时间");
+        var das_text = new Text("启动快速横移的前摇");
         das_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
 
         var das_slider = new Slider();
         das_slider.setMin(17);
         das_slider.setMax(333);
         das_slider.setValue(configData.getDas());
+        das_slider.setPrefWidth(500);
 
         var das_value = new Text(String.valueOf((long) das_slider.getValue()) + "ms");
         das_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
@@ -101,10 +105,10 @@ public class ConfigScene implements PushAndPopGameSubScene {
         });
 
         var hbox1 = new HBox();
-
         hbox1.getChildren().addAll(das_text, das_slider, das_value);
+        hbox1.setSpacing(20);
 
-        var arr_text = new Text("快速横移时间间隔");
+        var arr_text = new Text("快速横移时间间隔   ");
         arr_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
 
         var arr_slider = new Slider();
@@ -112,6 +116,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         arr_slider.setMax(83);
         arr_slider.setValue(configData.getArr());
         arr_slider.setMinorTickCount(1);
+        arr_slider.setPrefWidth(500);
 
         var arr_value = new Text(String.valueOf((long) arr_slider.getValue()) + "ms");
         arr_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
@@ -128,14 +133,16 @@ public class ConfigScene implements PushAndPopGameSubScene {
 
         var hbox2 = new HBox();
         hbox2.getChildren().addAll(arr_text, arr_slider, arr_value);
+        hbox2.setSpacing(20);
 
-        var sfd_arr_text = new Text("快速下降时间间隔");
+        var sfd_arr_text = new Text("快速下降时间间隔   ");
         sfd_arr_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
 
         var sfd_arr_slider = new Slider();
         sfd_arr_slider.setMin(1);
         sfd_arr_slider.setMax(100);
         sfd_arr_slider.setValue(configData.getSfd_ARR());
+        sfd_arr_slider.setPrefWidth(500);
 
         var sfd_arr_value = new Text(String.valueOf((long) sfd_arr_slider.getValue()) + "ms");
         sfd_arr_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
@@ -152,14 +159,16 @@ public class ConfigScene implements PushAndPopGameSubScene {
 
         var hbox3 = new HBox();
         hbox3.getChildren().addAll(sfd_arr_text, sfd_arr_slider, sfd_arr_value);
+        hbox3.setSpacing(20);
 
-        var visibility_text = new Text("幽灵块能见度");
+        var visibility_text = new Text("幽灵块能见度          ");
         visibility_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
 
         var visibility_slider = new Slider();
         visibility_slider.setMin(0);
         visibility_slider.setMax(1);
         visibility_slider.setValue(configData.getGhost_piece_visibility());
+        visibility_slider.setPrefWidth(500);
 
         var visibility_value = new Text(String.valueOf((long) (visibility_slider.getValue() * 100)) + "%");
         visibility_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
@@ -176,6 +185,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
 
         var hbox4 = new HBox();
         hbox4.getChildren().addAll(visibility_text, visibility_slider, visibility_value);
+        hbox4.setSpacing(20);
 
         gridpane.add(hbox1, 1, 1);
         gridpane.add(hbox2, 1, 2);

@@ -1,4 +1,4 @@
-package com.Cubicheng.MyTetr.util;
+package com.Cubicheng.MyTetr;
 
 public class Pair <T1,T2>{
     private T1 first;

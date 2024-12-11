@@ -14,6 +14,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+
 public class ClientWaitScene implements PushAndPopGameSubScene {
     public static final String SCENE_NAME = "ClientWaitScene";
 
@@ -31,12 +34,6 @@ public class ClientWaitScene implements PushAndPopGameSubScene {
 
     @Override
     public void initUI(GameScene gameScene, XInput input) {
-        try {
-            Client.getInstance().start();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
         var gridpane = new GridPane();
 
         var serverbtn = new Text("Client");

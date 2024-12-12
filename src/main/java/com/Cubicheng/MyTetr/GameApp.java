@@ -12,7 +12,6 @@ import com.whitewoodcity.fxgl.dsl.FXGL;
 import com.whitewoodcity.fxgl.service.ReplaceableGameScene;
 import com.whitewoodcity.fxgl.service.XGameScene;
 import javafx.stage.Screen;
-import com.Cubicheng.MyTetr.gameWorld.*;
 
 public class GameApp extends GameApplication {
 

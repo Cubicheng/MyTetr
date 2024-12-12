@@ -2,21 +2,14 @@ package com.Cubicheng.MyTetr.gameScenes;
 
 import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.GameApp;
-import com.Cubicheng.MyTetr.gameWorld.GetService;
+import com.Cubicheng.MyTetr.GetService;
 import com.Cubicheng.MyTetr.gameWorld.Player;
 import com.Cubicheng.MyTetr.gameWorld.Type;
-import com.Cubicheng.MyTetr.gameWorld.components.*;
-import com.Cubicheng.MyTetr.gameWorld.components.piece.HoldPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
-import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
-import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
 import com.almasb.fxgl.app.scene.GameScene;
-import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
-import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.input.*;
-import com.almasb.fxgl.texture.Texture;
 import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.XInput;
 import javafx.scene.control.Alert;
@@ -25,10 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import com.almasb.fxgl.dsl.FXGL;
 import javafx.scene.paint.ImagePattern;
-
-import java.util.List;
-
-import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
+import javafx.scene.text.Text;
 
 import java.util.Optional;
 
@@ -169,5 +159,10 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
     @Override
     public Entity get_entity(Type type) {
         return get_game_world().getEntitiesByType(type).getFirst();
+    }
+
+    @Override
+    public GridPane get_gridpane() {
+        return null;
     }
 }

@@ -107,7 +107,7 @@ public class MainMenu implements ReplaceableGameScene {
         gridpane.add(multiPlayerbtn, 1, 1);
         gridpane.add(configbtn, 1, 2);
 
-        gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) / 2);
+        gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) /2);
         gridpane.setTranslateY(FXGL.getAppCenter().getY() * 1.2);
 
         var background = FXGL.image("background.jpg");

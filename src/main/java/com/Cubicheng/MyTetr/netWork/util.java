@@ -1,5 +1,8 @@
 package com.Cubicheng.MyTetr.netWork;
 
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
+
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -13,5 +16,16 @@ public interface util {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static Text get_text(GridPane gridPane, int targetColumn, int targetRow) {
+        Text retrievedText = null;
+        for (javafx.scene.Node node : gridPane.getChildren()) {
+            if (GridPane.getRowIndex(node) == targetRow && GridPane.getColumnIndex(node) == targetColumn && node instanceof Text) {
+                retrievedText = (Text) node;
+                break;
+            }
+        }
+        return retrievedText;
     }
 }

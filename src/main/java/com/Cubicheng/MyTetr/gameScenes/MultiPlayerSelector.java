@@ -94,25 +94,7 @@ public class MultiPlayerSelector implements PushAndPopGameSubScene {
 
         clientbtn.setOnMouseClicked(_2 -> {
             Client.getInstance().setIp(room_ip.getText());
-            Client.getInstance().start();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            System.out.println(Client.getInstance().isConnected());
-            if (Client.getInstance().isConnected()) {
-                FXGL.<GameApp>getAppCast().push(ClientWaitScene.SCENE_NAME);
-            } else {
-                Client.getInstance().shutdown();
-                room_ip.clear();
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("无法连接服务器，可能是房间未创建或者是 IP 地址输入错误。");
-                alert.initOwner(Application.getStage());
-                alert.showAndWait();
-            }
+            FXGL.<GameApp>getAppCast().push(ClientWaitScene.SCENE_NAME);
         });
 
         gridpane.add(serverbtn, 1, 0);

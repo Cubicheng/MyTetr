@@ -2,6 +2,7 @@ package com.Cubicheng.MyTetr.gameScenes.serverScene;
 
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.GetService;
+import com.Cubicheng.MyTetr.gameScenes.MultiPlayerSelector;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.netWork.Server;
 import com.almasb.fxgl.app.scene.GameScene;
@@ -69,8 +70,9 @@ public class ServerWaitScene implements PushAndPopGameSubScene, GetService {
         });
 
         play_btn.setOnMouseClicked(_1 -> {
-
+            FXGL.<GameApp>getAppCast().push(ServerPlayScene.SCENE_NAME);
         });
+
 
         ImageView map_image = new ImageView(FXGL.image("background.jpg"));
         map_image.setFitWidth(gameScene.getAppWidth());

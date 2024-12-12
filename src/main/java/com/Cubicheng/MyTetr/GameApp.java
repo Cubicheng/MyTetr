@@ -3,6 +3,7 @@ package com.Cubicheng.MyTetr;
 import com.Cubicheng.MyTetr.gameScenes.*;
 import com.Cubicheng.MyTetr.gameScenes.MultiPlayerSelector;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientWaitScene;
+import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerPlayScene;
 import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerWaitScene;
 import com.Cubicheng.MyTetr.gameWorld.PropertyKey;
 import com.almasb.fxgl.app.GameSettings;
@@ -58,10 +59,10 @@ public class GameApp extends GameApplication {
             case MainMenu.SCENE_NAME -> new MainMenu();
             case SinglePlayer.SCENE_NAME -> new SinglePlayer();
             case MultiPlayerSelector.SCENE_NAME -> new MultiPlayerSelector();
-            case MultiPlayer.SCENE_NAME -> new MultiPlayer();
             case ConfigScene.SCENE_NAME -> new ConfigScene();
             case ServerWaitScene.SCENE_NAME -> new ServerWaitScene();
             case ClientWaitScene.SCENE_NAME -> new ClientWaitScene();
+            case ServerPlayScene.SCENE_NAME -> new ServerPlayScene();
             default -> throw new RuntimeException("Wrong GameScene type");
         };
     }

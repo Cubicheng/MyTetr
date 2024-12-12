@@ -22,6 +22,8 @@ public class Player {
     private Entity[] nextPiece;
     private Entity mapImageEntity;
 
+    private int id;
+
     public double startX = Constants.startX;
     public double startY = Constants.startY;
 
@@ -33,7 +35,9 @@ public class Player {
         return startY;
     }
 
-    public Player(GameScene gameScene, GameWorld gameWorld, double dx, double dy) {
+    public Player(int player_id, GameScene gameScene, GameWorld gameWorld, double dx, double dy) {
+        this.id = player_id;
+
         nextPiece = new Entity[5];
 
         var map_image = FXGL.image("map.png");

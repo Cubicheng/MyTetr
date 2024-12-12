@@ -24,7 +24,5 @@ public interface GetService extends DimensionService {
 
     public Entity get_entity(Type type, int id);
 
-    public Entity get_entity(Type type);
-
     public GridPane get_gridpane();
 }

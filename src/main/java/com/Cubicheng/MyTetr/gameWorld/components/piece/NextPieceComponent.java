@@ -14,8 +14,8 @@ import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
 
 public class NextPieceComponent extends OnePieceComponent {
 
-    public NextPieceComponent(double x, double y) {
-        super(x, y);
+    public NextPieceComponent(double x, double y, int id) {
+        super(x, y, id);
     }
 
     public static EntityBuilder builder(Component... components) {
@@ -32,7 +32,7 @@ public class NextPieceComponent extends OnePieceComponent {
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
                 .at(data.getX(), data.getY())
-                .with(new NextPieceComponent(data.get("startX"), data.get("startY")))
+                .with(new NextPieceComponent(data.get("startX"), data.get("startY"), data.get("id")))
                 .type(Type.NextPiece)
                 .with(components)
                 .zIndex(Integer.MAX_VALUE)

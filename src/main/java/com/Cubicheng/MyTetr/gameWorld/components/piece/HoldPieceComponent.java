@@ -18,8 +18,8 @@ public class HoldPieceComponent extends OnePieceComponent {
 
     boolean is_empty = true;
 
-    public HoldPieceComponent(double x, double y) {
-        super(x, y);
+    public HoldPieceComponent(double x, double y, int id) {
+        super(x, y, id);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class HoldPieceComponent extends OnePieceComponent {
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
                 .at(data.getX(), data.getY())
-                .with(new HoldPieceComponent(data.get("startX"), data.get("startY")))
+                .with(new HoldPieceComponent(data.get("startX"), data.get("startY"), data.get("id")))
                 .type(Type.HoldPiece)
                 .with(components)
                 .zIndex(Integer.MAX_VALUE)
@@ -57,8 +57,8 @@ public class HoldPieceComponent extends OnePieceComponent {
     @Override
     public int get_techomino_type() {
         if (is_empty) {
-            set_techomino(get_entity(Type.GameMap).getComponent(GameMapComponent.class).get_next_piece());
-            get_entity(Type.GameMap).getComponent(GameMapComponent.class).update_next_pieces();
+            set_techomino(get_entity(Type.GameMap, 0).getComponent(GameMapComponent.class).get_next_piece());
+            get_entity(Type.GameMap, 0).getComponent(GameMapComponent.class).update_next_pieces();
             is_empty = false;
         }
         return techominoType;

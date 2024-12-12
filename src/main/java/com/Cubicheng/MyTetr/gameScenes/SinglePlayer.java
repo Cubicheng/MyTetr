@@ -157,11 +157,6 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
     }
 
     @Override
-    public Entity get_entity(Type type) {
-        return get_game_world().getEntitiesByType(type).getFirst();
-    }
-
-    @Override
     public GridPane get_gridpane() {
         return null;
     }

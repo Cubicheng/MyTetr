@@ -61,10 +61,10 @@ public class Player {
         startX = startX * new_width + (gameScene.getAppWidth() - new_width) / 2 + dx;
         startY = startY * new_height + dy;
 
-        gameMap = GameMapComponent.of(new SpawnData(startX, startY + 19 * BLOCK_SIZE).put("startX", startX).put("startY", startY));
-        movablePiece = MovablePieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY));
-        ghostPiece = GhostPieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY));
-        holdPiece = HoldPieceComponent.of(new SpawnData(startX - 3 * BLOCK_SIZE, startY + 2.4 * BLOCK_SIZE).put("startX", startX).put("startY", startY));
+        gameMap = GameMapComponent.of(new SpawnData(startX, startY + 19 * BLOCK_SIZE).put("id", id));
+        movablePiece = MovablePieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY).put("id", id));
+        ghostPiece = GhostPieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY).put("id", id));
+        holdPiece = HoldPieceComponent.of(new SpawnData(startX - 3 * BLOCK_SIZE, startY + 2.4 * BLOCK_SIZE).put("startX", startX).put("startY", startY).put("id", id));
 
         System.out.println(gameMap);
         System.out.println(movablePiece);
@@ -72,7 +72,7 @@ public class Player {
         gameWorld.addEntities(gameMap, movablePiece, ghostPiece, holdPiece);
 
         for (int i = 0; i < 5; i++) {
-            nextPiece[i] = NextPieceComponent.of(new SpawnData(startX + 13 * BLOCK_SIZE, startY + (3 * i + 2.4) * BLOCK_SIZE).put("startX", startX).put("startY", startY));
+            nextPiece[i] = NextPieceComponent.of(new SpawnData(startX + 13 * BLOCK_SIZE, startY + (3 * i + 2.4) * BLOCK_SIZE).put("startX", startX).put("startY", startY).put("id", id));
             gameWorld.addEntity(nextPiece[i]);
         }
     }

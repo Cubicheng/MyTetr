@@ -10,15 +10,21 @@ public class Server {
 
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
+    private ServerHandler handler;
+
+    public ServerHandler getHandler() {
+        return handler;
+    }
 
     public void start() throws InterruptedException {
         bossGroup = new NioEventLoopGroup();
         workerGroup = new NioEventLoopGroup();
+        handler = new ServerHandler();
         try {
             ServerBootstrap boot = new ServerBootstrap();
             boot.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new ServerHandler());
+                    .childHandler(handler);
             ChannelFuture channelFuture = boot.bind(Constants.port).sync().addListener(future1 -> {
                 if (future1.isSuccess()) {
                     System.out.println("端口绑定成功");

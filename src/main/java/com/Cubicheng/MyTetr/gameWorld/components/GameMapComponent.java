@@ -2,6 +2,7 @@ package com.Cubicheng.MyTetr.gameWorld.components;
 
 import atlantafx.base.util.BBCodeHandler;
 import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.gameWorld.Constants;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.NextQueue;
 import com.Cubicheng.MyTetr.gameWorld.Type;
@@ -30,6 +31,12 @@ public class GameMapComponent extends Component {
     private NextQueue next_queue;
     private int y;
 
+    private int player_id;
+
+    public GameMapComponent(int id) {
+        this.player_id = id;
+    }
+
     @Override
     public void onAdded() {
         next_queue = new NextQueue();
@@ -43,7 +50,7 @@ public class GameMapComponent extends Component {
     }
 
     public void update_next_pieces() {
-        Entity gameMap = get_entity(Type.GameMap);
+        Entity gameMap = get_entity(Type.GameMap, 0);
         for (int i = 0; i < 5; i++) {
             Entity nextPiece = get_entity(Type.NextPiece, i);
             int type = gameMap.getComponent(GameMapComponent.class).get_next_piece(i);
@@ -73,18 +80,14 @@ public class GameMapComponent extends Component {
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
                 .at(data.getX(), data.getY())
-                .with(new GameMapComponent())
+                .with(new GameMapComponent(data.get("id")))
                 .type(Type.GameMap)
                 .with(components)
                 .build();
     }
 
     private Entity get_entity(Type type, int id) {
-        return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type, id);
-    }
-
-    private Entity get_entity(Type type) {
-        return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type);
+        return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type, id + player_id * typeSize.get(type));
     }
 
     List<Integer> generate_new_empty_row() {
@@ -96,7 +99,7 @@ public class GameMapComponent extends Component {
     }
 
     private void update_texture() {
-        Entity gameMap = get_entity(Type.GameMap);
+        Entity gameMap = get_entity(Type.GameMap, 0);
         gameMap.getViewComponent().clearChildren();
         for (int i = 0; i < MAP_HEIGHT; i++) {
             for (int j = 0; j < MAP_WIDTH; j++) {
@@ -131,10 +134,10 @@ public class GameMapComponent extends Component {
     }
 
     public void add_piece() {
-        int techominoType = get_entity(Type.MovablePiece).getComponent(MovablePieceComponent.class).get_techomino_type();
+        int techominoType = get_entity(Type.MovablePiece, 0).getComponent(MovablePieceComponent.class).get_techomino_type();
         for (int i = 0; i < 4; i++) {
-            int x = get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).getX(i);
-            int y = get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).getY(i);
+            int x = get_entity(Type.GhostPiece, 0).getComponent(GhostPieceComponent.class).getX(i);
+            int y = get_entity(Type.GhostPiece, 0).getComponent(GhostPieceComponent.class).getY(i);
             set_map(x, y, techominoType);
         }
         clear_line();

@@ -104,11 +104,6 @@ public class ServerWaitScene implements PushAndPopGameSubScene, GetService {
     }
 
     @Override
-    public Entity get_entity(Type type) {
-        return null;
-    }
-
-    @Override
     public GridPane get_gridpane() {
         return gridpane;
     }

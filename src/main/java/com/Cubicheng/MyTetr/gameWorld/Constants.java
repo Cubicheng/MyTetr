@@ -4,10 +4,12 @@ import com.Cubicheng.MyTetr.gameWorld.techominoData.*;
 
 import java.util.Map;
 
+import static com.Cubicheng.MyTetr.gameWorld.Type.*;
+
 public class Constants {
     public static final int MAP_WIDTH = 10;
     public static final int MAP_HEIGHT = 40;
-    public static final double BLOCK_SIZE = 47/1.75;
+    public static final double BLOCK_SIZE = 47 / 1.75;
     public static double startX = (double) 1035 / 2520;
     public static double startY = (double) 390 / 1680;
     public static double SOFT_DROP_TIME = 0.75;
@@ -22,7 +24,7 @@ public class Constants {
 
     public static final String config_file_path = "config/config.json";
 
-    public static Map<Integer,Techomino> int2techomino = Map.of(
+    public static Map<Integer, Techomino> int2techomino = Map.of(
             0, TECHOMINO_I,
             1, TECHOMINO_J,
             2, TECHOMINO_L,
@@ -30,5 +32,14 @@ public class Constants {
             4, TECHOMINO_S,
             5, TECHOMINO_T,
             6, TECHOMINO_Z
+    );
+
+    public static Map<Type, Integer> typeSize = Map.of(
+            MovablePiece, 1,
+            GhostPiece, 1,
+            NextPiece, 5,
+            OnePiece, 0,
+            HoldPiece, 1,
+            GameMap, 1
     );
 }

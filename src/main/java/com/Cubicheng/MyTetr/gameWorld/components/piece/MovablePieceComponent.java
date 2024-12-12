@@ -33,8 +33,8 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     private boolean is_collided = false;
 
-    public MovablePieceComponent(double x, double y) {
-        super(x, y);
+    public MovablePieceComponent(double x, double y, int id) {
+        super(x, y, id);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     private boolean check_bottom_collide() {
-        return y == get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).getY();
+        return y == get_entity(Type.GhostPiece, 0).getComponent(GhostPieceComponent.class).getY();
 
     }
 
@@ -81,13 +81,13 @@ public class MovablePieceComponent extends OnePieceComponent {
         if (check_bottom_collide()) {
             visibility = 0.8 + 0.2 * Math.cos(2 * Math.PI * blink_time);
             blink_time += tpf;
-            get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setVisibility(0.0);
+            get_entity(Type.GhostPiece, 0).getComponent(GhostPieceComponent.class).setVisibility(0.0);
             update_texture();
         } else {
             if (blink_time != 0) {
                 visibility = 1.0;
                 blink_time = 0;
-                get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setVisibility(ConfigVars.ghost_piece_visibility);
+                get_entity(Type.GhostPiece, 0).getComponent(GhostPieceComponent.class).setVisibility(ConfigVars.ghost_piece_visibility);
                 update_texture();
             }
         }
@@ -98,7 +98,7 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     private void get_next_piece() {
         is_collided = false;
-        Entity gameMap = get_entity(Type.GameMap);
+        Entity gameMap = get_entity(Type.GameMap, 0);
         if (gameMap == null) {
             System.out.println("gameMap is null");
             return;
@@ -111,7 +111,7 @@ public class MovablePieceComponent extends OnePieceComponent {
         x = 4;
         y = 21;
 
-        get_entity(Type.GameMap).getComponent(GameMapComponent.class).update_next_pieces();
+        get_entity(Type.GameMap, 0).getComponent(GameMapComponent.class).update_next_pieces();
         update_entity_position();
         update_texture();
     }
@@ -129,7 +129,7 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
-                .with(new MovablePieceComponent(data.get("startX"), data.get("startY")))
+                .with(new MovablePieceComponent(data.get("startX"), data.get("startY"), data.get("id")))
                 .with(components)
                 .type(Type.MovablePiece)
                 .zIndex(Integer.MAX_VALUE)
@@ -137,20 +137,20 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     public void hard_drop() {
-        get_entity(Type.GameMap).getComponent(GameMapComponent.class).add_piece();
-        get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_can_hold(true);
+        get_entity(Type.GameMap, 0).getComponent(GameMapComponent.class).add_piece();
+        get_entity(Type.HoldPiece, 0).getComponent(HoldPieceComponent.class).set_can_hold(true);
         get_next_piece();
     }
 
     public void hold() {
-        if (!get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).get_can_hold())
+        if (!get_entity(Type.HoldPiece, 0).getComponent(HoldPieceComponent.class).get_can_hold())
             return;
 
-        int hold_type = get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).get_techomino_type();
+        int hold_type = get_entity(Type.HoldPiece, 0).getComponent(HoldPieceComponent.class).get_techomino_type();
 
-        get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_techomino(techominoType);
+        get_entity(Type.HoldPiece, 0).getComponent(HoldPieceComponent.class).set_techomino(techominoType);
 
-        get_entity(Type.HoldPiece).getComponent(HoldPieceComponent.class).set_can_hold(false);
+        get_entity(Type.HoldPiece, 0).getComponent(HoldPieceComponent.class).set_can_hold(false);
 
         techominoType = hold_type;
         techomino = int2techomino.get(techominoType);
@@ -247,7 +247,7 @@ public class MovablePieceComponent extends OnePieceComponent {
             blink_time = 0;
             if (blink_break_cnt == 15) {
                 hard_drop();
-                get_entity(Type.GhostPiece).getComponent(GhostPieceComponent.class).setVisibility(ConfigVars.ghost_piece_visibility);
+                get_entity(Type.GhostPiece, 0).getComponent(GhostPieceComponent.class).setVisibility(ConfigVars.ghost_piece_visibility);
                 blink_break_cnt = 0;
             }
         }

@@ -14,8 +14,8 @@ import javafx.scene.image.ImageView;
 
 public class GhostPieceComponent extends OnePieceComponent {
 
-    public GhostPieceComponent(double x, double y) {
-        super(x, y);
+    public GhostPieceComponent(double x, double y, int id) {
+        super(x, y, id);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GhostPieceComponent extends OnePieceComponent {
 
     public static Entity of(EntityBuilder builder, SpawnData data, Component... components) {
         return builder
-                .with(new GhostPieceComponent(data.get("startX"), data.get("startY")))
+                .with(new GhostPieceComponent(data.get("startX"), data.get("startY"), data.get("id")))
                 .with(components)
                 .type(Type.GhostPiece)
                 .zIndex(Integer.MAX_VALUE - 10)
@@ -52,7 +52,7 @@ public class GhostPieceComponent extends OnePieceComponent {
         if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == MainMenu.class) {
             return;
         }
-        Entity movablePiece = get_entity(Type.MovablePiece);
+        Entity movablePiece = get_entity(Type.MovablePiece, 0);
         assert movablePiece != null;
         this.techomino = movablePiece.getComponent(MovablePieceComponent.class).get_techomino();
         rotate_index = movablePiece.getComponent(MovablePieceComponent.class).get_rotate_index();

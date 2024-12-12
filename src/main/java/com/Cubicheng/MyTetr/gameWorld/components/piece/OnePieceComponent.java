@@ -1,6 +1,7 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
 import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.gameWorld.Constants;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.gameWorld.techominoData.Techomino;
@@ -10,6 +11,7 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.dsl.FXGL;
 
 import com.Cubicheng.MyTetr.gameWorld.Type;
+import io.netty.util.Constant;
 import javafx.scene.image.ImageView;
 
 import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
@@ -19,6 +21,8 @@ public class OnePieceComponent extends Component {
     protected ImageView now_texture;
 
     protected int x, y;
+
+    protected int player_id;
 
     protected double render_dx = 0, render_dy = 0;
 
@@ -34,9 +38,10 @@ public class OnePieceComponent extends Component {
     protected double startX;
     protected double startY;
 
-    public OnePieceComponent(double x,double y){
+    public OnePieceComponent(double x, double y, int id) {
         startX = x;
         startY = y;
+        player_id = id;
     }
 
     double visibility = 1.0;
@@ -77,16 +82,12 @@ public class OnePieceComponent extends Component {
     }
 
     protected Entity get_entity(Type type, int id) {
-        return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type, id);
-    }
-
-    protected Entity get_entity(Type type) {
-        return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type);
+        return FXGL.<GameApp>getAppCast().getFrontlineService().get_entity(type, id + player_id * typeSize.get(type));
     }
 
     protected void update_texture() {
-        if(techomino == null){
-            return ;
+        if (techomino == null) {
+            return;
         }
         getEntity().getViewComponent().clearChildren();
         for (int i = 0; i < 4; i++) {
@@ -99,7 +100,7 @@ public class OnePieceComponent extends Component {
     }
 
     protected boolean can_move_to(int x, int y) {
-        Entity gameMap = get_entity(Type.GameMap);
+        Entity gameMap = get_entity(Type.GameMap, 0);
         if (gameMap == null) {
             System.out.println("gameMap is null");
             return false;
@@ -120,13 +121,13 @@ public class OnePieceComponent extends Component {
         this.techominoType = techominoType;
         this.techomino = int2techomino.get(techominoType);
         this.now_texture = new ImageView(ImageBuffer.texture[techominoType].image());
-        switch(techominoType){
+        switch (techominoType) {
             case 0:
-                render_dx = -BLOCK_SIZE/2;
-                render_dy = -BLOCK_SIZE/2;
+                render_dx = -BLOCK_SIZE / 2;
+                render_dy = -BLOCK_SIZE / 2;
                 break;
             case 3:
-                render_dx = -BLOCK_SIZE/2;
+                render_dx = -BLOCK_SIZE / 2;
                 render_dy = 0;
                 break;
             default:

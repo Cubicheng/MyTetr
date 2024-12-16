@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr.gameScenes.serverScene;
 
+import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.GetService;
 import com.Cubicheng.MyTetr.gameWorld.Type;
@@ -68,7 +69,6 @@ public class ServerWaitScene implements PushAndPopGameSubScene, GetService {
         });
 
         play_btn.setOnMouseClicked(_1 -> {
-            Server.getInstance().getHandler().startGame();
             FXGL.<GameApp>getAppCast().push(ServerPlayScene.SCENE_NAME);
         });
 

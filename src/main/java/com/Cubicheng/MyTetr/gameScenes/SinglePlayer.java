@@ -20,6 +20,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 
+import java.util.List;
 import java.util.Optional;
 
 public class SinglePlayer implements PushAndPopGameSubScene, GetService {
@@ -58,72 +59,71 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
             }
         }, KeyCode.ESCAPE);
 
-        input.addAction(new UserAction("Hard_Drop") {
-            @Override
-            protected void onActionBegin() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).hard_drop();
-            }
-        }, KeyCode.SPACE);
-
-        input.addAction(new UserAction("Left") {
-            @Override
-            protected void onActionBegin() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_left_begin();
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).move_left();
-            }
-
-            @Override
-            protected void onActionEnd() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_left_end();
-            }
-        }, KeyCode.LEFT);
-
-        input.addAction(new UserAction("Right") {
-            @Override
-            protected void onActionBegin() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_right_begin();
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).move_right();
-            }
-
-            @Override
-            protected void onActionEnd() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_right_end();
-            }
-        }, KeyCode.RIGHT);
-
-        input.addAction(new UserAction("Down") {
-            @Override
-            protected void onActionBegin() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_down_begin();
-            }
-
-            @Override
-            protected void onActionEnd() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_down_end();
-            }
-        }, KeyCode.DOWN);
-
-        input.addAction(new UserAction("rRotate") {
-            @Override
-            protected void onActionBegin() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).right_rotate();
-            }
-        }, KeyCode.UP);
-
-        input.addAction(new UserAction("lRotate") {
-            @Override
-            protected void onActionBegin() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).left_rotate();
-            }
-        }, KeyCode.Z);
-
-        input.addAction(new UserAction("doubleRotate") {
-            @Override
-            protected void onActionBegin() {
-                player.getMovablePiece().getComponent(MovablePieceComponent.class).double_ratate();
-            }
-        }, KeyCode.A);
-
+//        input.addAction(new UserAction("Hard_Drop") {
+//            @Override
+//            protected void onActionBegin() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).hard_drop();
+//            }
+//        }, KeyCode.SPACE);
+//
+//        input.addAction(new UserAction("Left") {
+//            @Override
+//            protected void onActionBegin() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_left_begin();
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).move_left();
+//            }
+//
+//            @Override
+//            protected void onActionEnd() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_left_end();
+//            }
+//        }, KeyCode.LEFT);
+//
+//        input.addAction(new UserAction("Right") {
+//            @Override
+//            protected void onActionBegin() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_right_begin();
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).move_right();
+//            }
+//
+//            @Override
+//            protected void onActionEnd() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_right_end();
+//            }
+//        }, KeyCode.RIGHT);
+//
+//        input.addAction(new UserAction("Down") {
+//            @Override
+//            protected void onActionBegin() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_down_begin();
+//            }
+//
+//            @Override
+//            protected void onActionEnd() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_down_end();
+//            }
+//        }, KeyCode.DOWN);
+//
+//        input.addAction(new UserAction("rRotate") {
+//            @Override
+//            protected void onActionBegin() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).right_rotate();
+//            }
+//        }, KeyCode.UP);
+//
+//        input.addAction(new UserAction("lRotate") {
+//            @Override
+//            protected void onActionBegin() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).left_rotate();
+//            }
+//        }, KeyCode.Z);
+//
+//        input.addAction(new UserAction("doubleRotate") {
+//            @Override
+//            protected void onActionBegin() {
+//                player.getMovablePiece().getComponent(MovablePieceComponent.class).double_ratate();
+//            }
+//        }, KeyCode.A);
 
         input.addTriggerListener(new TriggerListener() {
             @Override
@@ -138,14 +138,52 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
 
     @Override
     public void initUI(GameScene gameScene, XInput input) {
-
         var gridpane = new GridPane();
 
         var background = FXGL.image("back3.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
         player = new Player(0, gameScene, gameWorld, 0, 0);
+
+        List.of(KeyCode.SPACE)
+                .forEach(keyCode -> input
+                        .onActionBegin(keyCode, player.getMovablePiece().getComponent(MovablePieceComponent.class)::hard_drop));
+
+        List.of(KeyCode.LEFT)
+                .forEach(keyCode -> input
+                        .onActionBegin(keyCode, () -> {
+                            player.getMovablePiece().getComponent(MovablePieceComponent.class).move_left();
+                            player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_left_begin();
+                        })
+                        .onActionEnd(keyCode, player.getMovablePiece().getComponent(MovablePieceComponent.class)::on_move_left_end));
+
+        List.of(KeyCode.RIGHT)
+                .forEach(keyCode -> input
+                        .onActionBegin(keyCode, () -> {
+                            player.getMovablePiece().getComponent(MovablePieceComponent.class).move_right();
+                            player.getMovablePiece().getComponent(MovablePieceComponent.class).on_move_right_begin();
+                        })
+                        .onActionEnd(keyCode, player.getMovablePiece().getComponent(MovablePieceComponent.class)::on_move_right_end));
+
+        List.of(KeyCode.DOWN)
+                .forEach(keyCode -> input
+                        .onActionBegin(keyCode, player.getMovablePiece().getComponent(MovablePieceComponent.class)::on_move_down_begin)
+                        .onActionEnd(keyCode, player.getMovablePiece().getComponent(MovablePieceComponent.class)::on_move_down_end));
+
+        List.of(KeyCode.UP)
+                .forEach(keyCode -> input
+                        .onActionBegin(keyCode, player.getMovablePiece().getComponent(MovablePieceComponent.class)::right_rotate));
+
+        List.of(KeyCode.Z)
+                .forEach(keyCode -> input
+                        .onActionBegin(keyCode, player.getMovablePiece().getComponent(MovablePieceComponent.class)::left_rotate));
+
+        List.of(KeyCode.A)
+                .forEach(keyCode -> input
+                        .onActionBegin(keyCode, player.getMovablePiece().getComponent(MovablePieceComponent.class)::double_ratate));
+
     }
+
 
     @Override
     public GameWorld get_game_world() {

@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr.netWork.server;
 
+import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.netWork.Constants;
 import com.Cubicheng.MyTetr.netWork.packetHandler.PacketDecoder;
 import com.Cubicheng.MyTetr.netWork.packetHandler.PacketEncoder;
@@ -10,6 +11,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import javafx.application.Platform;
 
 public class Server {
 
@@ -18,6 +20,11 @@ public class Server {
     private ServerHandler handler;
 
     public void start() throws InterruptedException {
+        Platform.runLater(() -> {
+            Application.setIs_server(true);
+        });
+
+
         bossGroup = new NioEventLoopGroup();
         workerGroup = new NioEventLoopGroup();
         handler = new ServerHandler();
@@ -49,6 +56,9 @@ public class Server {
     }
 
     public void shutdown() {
+        Platform.runLater(() -> {
+            Application.setIs_server(false);
+        });
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
         System.out.println("server程序已经退出");
@@ -60,7 +70,7 @@ public class Server {
 
     public static final Server instance = new Server();
 
-    public static Server getInstance(){
+    public static Server getInstance() {
         return instance;
     }
 

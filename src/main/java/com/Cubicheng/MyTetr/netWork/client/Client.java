@@ -17,6 +17,8 @@ public class Client {
 
     private String ip;
 
+    private ClientHandler handler;
+
     public void setIp(String ip) {
         this.ip = ip;
     }
@@ -27,7 +29,17 @@ public class Client {
 
     private NioEventLoopGroup workGroup;
 
+    public ClientHandler getHandler() {
+        return handler;
+    }
+
     public void start() {
+        Platform.runLater(() -> {
+            Application.setIs_server(false);
+        });
+
+        handler = new ClientHandler();
+
         workGroup = new NioEventLoopGroup();
 
         Bootstrap bootstrap = new Bootstrap();
@@ -37,7 +49,7 @@ public class Client {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ch.pipeline().addLast(new PacketDecoder());
-                        ch.pipeline().addLast(new ClientHandler());
+                        ch.pipeline().addLast(handler);
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
@@ -63,6 +75,10 @@ public class Client {
     }
 
     public void shutdown() {
+        Platform.runLater(() -> {
+            Application.setIs_server(true);
+        });
+
         workGroup.shutdownGracefully();
         ip = "255.255.255.255";
         System.out.println("Client程序已经退出");

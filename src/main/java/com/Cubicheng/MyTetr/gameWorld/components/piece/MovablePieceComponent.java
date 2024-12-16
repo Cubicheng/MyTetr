@@ -1,10 +1,14 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
+import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.Pair;
+import com.Cubicheng.MyTetr.netWork.client.Client;
+import com.Cubicheng.MyTetr.netWork.protocol.UpdateMovablePiecePacket;
+import com.Cubicheng.MyTetr.netWork.server.Server;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -37,6 +41,27 @@ public class MovablePieceComponent extends OnePieceComponent {
         super(x, y, id);
     }
 
+    private void push_packet() {
+        if (Application.isServer()) {
+            Server.getInstance().getHandler()
+                    .update_movable_piece(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
+        } else {
+            Client.getInstance().getHandler()
+                    .update_movable_piece(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
+        }
+    }
+
+    public void update(UpdateMovablePiecePacket packet) {
+        x = packet.getX();
+        y = packet.getY();
+        rotate_index = packet.getRotate_index();
+        techominoType = packet.getTechomino_type();
+        techomino = int2techomino.get(techominoType);
+        now_texture = new ImageView(ImageBuffer.texture[techominoType].image());
+        update_texture();
+        update_entity_position();
+    }
+
     @Override
     public void onAdded() {
         x = 4;
@@ -47,20 +72,22 @@ public class MovablePieceComponent extends OnePieceComponent {
             kick_transation[i] = new Pair<>(0, 0);
         }
 
-        TimerTask down_task = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        move_down();
-                    }
-                });
-            }
-        };
+        if (player_id == 0) {
+            TimerTask down_task = new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            move_down();
+                        }
+                    });
+                }
+            };
 
-        down_timer = new Timer();
-        down_timer.scheduleAtFixedRate(down_task, down_delta, down_delta);
+            down_timer = new Timer();
+            down_timer.scheduleAtFixedRate(down_task, down_delta, down_delta);
+        }
     }
 
     @Override
@@ -204,7 +231,6 @@ public class MovablePieceComponent extends OnePieceComponent {
         r_timer.purge();
     }
 
-
     public void on_move_down_begin() {
         down_timer.cancel();
         down_timer.purge();
@@ -258,6 +284,7 @@ public class MovablePieceComponent extends OnePieceComponent {
             blink_break();
             x--;
             update_entity_position();
+            push_packet();
         }
     }
 
@@ -266,8 +293,8 @@ public class MovablePieceComponent extends OnePieceComponent {
             blink_break();
             x++;
             update_entity_position();
+            push_packet();
         }
-
     }
 
     public void move_down() {
@@ -275,8 +302,8 @@ public class MovablePieceComponent extends OnePieceComponent {
             blink_break();
             y--;
             update_entity_position();
+            push_packet();
         }
-
     }
 
     public void rotate(int option) {
@@ -296,6 +323,7 @@ public class MovablePieceComponent extends OnePieceComponent {
                 blink_break();
                 update_entity_position();
                 update_texture();
+                push_packet();
                 return;
             }
         }

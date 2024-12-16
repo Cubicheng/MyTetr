@@ -15,6 +15,15 @@ import java.awt.*;
 
 public class Application extends javafx.application.Application implements FillService {
     static Stage stage;
+    static private boolean is_server = false;
+
+    static public boolean isServer() {
+        return is_server;
+    }
+
+    static public void setIs_server(boolean is_server){
+        Application.is_server = is_server;
+    }
 
     @Override
     public void start(Stage stage) {
@@ -26,8 +35,8 @@ public class Application extends javafx.application.Application implements FillS
         int width = gd.getDisplayMode().getWidth();
         int height = gd.getDisplayMode().getHeight();
 
-        stage.setWidth(width/4);
-        stage.setHeight(height/4);
+        stage.setWidth(width / 4);
+        stage.setHeight(height / 4);
 
         var stackpane = new StackPane();
         stage.setScene(new Scene(stackpane));
@@ -49,7 +58,7 @@ public class Application extends javafx.application.Application implements FillS
         gamePane.renderHeightProperty().bind(stage.getScene().heightProperty());
     }
 
-    public static final Stage getStage(){
+    public static final Stage getStage() {
         return stage;
     }
 

@@ -44,6 +44,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setHeaderText("保存修改吗？");
                 alert.initOwner(Application.getStage());
+                alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     ObjectMapper objectMapper = new ObjectMapper();
@@ -78,12 +79,12 @@ public class ConfigScene implements PushAndPopGameSubScene {
         gridpane.setPadding(new Insets(10, 10, 10, 10));
 
         var header = new Text("设置");
-        header.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(50));
+        header.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(50));
 
         gridpane.add(header, 1, 0);
 
         var das_text = new Text("启动快速横移的前摇");
-        das_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+        das_text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         var das_slider = new Slider();
         das_slider.setMin(17);
@@ -92,7 +93,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         das_slider.setPrefWidth(500);
 
         var das_value = new Text(String.valueOf((long) das_slider.getValue()) + "ms");
-        das_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+        das_value.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         das_slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -109,7 +110,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         hbox1.setSpacing(20);
 
         var arr_text = new Text("快速横移时间间隔   ");
-        arr_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+        arr_text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         var arr_slider = new Slider();
         arr_slider.setMin(1);
@@ -119,7 +120,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         arr_slider.setPrefWidth(500);
 
         var arr_value = new Text(String.valueOf((long) arr_slider.getValue()) + "ms");
-        arr_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+        arr_value.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         arr_slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -136,7 +137,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         hbox2.setSpacing(20);
 
         var sfd_arr_text = new Text("快速下降时间间隔   ");
-        sfd_arr_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+        sfd_arr_text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         var sfd_arr_slider = new Slider();
         sfd_arr_slider.setMin(1);
@@ -145,7 +146,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         sfd_arr_slider.setPrefWidth(500);
 
         var sfd_arr_value = new Text(String.valueOf((long) sfd_arr_slider.getValue()) + "ms");
-        sfd_arr_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+        sfd_arr_value.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         sfd_arr_slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -162,7 +163,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         hbox3.setSpacing(20);
 
         var visibility_text = new Text("幽灵块能见度          ");
-        visibility_text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+        visibility_text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         var visibility_slider = new Slider();
         visibility_slider.setMin(0);
@@ -171,7 +172,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         visibility_slider.setPrefWidth(500);
 
         var visibility_value = new Text(String.valueOf((long) (visibility_slider.getValue() * 100)) + "%");
-        visibility_value.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(30));
+        visibility_value.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         visibility_slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override

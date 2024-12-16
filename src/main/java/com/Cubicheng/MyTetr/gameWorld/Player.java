@@ -66,9 +66,6 @@ public class Player {
         ghostPiece = GhostPieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY).put("id", id));
         holdPiece = HoldPieceComponent.of(new SpawnData(startX - 3 * BLOCK_SIZE, startY + 2.4 * BLOCK_SIZE).put("startX", startX).put("startY", startY).put("id", id));
 
-        System.out.println(gameMap);
-        System.out.println(movablePiece);
-
         gameWorld.addEntities(gameMap, movablePiece, ghostPiece, holdPiece);
 
         for (int i = 0; i < 5; i++) {

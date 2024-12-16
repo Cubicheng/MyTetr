@@ -4,7 +4,7 @@ import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientWaitScene;
 import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerWaitScene;
-import com.Cubicheng.MyTetr.netWork.Client;
+import com.Cubicheng.MyTetr.netWork.client.Client;
 import com.Cubicheng.MyTetr.netWork.util;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.FXGL;
@@ -13,26 +13,14 @@ import com.almasb.fxgl.input.UserAction;
 import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.XInput;
 
-import io.netty.util.concurrent.Future;
-import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 public class MultiPlayerSelector implements PushAndPopGameSubScene {
@@ -56,14 +44,15 @@ public class MultiPlayerSelector implements PushAndPopGameSubScene {
         var glow = new Glow(1.0);
 
         var serverbtn = new Text("创建房间");
-        serverbtn.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        serverbtn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         var clientbtn = new Text("加入房间");
-        clientbtn.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        clientbtn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         var room_ip = new TextField();
         room_ip.setPromptText("请输入房间 IP");
         room_ip.setFocusTraversable(false);
+        room_ip.setStyle("-fx-font-family: \"IPix\";");
 
         serverbtn.setOnMouseExited(_1 -> {
             serverbtn.setEffect(null);
@@ -88,6 +77,7 @@ public class MultiPlayerSelector implements PushAndPopGameSubScene {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("无法创建房间，请检查网络连接。");
                 alert.initOwner(Application.getStage());
+                alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
                 alert.showAndWait();
             }
         });

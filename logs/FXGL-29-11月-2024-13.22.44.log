@@ -289,9 +289,9 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 13:22:40.282 [FXGL Background Thread 1 ] DEBUG FXGLApplication      - Initializing game
 13:22:40.284 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Clearing assets cache
 13:22:40.285 [FXGL Background Thread 1 ] INFO  FXGLApplication      - Game initialization took: 0.003 sec
-13:22:40.327 [JavaFX Application Thread] WARN  FXGLAssetLoaderServi - Asset "/assets/ui/fonts/Lato-Bold.ttf" was not found!
+13:22:40.327 [JavaFX Application Thread] WARN  FXGLAssetLoaderServi - Asset "/assets/ui/fonts/IPix.ttf" was not found!
 13:22:40.327 [JavaFX Application Thread] WARN  FXGLAssetLoaderServi - Failed to load FONT
-13:22:40.328 [JavaFX Application Thread] WARN  FXGLAssetLoaderServi - Asset "/assets/ui/fonts/Lato-Bold.ttf" was not found!
+13:22:40.328 [JavaFX Application Thread] WARN  FXGLAssetLoaderServi - Asset "/assets/ui/fonts/IPix.ttf" was not found!
 13:22:40.328 [JavaFX Application Thread] WARN  FXGLAssetLoaderServi - Failed to load FONT
 13:22:40.330 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/background.jpg
 13:22:40.387 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions

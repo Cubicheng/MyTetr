@@ -35,6 +35,7 @@ public class MainMenu implements ReplaceableGameScene {
                     alert.setHeaderText("所以爱会消失对吗？");
                     alert.setContentText("");
                     alert.initOwner(Application.getStage());
+                    alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
                         System.exit(0);
@@ -59,13 +60,13 @@ public class MainMenu implements ReplaceableGameScene {
         var glow = new Glow(1.0);
 
         var singlePlayerbtn = new Text("单人模式");
-        singlePlayerbtn.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        singlePlayerbtn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         var multiPlayerbtn = new Text("多人模式");
-        multiPlayerbtn.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        multiPlayerbtn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         var configbtn = new Text("设置");
-        configbtn.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        configbtn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         singlePlayerbtn.setOnMouseExited(_1 -> {
             singlePlayerbtn.setEffect(null);
@@ -107,7 +108,7 @@ public class MainMenu implements ReplaceableGameScene {
         gridpane.add(multiPlayerbtn, 1, 1);
         gridpane.add(configbtn, 1, 2);
 
-        gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) /2);
+        gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) / 2);
         gridpane.setTranslateY(FXGL.getAppCenter().getY() * 1.2);
 
         var background = FXGL.image("background.jpg");

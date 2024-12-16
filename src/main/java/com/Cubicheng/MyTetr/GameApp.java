@@ -2,6 +2,7 @@ package com.Cubicheng.MyTetr;
 
 import com.Cubicheng.MyTetr.gameScenes.*;
 import com.Cubicheng.MyTetr.gameScenes.MultiPlayerSelector;
+import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientPlayScene;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientWaitScene;
 import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerPlayScene;
 import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerWaitScene;
@@ -33,7 +34,6 @@ public class GameApp extends GameApplication {
         settings.setTitle(logoString);
         settings.setMainMenuEnabled(false);
         settings.setGameMenuEnabled(false);
-        settings.setFontUI("BlackOpsOne-Regular.ttf");
 //    settings.setSceneFactory(new SceneFactory() {
 //      @Override
 //      public LoadingScene newLoadingScene() {
@@ -63,6 +63,7 @@ public class GameApp extends GameApplication {
             case ServerWaitScene.SCENE_NAME -> new ServerWaitScene();
             case ClientWaitScene.SCENE_NAME -> new ClientWaitScene();
             case ServerPlayScene.SCENE_NAME -> new ServerPlayScene();
+            case ClientPlayScene.SCENE_NAME -> new ClientPlayScene();
             default -> throw new RuntimeException("Wrong GameScene type");
         };
     }
@@ -74,7 +75,7 @@ public class GameApp extends GameApplication {
         } else return null;
     }
 
-    public Object get_last_gameScene(){
+    public Object get_last_gameScene() {
         return gameScenes.getLast();
     }
 }

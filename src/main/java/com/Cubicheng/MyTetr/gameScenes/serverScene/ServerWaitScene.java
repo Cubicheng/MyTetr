@@ -2,11 +2,9 @@ package com.Cubicheng.MyTetr.gameScenes.serverScene;
 
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.GetService;
-import com.Cubicheng.MyTetr.gameScenes.MultiPlayerSelector;
 import com.Cubicheng.MyTetr.gameWorld.Type;
-import com.Cubicheng.MyTetr.netWork.Server;
+import com.Cubicheng.MyTetr.netWork.server.Server;
 import com.almasb.fxgl.app.scene.GameScene;
-import com.almasb.fxgl.core.collection.grid.Grid;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
@@ -51,13 +49,13 @@ public class ServerWaitScene implements PushAndPopGameSubScene, GetService {
         gridpane = new GridPane();
 
         var server_title = new Text("房间 IP: " + server_ip);
-        server_title.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        server_title.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         text = new Text("等待 玩家2 加入...");
-        text.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         play_btn = new Text("");
-        play_btn.setFont(FXGL.getAssetLoader().loadFont("Lato-Bold.ttf").newFont(40));
+        play_btn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         var glow = new Glow(1.0);
 
@@ -70,9 +68,9 @@ public class ServerWaitScene implements PushAndPopGameSubScene, GetService {
         });
 
         play_btn.setOnMouseClicked(_1 -> {
+            Server.getInstance().getHandler().startGame();
             FXGL.<GameApp>getAppCast().push(ServerPlayScene.SCENE_NAME);
         });
-
 
         ImageView map_image = new ImageView(FXGL.image("background.jpg"));
         map_image.setFitWidth(gameScene.getAppWidth());

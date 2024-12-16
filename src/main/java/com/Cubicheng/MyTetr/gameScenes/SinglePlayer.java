@@ -43,6 +43,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
                 alert.setHeaderText("确认退出吗？");
                 alert.setContentText("你将会失去你的进度。");
                 alert.initOwner(Application.getStage());
+                alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     player.getMovablePiece().removeFromWorld();

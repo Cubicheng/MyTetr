@@ -1,28 +1,23 @@
 package com.Cubicheng.MyTetr.gameWorld.components;
 
-import atlantafx.base.util.BBCodeHandler;
 import com.Cubicheng.MyTetr.GameApp;
-import com.Cubicheng.MyTetr.gameWorld.Constants;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.NextQueue;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
-import com.Cubicheng.MyTetr.gameWorld.components.piece.OnePieceComponent;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
+import static com.Cubicheng.MyTetr.gameWorld.Vars.*;
 
 public class GameMapComponent extends Component {
 
@@ -39,7 +34,7 @@ public class GameMapComponent extends Component {
 
     @Override
     public void onAdded() {
-        next_queue = new NextQueue();
+        next_queue = new NextQueue(seed);
         for (int i = 0; i < MAP_HEIGHT; i++) {
             playfiled.add(generate_new_empty_row());
         }

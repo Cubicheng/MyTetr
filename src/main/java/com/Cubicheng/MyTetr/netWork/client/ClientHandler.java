@@ -4,6 +4,7 @@ import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientPlayScene;
 import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerPlayScene;
 import com.Cubicheng.MyTetr.gameWorld.Type;
+import com.Cubicheng.MyTetr.gameWorld.Vars;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.netWork.codec.PacketCodec;
 import com.Cubicheng.MyTetr.netWork.protocol.StartRespondPacket;
@@ -49,6 +50,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         System.out.println("ClientHandler收到的Packet:" + msg);
         if (msg instanceof StartRespondPacket) {
             Platform.runLater(() -> {
+                Vars.seed = ((StartRespondPacket) msg).getSeed();
                 FXGL.<GameApp>getAppCast().push(ClientPlayScene.SCENE_NAME);
             });
         } else if (msg instanceof UpdateMovablePiecePacket) {

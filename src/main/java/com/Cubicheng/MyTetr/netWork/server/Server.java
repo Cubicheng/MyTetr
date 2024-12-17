@@ -1,6 +1,7 @@
 package com.Cubicheng.MyTetr.netWork.server;
 
 import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.ApplicationType;
 import com.Cubicheng.MyTetr.netWork.Constants;
 import com.Cubicheng.MyTetr.netWork.packetHandler.PacketDecoder;
 import com.Cubicheng.MyTetr.netWork.packetHandler.PacketEncoder;
@@ -21,7 +22,7 @@ public class Server {
 
     public void start() throws InterruptedException {
         Platform.runLater(() -> {
-            Application.setIs_server(true);
+            Application.setApplicationType(ApplicationType.Server);
         });
 
 
@@ -37,7 +38,6 @@ public class Server {
                         protected void initChannel(NioSocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new PacketDecoder());
                             ch.pipeline().addLast(handler);
-                            //编码器应该放在管线开头
                             ch.pipeline().addFirst(new PacketEncoder());
                         }
                     });
@@ -57,7 +57,7 @@ public class Server {
 
     public void shutdown() {
         Platform.runLater(() -> {
-            Application.setIs_server(false);
+            Application.setApplicationType(ApplicationType.None);
         });
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();

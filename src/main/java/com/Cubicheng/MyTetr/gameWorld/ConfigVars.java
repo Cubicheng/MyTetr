@@ -17,7 +17,7 @@ public class ConfigVars {
         ObjectMapper objectMapper = new ObjectMapper();
         ConfigData configData;
         try {
-            configData = objectMapper.readValue(new File(Constants.config_file_path), ConfigData.class);
+            configData = objectMapper.readValue(new File(Vars.config_file_path), ConfigData.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

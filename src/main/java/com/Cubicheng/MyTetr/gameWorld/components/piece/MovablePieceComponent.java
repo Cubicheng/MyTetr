@@ -1,6 +1,7 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
 import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.ApplicationType;
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
@@ -22,7 +23,7 @@ import java.util.TimerTask;
 
 import static com.Cubicheng.MyTetr.gameWorld.ConfigVars.ARR;
 import static com.Cubicheng.MyTetr.gameWorld.ConfigVars.DAS;
-import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
+import static com.Cubicheng.MyTetr.gameWorld.Vars.*;
 
 public class MovablePieceComponent extends OnePieceComponent {
 
@@ -42,10 +43,10 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     private void push_packet() {
-        if (Application.isServer()) {
+        if (Application.getApplicationType() == ApplicationType.Server) {
             Server.getInstance().getHandler()
                     .update_movable_piece(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
-        } else {
+        } else if (Application.getApplicationType() == ApplicationType.Client) {
             Client.getInstance().getHandler()
                     .update_movable_piece(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
         }

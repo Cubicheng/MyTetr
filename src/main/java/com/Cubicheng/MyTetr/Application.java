@@ -15,14 +15,14 @@ import java.awt.*;
 
 public class Application extends javafx.application.Application implements FillService {
     static Stage stage;
-    static private boolean is_server = false;
+    static private ApplicationType applicationType = ApplicationType.None;
 
-    static public boolean isServer() {
-        return is_server;
+    static public ApplicationType getApplicationType() {
+        return applicationType;
     }
 
-    static public void setIs_server(boolean is_server){
-        Application.is_server = is_server;
+    static public void setApplicationType(ApplicationType applicationType){
+        Application.applicationType = applicationType;
     }
 
     @Override

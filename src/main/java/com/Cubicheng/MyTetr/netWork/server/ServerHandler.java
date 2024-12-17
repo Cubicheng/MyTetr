@@ -74,9 +74,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         }
     }
 
-    public void startGame() {
+    public void startGame(long seed) {
         System.out.println("开始游戏");
-        var startRespondPacket = new StartRespondPacket();
+        var startRespondPacket = new StartRespondPacket(seed);
         var byteBuf = PacketCodec.encode(startRespondPacket, null);
         channels.writeAndFlush(byteBuf).addListener(future -> {
             if (!future.isSuccess()) {

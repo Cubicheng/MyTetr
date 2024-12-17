@@ -12,9 +12,8 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.texture.Texture;
-import javafx.scene.paint.ImagePattern;
 
-import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
+import static com.Cubicheng.MyTetr.gameWorld.Vars.BLOCK_SIZE;
 
 public class Player {
     private Entity movablePiece, ghostPiece, holdPiece;
@@ -24,8 +23,8 @@ public class Player {
 
     private int id;
 
-    public double startX = Constants.startX;
-    public double startY = Constants.startY;
+    public double startX = Vars.startX;
+    public double startY = Vars.startY;
 
     public double getStartX() {
         return startX;
@@ -61,7 +60,7 @@ public class Player {
         startX = startX * new_width + (gameScene.getAppWidth() - new_width) / 2 + dx;
         startY = startY * new_height + dy;
 
-        gameMap = GameMapComponent.of(new SpawnData(startX, startY + 19 * BLOCK_SIZE).put("id", id));
+        gameMap = GameMapComponent.of(new SpawnData(startX, startY + 19 * BLOCK_SIZE).put("id", id).put("seed", Vars.seed));
         movablePiece = MovablePieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY).put("id", id));
         ghostPiece = GhostPieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY).put("id", id));
         holdPiece = HoldPieceComponent.of(new SpawnData(startX - 3 * BLOCK_SIZE, startY + 2.4 * BLOCK_SIZE).put("startX", startX).put("startY", startY).put("id", id));

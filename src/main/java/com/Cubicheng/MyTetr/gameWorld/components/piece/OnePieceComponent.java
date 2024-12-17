@@ -1,7 +1,6 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
 import com.Cubicheng.MyTetr.GameApp;
-import com.Cubicheng.MyTetr.gameWorld.Constants;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.gameWorld.techominoData.Techomino;
@@ -11,10 +10,9 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.dsl.FXGL;
 
 import com.Cubicheng.MyTetr.gameWorld.Type;
-import io.netty.util.Constant;
 import javafx.scene.image.ImageView;
 
-import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
+import static com.Cubicheng.MyTetr.gameWorld.Vars.*;
 
 public class OnePieceComponent extends Component {
 

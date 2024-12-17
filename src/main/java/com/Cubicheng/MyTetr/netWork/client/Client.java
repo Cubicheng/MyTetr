@@ -1,6 +1,7 @@
 package com.Cubicheng.MyTetr.netWork.client;
 
 import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.ApplicationType;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.netWork.Constants;
 import com.Cubicheng.MyTetr.netWork.packetHandler.PacketDecoder;
@@ -35,7 +36,7 @@ public class Client {
 
     public void start() {
         Platform.runLater(() -> {
-            Application.setIs_server(false);
+            Application.setApplicationType(ApplicationType.Client);
         });
 
         handler = new ClientHandler();
@@ -76,7 +77,7 @@ public class Client {
 
     public void shutdown() {
         Platform.runLater(() -> {
-            Application.setIs_server(true);
+            Application.setApplicationType(ApplicationType.None);
         });
 
         workGroup.shutdownGracefully();

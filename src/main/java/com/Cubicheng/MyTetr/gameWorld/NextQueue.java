@@ -6,29 +6,31 @@ public class NextQueue {
 
     private Vector<Integer> next_queue;
     private List<Integer> piece_id = new ArrayList<>();
+    private final Random random;
 
-    public NextQueue() {
+    public NextQueue(long seed) {
         for (int i = 0; i < 7; i++) {
             piece_id.add(i);
         }
         next_queue = new Vector<>();
+        random = new Random(seed);
         add_a_new_pack();
     }
 
     void add_a_new_pack() {
-        Collections.shuffle(piece_id);
+        Collections.shuffle(piece_id, random);
         for (int i = 0; i < 7; i++) {
             next_queue.add(piece_id.get(i));
         }
     }
 
-    public int get_next_piece(int id){
+    public int get_next_piece(int id) {
         return next_queue.get(id);
     }
 
     public int get_next_piece() {
         int tmp = next_queue.removeFirst();
-        if(next_queue.size()<5){
+        if (next_queue.size() < 5) {
             add_a_new_pack();
         }
         return tmp;

@@ -1,16 +1,11 @@
 package com.Cubicheng.MyTetr.gameWorld.components.piece;
 
-import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
-import javafx.scene.image.ImageView;
-
-import static com.Cubicheng.MyTetr.gameWorld.Constants.*;
-import static com.Cubicheng.MyTetr.gameWorld.Constants.BLOCK_SIZE;
 
 public class NextPieceComponent extends OnePieceComponent {
 

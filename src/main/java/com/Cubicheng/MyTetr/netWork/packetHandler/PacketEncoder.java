@@ -10,10 +10,10 @@ import io.netty.handler.codec.MessageToByteEncoder;
 public class PacketEncoder extends MessageToByteEncoder<Packet> {
     @Override
     protected void encode(ChannelHandlerContext ctx, Packet msg, ByteBuf out) {
-        System.out.println("PacketEncoder收到的Packet:" + msg);
+//        System.out.println("PacketEncoder收到的Packet:" + msg);
         PacketCodec.encode(msg, out);
         ctx.writeAndFlush(out);
-        System.out.println("PacketEncoder最终发送出去的ByteBuf："
-                + ByteBufUtil.prettyHexDump(out));
+//        System.out.println("PacketEncoder最终发送出去的ByteBuf："
+//                + ByteBufUtil.prettyHexDump(out));
     }
 }

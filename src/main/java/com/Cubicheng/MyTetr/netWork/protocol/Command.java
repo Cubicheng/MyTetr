@@ -5,6 +5,7 @@ public interface Command {
     Byte UPDATE_MOVABLE_PIECE = 2;
     Byte HARD_DROP = 3;
     Byte HOLD = 4;
+    Byte ATTACK = 5;
 
     static Class<? extends Packet> getRequestByCommand(byte command) {
         if(command == START_RESPONSE){
@@ -18,6 +19,9 @@ public interface Command {
         }
         if(command == HOLD){
             return OnHoldPacket.class;
+        }
+        if(command == ATTACK){
+            return AttackPacket.class;
         }
         return null;
     }

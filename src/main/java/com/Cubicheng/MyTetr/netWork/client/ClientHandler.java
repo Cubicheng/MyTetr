@@ -4,12 +4,10 @@ import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientPlayScene;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.Variables;
+import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.netWork.codec.PacketCodec;
-import com.Cubicheng.MyTetr.netWork.protocol.OnHardDropPacket;
-import com.Cubicheng.MyTetr.netWork.protocol.OnHoldPacket;
-import com.Cubicheng.MyTetr.netWork.protocol.StartRespondPacket;
-import com.Cubicheng.MyTetr.netWork.protocol.UpdateMovablePiecePacket;
+import com.Cubicheng.MyTetr.netWork.protocol.*;
 import com.Cubicheng.MyTetr.netWork.util;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -48,7 +46,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("ClientHandler收到的Packet:" + msg);
         if (msg instanceof StartRespondPacket) {
             Platform.runLater(() -> {
                 Variables.seed = ((StartRespondPacket) msg).getSeed();
@@ -60,17 +57,24 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
                 movablePiece.getComponent(MovablePieceComponent.class).update((UpdateMovablePiecePacket) msg);
             });
-        }else if(msg instanceof OnHardDropPacket){
+        } else if (msg instanceof OnHardDropPacket) {
             Platform.runLater(() -> {
                 var service = FXGL.<GameApp>getAppCast().getFrontlineService();
                 Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
                 movablePiece.getComponent(MovablePieceComponent.class).hard_drop();
             });
-        }else if(msg instanceof OnHoldPacket){
+        } else if (msg instanceof OnHoldPacket) {
             Platform.runLater(() -> {
                 var service = FXGL.<GameApp>getAppCast().getFrontlineService();
                 Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
                 movablePiece.getComponent(MovablePieceComponent.class).hold();
+            });
+        } else if (msg instanceof AttackPacket) {
+            Platform.runLater(() -> {
+                System.out.println("receive attack");
+                var service = FXGL.<GameApp>getAppCast().getFrontlineService();
+                Entity gameMap = service.get_entity(Type.GameMap, 0);
+                gameMap.getComponent(GameMapComponent.class).add_attack_to_queue(((AttackPacket) msg).getAttack(), ((AttackPacket) msg).getX());
             });
         }
     }
@@ -94,7 +98,16 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void push_OnHoldPacket() {
-        var byteBuf = PacketCodec.encode(new OnHardDropPacket(), null);
+        var byteBuf = PacketCodec.encode(new OnHoldPacket(), null);
+        channels.writeAndFlush(byteBuf).addListener(future -> {
+            if (!future.isSuccess()) {
+                System.out.println("Send message failed: " + future.cause());
+            }
+        });
+    }
+
+    public void push_AttackPacket(int attack, int x) {
+        var byteBuf = PacketCodec.encode(new AttackPacket(attack, x), null);
         channels.writeAndFlush(byteBuf).addListener(future -> {
             if (!future.isSuccess()) {
                 System.out.println("Send message failed: " + future.cause());

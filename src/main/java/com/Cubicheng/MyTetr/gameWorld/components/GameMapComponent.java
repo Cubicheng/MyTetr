@@ -1,12 +1,19 @@
 package com.Cubicheng.MyTetr.gameWorld.components;
 
+import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.ApplicationType;
 import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.Pair;
+import com.Cubicheng.MyTetr.gameWorld.AttackQueue;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.Cubicheng.MyTetr.gameWorld.NextQueue;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
+import com.Cubicheng.MyTetr.netWork.client.Client;
+import com.Cubicheng.MyTetr.netWork.protocol.AttackPacket;
+import com.Cubicheng.MyTetr.netWork.server.Server;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -16,6 +23,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.Cubicheng.MyTetr.gameWorld.Variables.*;
 
@@ -24,7 +32,9 @@ public class GameMapComponent extends Component {
     private List<List<Integer>> playfiled = new ArrayList<>(MAP_HEIGHT);
 
     private NextQueue next_queue;
+    private AttackQueue attack_queue;
     private int y;
+    private Random random;
 
     private int player_id;
 
@@ -32,9 +42,43 @@ public class GameMapComponent extends Component {
         this.player_id = id;
     }
 
+    public void add_attack_to_queue(int attack, int x) {
+        System.out.println("attack: " + attack);
+        attack_queue.add(attack, x);
+    }
+
+    public void add_garbage() {
+        Pair<Integer, Integer> pair = attack_queue.get_front();
+        if (pair == null) {
+            return;
+        }
+        int attack = pair.first();
+        int x = pair.second();
+
+        for (int i = MAP_HEIGHT - 1; i >= attack; i--) {
+            for (int j = 0; j < MAP_WIDTH; j++) {
+                playfiled.get(i).set(j, playfiled.get(i - attack).get(j));
+            }
+        }
+
+        for (int i = 0; i < attack; i++) {
+            for (int j = 0; j < MAP_WIDTH; j++) {
+                if (j == x) {
+                    playfiled.get(i).set(j, -1);
+                } else {
+                    playfiled.get(i).set(j, 8);
+                }
+            }
+        }
+
+        update_texture();
+    }
+
     @Override
     public void onAdded() {
         next_queue = new NextQueue(seed);
+        attack_queue = new AttackQueue();
+        random = new Random();
         for (int i = 0; i < MAP_HEIGHT; i++) {
             playfiled.add(generate_new_empty_row());
         }
@@ -112,7 +156,20 @@ public class GameMapComponent extends Component {
         playfiled.get(y).set(x, type);
     }
 
+    private void push_AttackPacket(int attack, int x) {
+        if (player_id != 0) return;
+        System.out.println("attack: " + attack + " x: " + x);
+        if (Application.getApplicationType() == ApplicationType.Server) {
+            Server.getInstance().getHandler().push_AttackPacket(attack, x);
+            get_entity(Type.GameMap, 1).getComponent(GameMapComponent.class).add_attack_to_queue(attack, x);
+        } else if (Application.getApplicationType() == ApplicationType.Client) {
+            Client.getInstance().getHandler().push_AttackPacket(attack, x);
+            get_entity(Type.GameMap, 1).getComponent(GameMapComponent.class).add_attack_to_queue(attack, x);
+        }
+    }
+
     private void clear_line() {
+        int clear_line_cnt = 0;
         for (int i = 0; i < MAP_HEIGHT; i++) {
             boolean is_full = true;
             for (int j = 0; j < MAP_WIDTH; j++) {
@@ -122,10 +179,17 @@ public class GameMapComponent extends Component {
                 }
             }
             if (!is_full) continue;
+            clear_line_cnt++;
             playfiled.remove(i);
             playfiled.add(generate_new_empty_row());
             i--;
         }
+        //tetris
+        if (clear_line_cnt == 4) {
+            push_AttackPacket(4, random.nextInt(MAP_WIDTH));
+        }
+
+        add_garbage();
     }
 
     public void add_piece() {

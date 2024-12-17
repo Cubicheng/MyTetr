@@ -45,10 +45,10 @@ public class MovablePieceComponent extends OnePieceComponent {
     private void push_UpdateMovablePiecePacket() {
         if (Application.getApplicationType() == ApplicationType.Server) {
             Server.getInstance().getHandler()
-                    .push_UpdateMovablePiecePacket(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
+                    .push_UpdateMovablePiecePacket(new UpdateMovablePiecePacket(x, y, rotate_index));
         } else if (Application.getApplicationType() == ApplicationType.Client) {
             Client.getInstance().getHandler()
-                    .push_UpdateMovablePiecePacket(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
+                    .push_UpdateMovablePiecePacket(new UpdateMovablePiecePacket(x, y, rotate_index));
         }
     }
 
@@ -76,9 +76,6 @@ public class MovablePieceComponent extends OnePieceComponent {
         x = packet.getX();
         y = packet.getY();
         rotate_index = packet.getRotate_index();
-        techominoType = packet.getTechomino_type();
-        techomino = int2techomino.get(techominoType);
-        now_texture = new ImageView(ImageBuffer.texture[techominoType].image());
         update_texture();
         update_entity_position();
     }

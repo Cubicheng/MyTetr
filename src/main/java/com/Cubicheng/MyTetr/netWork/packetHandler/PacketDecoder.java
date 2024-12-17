@@ -12,10 +12,10 @@ public class PacketDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in,
                           List<Object> out) throws Exception {
-        System.out.println("PacketDecoder接收到的远方发来的byteBuf");
-        System.out.println(ByteBufUtil.prettyHexDump(in));
+//        System.out.println("PacketDecoder接收到的远方发来的byteBuf");
+//        System.out.println(ByteBufUtil.prettyHexDump(in));
         var packet = PacketCodec.decode(in);
-        System.out.println("PacketDecoder反序列化得到的Packet:" + packet);
+//        System.out.println("PacketDecoder反序列化得到的Packet:" + packet);
         out.add(packet);
     }
 }

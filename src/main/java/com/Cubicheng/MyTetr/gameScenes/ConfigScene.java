@@ -4,7 +4,7 @@ import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.ConfigData;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
-import com.Cubicheng.MyTetr.gameWorld.Vars;
+import com.Cubicheng.MyTetr.gameWorld.Variables;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.input.Input;
@@ -48,7 +48,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
                 if (result.get() == ButtonType.OK) {
                     ObjectMapper objectMapper = new ObjectMapper();
                     try {
-                        objectMapper.writeValue(new File(Vars.config_file_path), configData);
+                        objectMapper.writeValue(new File(Variables.config_file_path), configData);
                         ConfigVars.update_config_from_json();
                     } catch (IOException e) {
                         System.err.println("读取或写入JSON文件出错：" + e.getMessage());
@@ -64,7 +64,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
     public void initUI(GameScene gameScene, XInput input) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            configData = objectMapper.readValue(new File(Vars.config_file_path), ConfigData.class);
+            configData = objectMapper.readValue(new File(Variables.config_file_path), ConfigData.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

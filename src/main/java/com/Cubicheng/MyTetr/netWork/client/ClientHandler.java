@@ -2,11 +2,12 @@ package com.Cubicheng.MyTetr.netWork.client;
 
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientPlayScene;
-import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerPlayScene;
 import com.Cubicheng.MyTetr.gameWorld.Type;
-import com.Cubicheng.MyTetr.gameWorld.Vars;
+import com.Cubicheng.MyTetr.gameWorld.Variables;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.netWork.codec.PacketCodec;
+import com.Cubicheng.MyTetr.netWork.protocol.OnHardDropPacket;
+import com.Cubicheng.MyTetr.netWork.protocol.OnHoldPacket;
 import com.Cubicheng.MyTetr.netWork.protocol.StartRespondPacket;
 import com.Cubicheng.MyTetr.netWork.protocol.UpdateMovablePiecePacket;
 import com.Cubicheng.MyTetr.netWork.util;
@@ -50,7 +51,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         System.out.println("ClientHandler收到的Packet:" + msg);
         if (msg instanceof StartRespondPacket) {
             Platform.runLater(() -> {
-                Vars.seed = ((StartRespondPacket) msg).getSeed();
+                Variables.seed = ((StartRespondPacket) msg).getSeed();
                 FXGL.<GameApp>getAppCast().push(ClientPlayScene.SCENE_NAME);
             });
         } else if (msg instanceof UpdateMovablePiecePacket) {
@@ -59,11 +60,41 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
                 movablePiece.getComponent(MovablePieceComponent.class).update((UpdateMovablePiecePacket) msg);
             });
+        }else if(msg instanceof OnHardDropPacket){
+            Platform.runLater(() -> {
+                var service = FXGL.<GameApp>getAppCast().getFrontlineService();
+                Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
+                movablePiece.getComponent(MovablePieceComponent.class).hard_drop();
+            });
+        }else if(msg instanceof OnHoldPacket){
+            Platform.runLater(() -> {
+                var service = FXGL.<GameApp>getAppCast().getFrontlineService();
+                Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
+                movablePiece.getComponent(MovablePieceComponent.class).hold();
+            });
         }
     }
 
-    public void update_movable_piece(UpdateMovablePiecePacket packet) {
+    public void push_UpdateMovablePiecePacket(UpdateMovablePiecePacket packet) {
         var byteBuf = PacketCodec.encode(packet, null);
+        channels.writeAndFlush(byteBuf).addListener(future -> {
+            if (!future.isSuccess()) {
+                System.out.println("Send message failed: " + future.cause());
+            }
+        });
+    }
+
+    public void push_OnHardDropPacket() {
+        var byteBuf = PacketCodec.encode(new OnHardDropPacket(), null);
+        channels.writeAndFlush(byteBuf).addListener(future -> {
+            if (!future.isSuccess()) {
+                System.out.println("Send message failed: " + future.cause());
+            }
+        });
+    }
+
+    public void push_OnHoldPacket() {
+        var byteBuf = PacketCodec.encode(new OnHardDropPacket(), null);
         channels.writeAndFlush(byteBuf).addListener(future -> {
             if (!future.isSuccess()) {
                 System.out.println("Send message failed: " + future.cause());

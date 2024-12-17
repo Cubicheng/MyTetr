@@ -1,10 +1,11 @@
 package com.Cubicheng.MyTetr.netWork.server;
 
 import com.Cubicheng.MyTetr.GameApp;
-import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientPlayScene;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.netWork.codec.PacketCodec;
+import com.Cubicheng.MyTetr.netWork.protocol.OnHardDropPacket;
+import com.Cubicheng.MyTetr.netWork.protocol.OnHoldPacket;
 import com.Cubicheng.MyTetr.netWork.protocol.StartRespondPacket;
 import com.Cubicheng.MyTetr.netWork.protocol.UpdateMovablePiecePacket;
 import com.Cubicheng.MyTetr.netWork.util;
@@ -15,7 +16,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
-import io.netty.util.ReferenceCountUtil;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import javafx.application.Platform;
 
@@ -71,6 +71,18 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
                 movablePiece.getComponent(MovablePieceComponent.class).update((UpdateMovablePiecePacket) msg);
             });
+        }else if(msg instanceof OnHardDropPacket){
+            Platform.runLater(() -> {
+                var service = FXGL.<GameApp>getAppCast().getFrontlineService();
+                Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
+                movablePiece.getComponent(MovablePieceComponent.class).hard_drop();
+            });
+        }else if(msg instanceof OnHoldPacket){
+            Platform.runLater(() -> {
+                var service = FXGL.<GameApp>getAppCast().getFrontlineService();
+                Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
+                movablePiece.getComponent(MovablePieceComponent.class).hold();
+            });
         }
     }
 
@@ -85,8 +97,26 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         });
     }
 
-    public void update_movable_piece(UpdateMovablePiecePacket packet) {
+    public void push_UpdateMovablePiecePacket(UpdateMovablePiecePacket packet) {
         var byteBuf = PacketCodec.encode(packet, null);
+        channels.writeAndFlush(byteBuf).addListener(future -> {
+            if (!future.isSuccess()) {
+                System.out.println("Send message failed: " + future.cause());
+            }
+        });
+    }
+
+    public void push_OnHardDropPacket() {
+        var byteBuf = PacketCodec.encode(new OnHardDropPacket(), null);
+        channels.writeAndFlush(byteBuf).addListener(future -> {
+            if (!future.isSuccess()) {
+                System.out.println("Send message failed: " + future.cause());
+            }
+        });
+    }
+
+    public void push_OnHoldPacket() {
+        var byteBuf = PacketCodec.encode(new OnHoldPacket(), null);
         channels.writeAndFlush(byteBuf).addListener(future -> {
             if (!future.isSuccess()) {
                 System.out.println("Send message failed: " + future.cause());

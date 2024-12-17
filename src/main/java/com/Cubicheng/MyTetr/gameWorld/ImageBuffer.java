@@ -2,7 +2,7 @@ package com.Cubicheng.MyTetr.gameWorld;
 
 import com.whitewoodcity.fxgl.app.ImageData;
 
-import static com.Cubicheng.MyTetr.gameWorld.Vars.BLOCK_SIZE;
+import static com.Cubicheng.MyTetr.gameWorld.Variables.BLOCK_SIZE;
 
 public class ImageBuffer {
     public static final ImageData[] texture = {

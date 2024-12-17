@@ -23,7 +23,7 @@ import java.util.TimerTask;
 
 import static com.Cubicheng.MyTetr.gameWorld.ConfigVars.ARR;
 import static com.Cubicheng.MyTetr.gameWorld.ConfigVars.DAS;
-import static com.Cubicheng.MyTetr.gameWorld.Vars.*;
+import static com.Cubicheng.MyTetr.gameWorld.Variables.*;
 
 public class MovablePieceComponent extends OnePieceComponent {
 
@@ -42,13 +42,33 @@ public class MovablePieceComponent extends OnePieceComponent {
         super(x, y, id);
     }
 
-    private void push_packet() {
+    private void push_UpdateMovablePiecePacket() {
         if (Application.getApplicationType() == ApplicationType.Server) {
             Server.getInstance().getHandler()
-                    .update_movable_piece(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
+                    .push_UpdateMovablePiecePacket(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
         } else if (Application.getApplicationType() == ApplicationType.Client) {
             Client.getInstance().getHandler()
-                    .update_movable_piece(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
+                    .push_UpdateMovablePiecePacket(new UpdateMovablePiecePacket(x, y, rotate_index, techominoType));
+        }
+    }
+
+    private void push_OnHardDropPacket() {
+        if (Application.getApplicationType() == ApplicationType.Server) {
+            Server.getInstance().getHandler()
+                    .push_OnHardDropPacket();
+        } else if (Application.getApplicationType() == ApplicationType.Client) {
+            Client.getInstance().getHandler()
+                    .push_OnHardDropPacket();
+        }
+    }
+
+    private void push_OnHoldPacket() {
+        if (Application.getApplicationType() == ApplicationType.Server) {
+            Server.getInstance().getHandler()
+                    .push_OnHoldPacket();
+        } else if (Application.getApplicationType() == ApplicationType.Client) {
+            Client.getInstance().getHandler()
+                    .push_OnHoldPacket();
         }
     }
 
@@ -119,7 +139,7 @@ public class MovablePieceComponent extends OnePieceComponent {
                 update_texture();
             }
         }
-        if (blink_time > SOFT_DROP_TIME) {
+        if (blink_time > SOFT_DROP_TIME && player_id == 0) {
             hard_drop();
         }
     }
@@ -165,6 +185,9 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     public void hard_drop() {
+        if (player_id == 0) {
+            push_OnHardDropPacket();
+        }
         get_entity(Type.GameMap, 0).getComponent(GameMapComponent.class).add_piece();
         get_entity(Type.HoldPiece, 0).getComponent(HoldPieceComponent.class).set_can_hold(true);
         get_next_piece();
@@ -173,6 +196,10 @@ public class MovablePieceComponent extends OnePieceComponent {
     public void hold() {
         if (!get_entity(Type.HoldPiece, 0).getComponent(HoldPieceComponent.class).get_can_hold())
             return;
+
+        if (player_id == 0) {
+            push_OnHoldPacket();
+        }
 
         int hold_type = get_entity(Type.HoldPiece, 0).getComponent(HoldPieceComponent.class).get_techomino_type();
 
@@ -272,7 +299,7 @@ public class MovablePieceComponent extends OnePieceComponent {
         if (blink_time != 0) {
             blink_break_cnt++;
             blink_time = 0;
-            if (blink_break_cnt == 15) {
+            if (blink_break_cnt == 15 && player_id == 0) {
                 hard_drop();
                 get_entity(Type.GhostPiece, 0).getComponent(GhostPieceComponent.class).setVisibility(ConfigVars.ghost_piece_visibility);
                 blink_break_cnt = 0;
@@ -285,7 +312,7 @@ public class MovablePieceComponent extends OnePieceComponent {
             blink_break();
             x--;
             update_entity_position();
-            push_packet();
+            push_UpdateMovablePiecePacket();
         }
     }
 
@@ -294,7 +321,7 @@ public class MovablePieceComponent extends OnePieceComponent {
             blink_break();
             x++;
             update_entity_position();
-            push_packet();
+            push_UpdateMovablePiecePacket();
         }
     }
 
@@ -303,7 +330,7 @@ public class MovablePieceComponent extends OnePieceComponent {
             blink_break();
             y--;
             update_entity_position();
-            push_packet();
+            push_UpdateMovablePiecePacket();
         }
     }
 
@@ -324,7 +351,7 @@ public class MovablePieceComponent extends OnePieceComponent {
                 blink_break();
                 update_entity_position();
                 update_texture();
-                push_packet();
+                push_UpdateMovablePiecePacket();
                 return;
             }
         }

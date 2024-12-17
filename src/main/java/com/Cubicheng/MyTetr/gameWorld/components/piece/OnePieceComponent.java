@@ -12,7 +12,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import javafx.scene.image.ImageView;
 
-import static com.Cubicheng.MyTetr.gameWorld.Vars.*;
+import static com.Cubicheng.MyTetr.gameWorld.Variables.*;
 
 public class OnePieceComponent extends Component {
 

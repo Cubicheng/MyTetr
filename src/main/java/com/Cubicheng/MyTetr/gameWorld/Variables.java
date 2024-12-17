@@ -6,7 +6,7 @@ import java.util.Map;
 
 import static com.Cubicheng.MyTetr.gameWorld.Type.*;
 
-public class Vars {
+public class Variables {
     public static final int MAP_WIDTH = 10;
     public static final int MAP_HEIGHT = 40;
     public static final double BLOCK_SIZE = 47 / 1.75;

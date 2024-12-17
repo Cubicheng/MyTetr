@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.Cubicheng.MyTetr.gameWorld.Vars.*;
+import static com.Cubicheng.MyTetr.gameWorld.Variables.*;
 
 public class GameMapComponent extends Component {
 

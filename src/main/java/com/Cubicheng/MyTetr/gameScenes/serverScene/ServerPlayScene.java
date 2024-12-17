@@ -5,7 +5,7 @@ import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.GetService;
 import com.Cubicheng.MyTetr.gameWorld.Player;
 import com.Cubicheng.MyTetr.gameWorld.Type;
-import com.Cubicheng.MyTetr.gameWorld.Vars;
+import com.Cubicheng.MyTetr.gameWorld.Variables;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.netWork.server.Server;
 import com.almasb.fxgl.app.scene.GameScene;
@@ -16,7 +16,6 @@ import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.KeyTrigger;
 import com.almasb.fxgl.input.TriggerListener;
 import com.almasb.fxgl.input.UserAction;
-import com.sun.jdi.event.ThreadDeathEvent;
 import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.XInput;
 import javafx.scene.control.Alert;
@@ -77,9 +76,9 @@ public class ServerPlayScene implements PushAndPopGameSubScene, GetService {
 
     @Override
     public void initUI(GameScene gameScene, XInput input) {
-        Vars.seed = System.currentTimeMillis();
+        Variables.seed = System.currentTimeMillis();
 
-        Server.getInstance().getHandler().startGame(Vars.seed);
+        Server.getInstance().getHandler().startGame(Variables.seed);
 
         var background = FXGL.image("back3.jpg");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));

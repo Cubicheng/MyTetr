@@ -83,8 +83,16 @@ public class MultiPlayerSelector implements PushAndPopGameSubScene {
         });
 
         clientbtn.setOnMouseClicked(_2 -> {
-            Client.getInstance().setIp(room_ip.getText());
-            FXGL.<GameApp>getAppCast().push(ClientWaitScene.SCENE_NAME);
+            if (util.isNetworkConnected()) {
+                Client.getInstance().setIp(room_ip.getText());
+                FXGL.<GameApp>getAppCast().push(ClientWaitScene.SCENE_NAME);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("无法加入房间，请检查网络连接。");
+                alert.initOwner(Application.getStage());
+                alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+                alert.showAndWait();
+            }
         });
 
         gridpane.add(serverbtn, 1, 0);

@@ -46,13 +46,8 @@ public class ServerPlayScene implements PushAndPopGameSubScene, GetService {
                 alert.initOwner(Application.getStage());
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
-                    player0.getMovablePiece().removeFromWorld();
-                    player0.getHoldPiece().removeFromWorld();
-                    player0.getGhostPiece().removeFromWorld();
-                    for (Entity entity : player0.getNextPiece()) {
-                        entity.removeFromWorld();
-                    }
-                    player0.getGameMap().removeFromWorld();
+                    player0.on_remove();
+                    player1.on_remove();
                     FXGL.<GameApp>getAppCast().pop();
                 }
             }
@@ -137,5 +132,10 @@ public class ServerPlayScene implements PushAndPopGameSubScene, GetService {
     @Override
     public GridPane get_gridpane() {
         return null;
+    }
+
+    @Override
+    public Player get_player(int id) {
+        return id == 0 ? player0 : player1;
     }
 }

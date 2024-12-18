@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr;
 
+import com.Cubicheng.MyTetr.gameWorld.Player;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -25,4 +26,6 @@ public interface GetService extends DimensionService {
     public Entity get_entity(Type type, int id);
 
     public GridPane get_gridpane();
+
+    public Player get_player(int id);
 }

@@ -11,6 +11,7 @@ import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
+import com.Cubicheng.MyTetr.gameWorld.components.piece.WarnPieceComponent;
 import com.Cubicheng.MyTetr.netWork.client.Client;
 import com.Cubicheng.MyTetr.netWork.protocol.AttackPacket;
 import com.Cubicheng.MyTetr.netWork.server.Server;
@@ -35,6 +36,8 @@ public class GameMapComponent extends Component {
     private AttackQueue attack_queue;
     private int y;
     private Random random;
+
+    private boolean is_warning = false;
 
     private int player_id;
 
@@ -85,7 +88,7 @@ public class GameMapComponent extends Component {
     }
 
     public int get_next_piece() {
-        return next_queue.get_next_piece();
+        return next_queue.get_next_piece_and_pop();
     }
 
     public void update_next_pieces() {
@@ -137,12 +140,37 @@ public class GameMapComponent extends Component {
         return row;
     }
 
+    private void handle_warning(int max_y) {
+        if (get_entity(Type.WarnPiece, 0).getComponent(WarnPieceComponent.class).is_dead()) {
+            get_entity(Type.MovablePiece, 0).getComponent(MovablePieceComponent.class).setIs_dead(true);
+            FXGL.<GameApp>getAppCast().getFrontlineService().get_player(player_id).on_die();
+            return;
+        }
+        if (max_y > 16) {
+            if (!is_warning) {
+                is_warning = true;
+                get_entity(Type.WarnPiece, 0).getComponent(WarnPieceComponent.class).setVisibility(1.0);
+                var mapImage = get_entity(Type.MapImageEntity, 0);
+                mapImage.getViewComponent().addChild(ImageBuffer.map_warn_texture);
+            }
+        } else {
+            if (is_warning) {
+                is_warning = false;
+                get_entity(Type.WarnPiece, 0).getComponent(WarnPieceComponent.class).setVisibility(0.0);
+                var mapImage = get_entity(Type.MapImageEntity, 0);
+                mapImage.getViewComponent().removeChild(ImageBuffer.map_warn_texture);
+            }
+        }
+    }
+
     private void update_texture() {
         Entity gameMap = get_entity(Type.GameMap, 0);
         gameMap.getViewComponent().clearChildren();
+        int max_y = 0;
         for (int i = 0; i < MAP_HEIGHT; i++) {
             for (int j = 0; j < MAP_WIDTH; j++) {
                 if (playfiled.get(i).get(j) != -1) {
+                    max_y = Math.max(max_y, i);
                     ImageView imageView = new ImageView(ImageBuffer.texture[playfiled.get(i).get(j)].image());
                     imageView.setLayoutX(j * BLOCK_SIZE);
                     imageView.setLayoutY(-i * BLOCK_SIZE);
@@ -150,6 +178,7 @@ public class GameMapComponent extends Component {
                 }
             }
         }
+        handle_warning(max_y);
     }
 
     private void set_map(int x, int y, int type) {

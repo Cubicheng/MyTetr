@@ -6,5 +6,7 @@ public enum Type {
     NextPiece,
     OnePiece,
     HoldPiece,
-    GameMap;
+    WarnPiece,
+    GameMap,
+    MapImageEntity;
 }

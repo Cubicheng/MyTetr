@@ -18,6 +18,8 @@ import com.almasb.fxgl.entity.component.Component;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 
+import javax.xml.stream.Location;
+import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,6 +39,13 @@ public class MovablePieceComponent extends OnePieceComponent {
     private long down_delta = 1500;
 
     private boolean is_collided = false;
+
+    private boolean is_dead = false;
+
+    public void setIs_dead(boolean is_dead) {
+        this.is_dead = is_dead;
+        down_timer.cancel();
+    }
 
     public MovablePieceComponent(double x, double y, int id) {
         super(x, y, id);
@@ -115,11 +124,13 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     private boolean check_bottom_collide() {
         return y == get_entity(Type.GhostPiece, 0).getComponent(GhostPieceComponent.class).getY();
-
     }
 
     @Override
     public void onUpdate(double tpf) {
+        if (is_dead) {
+            return;
+        }
         if (techomino == null) {
             get_next_piece();
         }
@@ -159,6 +170,8 @@ public class MovablePieceComponent extends OnePieceComponent {
         get_entity(Type.GameMap, 0).getComponent(GameMapComponent.class).update_next_pieces();
         update_entity_position();
         update_texture();
+
+        get_entity(Type.WarnPiece, 0).getComponent(WarnPieceComponent.class).get_next_piece();
     }
 
     public static EntityBuilder builder(Component... components) {
@@ -182,6 +195,9 @@ public class MovablePieceComponent extends OnePieceComponent {
     }
 
     public void hard_drop() {
+        if (is_dead) {
+            return;
+        }
         if (player_id == 0) {
             push_OnHardDropPacket();
         }

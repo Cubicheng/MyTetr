@@ -40,7 +40,9 @@ public class Variables {
             NextPiece, 5,
             OnePiece, 0,
             HoldPiece, 1,
-            GameMap, 1
+            GameMap, 1,
+            WarnPiece, 1,
+            MapImageEntity, 1
     );
 
     public static long seed = 0;

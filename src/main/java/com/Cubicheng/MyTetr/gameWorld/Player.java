@@ -1,10 +1,10 @@
 package com.Cubicheng.MyTetr.gameWorld;
 
+import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.ApplicationType;
+import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
-import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
-import com.Cubicheng.MyTetr.gameWorld.components.piece.HoldPieceComponent;
-import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
-import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
+import com.Cubicheng.MyTetr.gameWorld.components.piece.*;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
@@ -12,11 +12,16 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.texture.Texture;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.awt.*;
+import java.util.Optional;
 
 import static com.Cubicheng.MyTetr.gameWorld.Variables.BLOCK_SIZE;
 
 public class Player {
-    private Entity movablePiece, ghostPiece, holdPiece;
+    private Entity movablePiece, ghostPiece, holdPiece, warnPiece;
     private Entity gameMap;
     private Entity[] nextPiece;
     private Entity mapImageEntity;
@@ -34,24 +39,54 @@ public class Player {
         return startY;
     }
 
+    public void on_die() {
+        if (Application.getApplicationType() == ApplicationType.None) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Wasted.");
+            alert.initOwner(Application.getStage());
+            alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+            alert.show();
+            alert.setOnHidden(evt -> {
+                on_remove();
+                FXGL.<GameApp>getAppCast().pop();
+            });
+        }
+    }
+
+    public void on_remove() {
+        movablePiece.removeFromWorld();
+        holdPiece.removeFromWorld();
+        ghostPiece.removeFromWorld();
+        warnPiece.removeFromWorld();
+        for (Entity entity : nextPiece) {
+            entity.removeFromWorld();
+        }
+        gameMap.removeFromWorld();
+    }
+
     public Player(int player_id, GameScene gameScene, GameWorld gameWorld, double dx, double dy) {
-        this.id = player_id;
-
-        nextPiece = new Entity[5];
-
         var map_image = FXGL.image("map.png");
+        var map_warn_image = FXGL.image("map_warn.png");
 
         double new_width = gameScene.getAppHeight() / map_image.getHeight() * map_image.getWidth();
         double new_height = gameScene.getAppHeight();
 
-        var map_texture = new Texture(map_image);
+        ImageBuffer.map_texture = new Texture(map_image);
+        ImageBuffer.map_texture.setFitWidth(new_width);
+        ImageBuffer.map_texture.setFitHeight(new_height);
 
-        map_texture.setFitWidth(new_width);
-        map_texture.setFitHeight(new_height);
+        ImageBuffer.map_warn_texture = new Texture(map_warn_image);
+        ImageBuffer.map_warn_texture.setFitWidth(new_width);
+        ImageBuffer.map_warn_texture.setFitHeight(new_height);
+
+        this.id = player_id;
+
+        nextPiece = new Entity[5];
 
         mapImageEntity = new EntityBuilder()
                 .at((gameScene.getAppWidth() - new_width) / 2 + dx, dy)
-                .view(map_texture)
+                .type(Type.MapImageEntity)
+                .view(ImageBuffer.map_texture)
                 .zIndex(Integer.MIN_VALUE)
                 .build();
 
@@ -71,29 +106,12 @@ public class Player {
             nextPiece[i] = NextPieceComponent.of(new SpawnData(startX + 13 * BLOCK_SIZE, startY + (3 * i + 2.4) * BLOCK_SIZE).put("startX", startX).put("startY", startY).put("id", id));
             gameWorld.addEntity(nextPiece[i]);
         }
+
+        warnPiece = WarnPieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY).put("id", id));
+        gameWorld.addEntity(warnPiece);
     }
 
     public Entity getMovablePiece() {
         return movablePiece;
-    }
-
-    public Entity getGhostPiece() {
-        return ghostPiece;
-    }
-
-    public Entity getHoldPiece() {
-        return holdPiece;
-    }
-
-    public Entity getGameMap() {
-        return gameMap;
-    }
-
-    public Entity[] getNextPiece() {
-        return nextPiece;
-    }
-
-    public Entity getMapImageEntity() {
-        return mapImageEntity;
     }
 }

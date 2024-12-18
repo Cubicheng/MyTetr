@@ -28,7 +28,7 @@ public class NextQueue {
         return queue.get(id);
     }
 
-    public int get_next_piece() {
+    public int get_next_piece_and_pop() {
         int tmp = queue.removeFirst();
         if (queue.size() < 5) {
             add_a_new_pack();

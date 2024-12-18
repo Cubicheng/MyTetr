@@ -44,13 +44,8 @@ public class ClientPlayScene implements PushAndPopGameSubScene, GetService {
                 alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
-                    player1.getMovablePiece().removeFromWorld();
-                    player1.getHoldPiece().removeFromWorld();
-                    player1.getGhostPiece().removeFromWorld();
-                    for (Entity entity : player1.getNextPiece()) {
-                        entity.removeFromWorld();
-                    }
-                    player1.getGameMap().removeFromWorld();
+                    player0.on_remove();
+                    player1.on_remove();
                     FXGL.<GameApp>getAppCast().pop();
                 }
             }
@@ -132,5 +127,10 @@ public class ClientPlayScene implements PushAndPopGameSubScene, GetService {
     @Override
     public GridPane get_gridpane() {
         return null;
+    }
+
+    @Override
+    public Player get_player(int id) {
+        return id == 0 ? player0 : player1;
     }
 }

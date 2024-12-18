@@ -67,7 +67,7 @@ public class OnePieceComponent extends Component {
     @Override
     public void onAdded() {
         x = 4;
-        y = 20;
+        y = 21;
     }
 
     protected void update_entity_position() {

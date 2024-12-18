@@ -5,6 +5,7 @@ import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.GetService;
 import com.Cubicheng.MyTetr.gameWorld.Player;
 import com.Cubicheng.MyTetr.gameWorld.Type;
+import com.Cubicheng.MyTetr.gameWorld.Variables;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.entity.Entity;
@@ -47,13 +48,7 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
                 alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
-                    player.getMovablePiece().removeFromWorld();
-                    player.getHoldPiece().removeFromWorld();
-                    player.getGhostPiece().removeFromWorld();
-                    for (Entity entity : player.getNextPiece()) {
-                        entity.removeFromWorld();
-                    }
-                    player.getGameMap().removeFromWorld();
+                    player.on_remove();
                     FXGL.<GameApp>getAppCast().pop();
                 }
             }
@@ -138,6 +133,8 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
 
     @Override
     public void initUI(GameScene gameScene, XInput input) {
+        Variables.seed = System.currentTimeMillis();
+
         var gridpane = new GridPane();
 
         var background = FXGL.image("back3.jpg");
@@ -184,7 +181,6 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
 
     }
 
-
     @Override
     public GameWorld get_game_world() {
         return gameWorld;
@@ -198,5 +194,10 @@ public class SinglePlayer implements PushAndPopGameSubScene, GetService {
     @Override
     public GridPane get_gridpane() {
         return null;
+    }
+
+    @Override
+    public Player get_player(int id) {
+        return player;
     }
 }

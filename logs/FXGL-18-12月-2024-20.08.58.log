@@ -1,0 +1,489 @@
+20:08:45.957 [JavaFX Application Thread] DEBUG Logger               - Configured Logger
+20:08:45.968 [JavaFX Application Thread] DEBUG GameApplication      - Logging settings
+Title: Demo
+Version: 0.0
+Width: 1500
+Height: 1000
+Fullscreen: false
+Intro: false
+Profiling: false
+Single step:false
+App Mode: DEVELOPER
+Menu Key: ESCAPE
+Stage Style: DECORATED
+Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
+
+20:08:45.970 [JavaFX Application Thread] DEBUG FXGLApplication      - Initializing FXGL
+20:08:45.978 [JavaFX Application Thread] INFO  Engine               - FXGL-17.3 (30.03.2023 11.49) on WINDOWS (J:21.0.4 FX:21.0.1)
+20:08:45.978 [JavaFX Application Thread] DEBUG Engine               - JRE Vendor Name: Oracle Corporation
+20:08:45.979 [JavaFX Application Thread] DEBUG Engine               - Running on OS: Windows 11 version 10.0
+20:08:45.979 [JavaFX Application Thread] DEBUG Engine               - Architecture: amd64
+20:08:45.979 [JavaFX Application Thread] INFO  Engine               - Source code and latest versions at: https://github.com/AlmasB/FXGL
+20:08:45.979 [JavaFX Application Thread] INFO  Engine               -       Ask questions and discuss at: https://github.com/AlmasB/FXGL/discussions
+20:08:45.979 [JavaFX Application Thread] INFO  Engine               -              Join the FXGL chat at: https://gitter.im/AlmasB/FXGL
+20:08:46.011 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Target settings size: 1500.0 x 1000.0
+20:08:46.011 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Scaled scene size:    1500.0 x 1000.0
+20:08:46.013 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Scaled ratio: (1.0, 1.0)
+20:08:46.015 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Set initial scene to FXGLStartupScene
+20:08:46.015 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Opening embedded window
+20:08:46.015 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Window border size: (0, 0)
+20:08:46.015 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Scaled size: 1500.0 x 1000.0
+20:08:46.016 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Scaled ratio: (1.0, 1.0)
+20:08:46.019 [FXGL Background Thread 1 ] DEBUG Engine               - Initializing environment variables
+20:08:46.057 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class com.Cubicheng.MyTetr.GameApp
+20:08:46.057 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Applying CSS: fxgl_dark.css
+20:08:46.058 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/css/fxgl_dark.css
+20:08:46.078 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Initializing application scenes
+20:08:46.122 [FXGL Background Thread 1 ] DEBUG GameWorld            - Game world initialized
+20:08:46.156 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Physics world initialized: appHeight=1000, physics.ppm=50.0
+20:08:46.157 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Using strategy: BRUTE_FORCE
+20:08:46.159 [FXGL Background Thread 1 ] DEBUG GameScene            - Game scene initialized: 1500x1000
+20:08:46.159 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Application scenes initialized
+20:08:46.174 [FXGL Background Thread 1 ] DEBUG SystemBundleService  - Loading FXGL system data
+20:08:46.176 [FXGL Background Thread 1 ] WARN  SystemBundleService  - Failed to load: java.io.FileNotFoundException: D:\IDEA Workspace\MyTetr\system\fxgl.bundle (系统找不到指定的文件。)
+20:08:46.176 [FXGL Background Thread 1 ] DEBUG SystemBundleService  - Loading default FXGL system data
+20:08:46.176 [FXGL Background Thread 1 ] DEBUG UpdaterService       - Checking for updates
+20:08:46.181 [FXGL Background Thread 4 ] DEBUG FXGLApplication      - Loading fonts
+20:08:46.181 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/fonts/VarelaRound-Regular.ttf
+20:08:46.182 [FXGL Background Thread 1 ] DEBUG FXGLApplication      - Loading default localization
+20:08:46.182 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/languages/english.lang
+20:08:46.207 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/fonts/Abel-Regular.ttf
+20:08:46.210 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/fonts/TerminalLandMono-Regular.otf
+20:08:46.210 [FXGL Background Thread 1 ] INFO  FXGLApplication      - FXGL initialization took: 0.191 sec
+20:08:46.212 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/fonts/Courier-Prime.ttf
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT0 - 0
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: TRACK_NEXT - Next Track
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F10 - F10
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F5 - F5
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: EXCLAMATION_MARK - Exclamation Mark
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PERIOD - Period
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_VOICED_SOUND - Dead Voiced Sound
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: UNDEFINED - Undefined
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_9 - Softkey 9
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_GRAVE - Dead Grave
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: A - A
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: EQUALS - Equals
+20:08:46.225 [JavaFX Application Thread] DEBUG Input                - Registered new binding: J - J
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: O - O
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD9 - Numpad 9
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: INFO - Info
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SLASH - Slash
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: GAME_A - Game A
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: ALPHANUMERIC - Alphanumeric
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: STAR - Star
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: VOLUME_DOWN - Volume Down
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F17 - F17
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F16 - F16
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F22 - F22
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Z - Z
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_4 - Softkey 4
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: N - N
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F14 - F14
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Y - Y
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: HALF_WIDTH - Half Width
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: RECORD - Record
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: RIGHT - Right
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: MODECHANGE - Mode Change
+20:08:46.226 [JavaFX Application Thread] DEBUG Input                - Registered new binding: KANA - Kana
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F - F
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD4 - Numpad 4
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F8 - F8
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_8 - Softkey 8
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DELETE - Delete
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: COLON - Colon
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_BREVE - Dead Breve
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: OPEN_BRACKET - Open Bracket
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: GAME_B - Game B
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: INPUT_METHOD_ON_OFF - Input Method On/Off
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: FINAL - Final
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: QUOTE - Quote
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: COMMA - Comma
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: KP_RIGHT - Numpad Right
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F9 - F9
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CONTEXT_MENU - Context Menu
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_DOUBLEACUTE - Dead Doubleacute
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: JAPANESE_ROMAN - Japanese Roman
+20:08:46.227 [JavaFX Application Thread] DEBUG Input                - Registered new binding: BACK_QUOTE - Back Quote
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: ADD - Add
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F3 - F3
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: B - B
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT5 - 5
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CAPS - Caps Lock
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: K - K
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DECIMAL - Decimal
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: BACK_SLASH - Back Slash
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_2 - Softkey 2
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: G - G
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: REWIND - Rewind
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT6 - 6
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT8 - 8
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F18 - F18
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: GREATER - Greater
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F2 - F2
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD6 - Numpad 6
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_CARON - Dead Caron
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PROPS - Properties
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: EJECT_TOGGLE - Eject
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F19 - F19
+20:08:46.228 [JavaFX Application Thread] DEBUG Input                - Registered new binding: JAPANESE_HIRAGANA - Japanese Hiragana
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: INVERTED_EXCLAMATION_MARK - Inverted Exclamation Mark
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CONVERT - Convert
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: KATAKANA - Katakana
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_OGONEK - Dead Ogonek
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F1 - F1
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT3 - 3
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Q - Q
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: QUOTEDBL - Double Quote
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT2 - 2
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: FIND - Find
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: D - D
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: HOME - Home
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: COLORED_KEY_3 - Colored Key 3
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F20 - F20
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_TILDE - Dead Tilde
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: ROMAN_CHARACTERS - Roman Characters
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F6 - F6
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: HIRAGANA - Hiragana
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SHORTCUT - Shortcut
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: STOP - Stop
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: TRACK_PREV - Previous Track
+20:08:46.229 [JavaFX Application Thread] DEBUG Input                - Registered new binding: R - R
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_5 - Softkey 5
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F13 - F13
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F23 - F23
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD7 - Numpad 7
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: INSERT - Insert
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PAGE_DOWN - Page Down
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: EURO_SIGN - Euro Sign
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_ACUTE - Dead Acute
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMBER_SIGN - Number Sign
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CLOSE_BRACKET - Close Bracket
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: COLORED_KEY_0 - Colored Key 0
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: LEFT - Left
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AMPERSAND - Ampersand
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: ENTER - Enter
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: HELP - Help
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: UNDO - Undo
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F4 - F4
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PLAY - Play
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PAUSE - Pause
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F11 - F11
+20:08:46.230 [JavaFX Application Thread] DEBUG Input                - Registered new binding: X - X
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F7 - F7
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_CIRCUMFLEX - Dead Circumflex
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: FAST_FWD - Fast Forward
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: E - E
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CUT - Cut
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: KP_DOWN - Numpad Down
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: UP - Up
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_3 - Softkey 3
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: KANJI - Kanji
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_1 - Softkey 1
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD8 - Numpad 8
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_MACRON - Dead Macron
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT1 - 1
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: KP_UP - Numpad Up
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: C - C
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: RIGHT_PARENTHESIS - Right Parenthesis
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD1 - Numpad 1
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PRINTSCREEN - Print Screen
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DOLLAR - Dollar
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F24 - F24
+20:08:46.231 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_IOTA - Dead Iota
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: MULTIPLY - Multiply
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CIRCUMFLEX - Circumflex
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SEMICOLON - Semicolon
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: JAPANESE_KATAKANA - Japanese Katakana
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CHANNEL_DOWN - Channel Down
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: I - I
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: V - V
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SCROLL_LOCK - Scroll Lock
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_SEMIVOICED_SOUND - Dead Semivoiced Sound
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: U - U
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIVIDE - Divide
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PREVIOUS_CANDIDATE - Previous Candidate
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: BEGIN - Begin
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PASTE - Paste
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: LESS - Less
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: ASTERISK - Asterisk
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: GAME_C - Game C
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: KANA_LOCK - Kana Lock
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CANCEL - Cancel
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: COPY - Copy
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: H - H
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD2 - Numpad 2
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F21 - F21
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: W - W
+20:08:46.232 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUM_LOCK - Num Lock
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CHANNEL_UP - Channel Up
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: TAB - Tab
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F12 - F12
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_DIAERESIS - Dead Diaeresis
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PAGE_UP - Page Up
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: END - End
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: GAME_D - Game D
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_ABOVERING - Dead Abovering
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NONCONVERT - Nonconvert
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_0 - Softkey 0
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_CEDILLA - Dead Cedilla
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: P - P
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT7 - 7
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: MINUS - Minus
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: M - M
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: ACCEPT - Accept
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: S - S
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CLEAR - Clear
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AT - At
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: VOLUME_UP - Volume Up
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: POUND - Pound
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: PLUS - Plus
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: COLORED_KEY_2 - Colored Key 2
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_6 - Softkey 6
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SOFTKEY_7 - Softkey 7
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: MUTE - Mute
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: ESCAPE - Esc
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT9 - 9
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: FULL_WIDTH - Full Width
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: POWER - Power
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD3 - Numpad 3
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: BRACERIGHT - Right Brace
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: COMPOSE - Compose
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SUBTRACT - Subtract
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: T - T
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD5 - Numpad 5
+20:08:46.233 [JavaFX Application Thread] DEBUG Input                - Registered new binding: COLORED_KEY_1 - Colored Key 1
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SEPARATOR - Separator
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: NUMPAD0 - Numpad 0
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: SPACE - Space
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: KP_LEFT - Numpad Left
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: UNDERSCORE - Underscore
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: ALL_CANDIDATES - All Candidates
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: CODE_INPUT - Code Input
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: F15 - F15
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DIGIT4 - 4
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: L - L
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DEAD_ABOVEDOT - Dead Abovedot
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: BRACELEFT - Left Brace
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: LEFT_PARENTHESIS - Left Parenthesis
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AGAIN - Again
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: DOWN - Down
+20:08:46.234 [JavaFX Application Thread] DEBUG Input                - Registered new binding: BACK_SPACE - Backspace
+20:08:46.246 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/textures/fxgl_icon.png
+20:08:46.286 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:///C:/Users/26303/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/textures/fxgl_default_cursor.png
+20:08:46.288 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Screenshot - CTRL+8
+20:08:46.288 [JavaFX Application Thread] DEBUG Input                - Registered new binding: System info dump - CTRL+9
+20:08:46.289 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Restart - CTRL+R
+20:08:46.290 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Toggle Debug Camera - CTRL+7
+20:08:46.294 [JavaFX Application Thread] DEBUG LoopRunner           - Starting loop
+20:08:46.294 [JavaFX Application Thread] DEBUG LoopRunner           - Initializing JavaFX AnimationTimerLoop
+20:08:46.295 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+20:08:46.295 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+20:08:46.306 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLStartupScene and adding to FXGLLoadingScene
+20:08:46.306 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - FXGLStartupScene -> FXGLLoadingScene
+20:08:46.306 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+20:08:46.306 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+20:08:46.306 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+20:08:46.307 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+20:08:46.310 [FXGL Background Thread 4 ] DEBUG FXGLApplication      - Initializing game
+20:08:46.313 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Clearing assets cache
+20:08:46.313 [JavaFX Application Thread] DEBUG FXGLApplication      - Registering font factories with UI factory
+20:08:46.499 [FXGL Background Thread 4 ] INFO  FXGLApplication      - Game initialization took: 0.189 sec
+20:08:46.504 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/ui/fonts/IPix.ttf
+20:08:46.515 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/background.jpg
+20:08:46.572 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+20:08:46.573 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+20:08:46.573 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - FXGLLoadingScene -> GameScene
+20:08:47.448 [JavaFX Application Thread] DEBUG GameWorld            - Game world initialized
+20:08:47.448 [JavaFX Application Thread] DEBUG PhysicsWorld         - Physics world initialized: appHeight=1000, physics.ppm=50.0
+20:08:47.448 [JavaFX Application Thread] DEBUG PhysicsWorld         - Using strategy: BRUTE_FORCE
+20:08:47.449 [JavaFX Application Thread] DEBUG GameScene            - Game scene initialized: 1500x1000
+20:08:47.449 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Escape - Esc
+20:08:47.453 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/back3.jpg
+20:08:47.549 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/map.png
+20:08:47.596 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/map_warn.png
+20:08:47.709 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_9.png
+20:08:47.717 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_10.png
+20:08:47.719 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AUTO-0 - Space
+20:08:47.720 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AUTO-1 - Left
+20:08:47.720 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AUTO-2 - Right
+20:08:47.720 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AUTO-3 - Down
+20:08:47.721 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AUTO-4 - Up
+20:08:47.721 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AUTO-5 - Z
+20:08:47.721 [JavaFX Application Thread] DEBUG Input                - Registered new binding: AUTO-6 - A
+20:08:47.723 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Push state: ConcurrentGameSubScene
+20:08:47.723 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+20:08:47.724 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ConcurrentGameSubScene
+20:08:47.724 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - GameScene -> ConcurrentGameSubScene
+20:08:47.726 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_2.png
+20:08:47.727 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_6.png
+20:08:47.729 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_5.png
+20:08:47.731 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_3.png
+20:08:47.733 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_4.png
+20:08:47.735 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_0.png
+20:08:48.664 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/IDEA%20Workspace/MyTetr/target/classes/assets/textures/block_1.png
+20:08:49.187 [FXGL Background Thread 3 ] DEBUG Engine               - Logging environment variables
+20:08:49.187 [FXGL Background Thread 3 ] DEBUG Engine               - achievements: []
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - actualHeight: 383.4285583496094
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - actualHeightProperty: ReadOnlyDoubleProperty [value: 383.4285583496094]
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - actualWidth: 616.5714111328125
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - actualWidthProperty: ReadOnlyDoubleProperty [value: 616.5714111328125]
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - appIcon: fxgl_icon.png
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - applicationMode: DEVELOPER
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - cSSList: [fxgl_dark.css]
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - collisionDetectionStrategy: BRUTE_FORCE
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - configClass: Optional.empty
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - credits: []
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - defaultCursor: CursorInfo(imageName=fxgl_default_cursor.png, hotspotX=7.0, hotspotY=6.0)
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - devBBoxColorProperty: ObjectProperty [value: 0xff0000ff]
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - devEnableDebugCameraProperty: BooleanProperty [value: false]
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - devSensorColorProperty: ObjectProperty [value: 0xffff00ff]
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - devShowBBoxProperty: BooleanProperty [value: false]
+20:08:49.188 [FXGL Background Thread 3 ] DEBUG Engine               - devShowPositionProperty: BooleanProperty [value: false]
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - enabledMenuItems: []
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - engineServices: [class com.almasb.fxgl.app.services.FXGLAssetLoaderService, class com.almasb.fxgl.app.FXGLApplication$GameApplicationService, class com.almasb.fxgl.app.services.FXGLDialogService, class com.almasb.fxgl.app.services.IOTaskExecutorService, class com.almasb.fxgl.io.FileSystemService, class com.almasb.fxgl.localization.LocalizationService, class com.almasb.fxgl.app.services.SystemBundleService, class com.almasb.fxgl.profile.SaveLoadService, class com.almasb.fxgl.ui.FXGLUIFactoryServiceProvider, class com.almasb.fxgl.ui.FXGLDialogFactoryServiceProvider, class com.almasb.fxgl.audio.AudioPlayer, class com.almasb.fxgl.notification.impl.NotificationServiceProvider, class com.almasb.fxgl.achievement.AchievementService, class com.almasb.fxgl.cutscene.CutsceneService, class com.almasb.fxgl.minigames.MiniGameService, class com.almasb.fxgl.net.NetService, class com.almasb.fxgl.app.services.UpdaterService, class com.almasb.fxgl.dev.DevService]
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - fontGame: Abel-Regular.ttf
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - fontMono: TerminalLandMono-Regular.otf
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - fontSizeScaleUI: 1.0
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - fontText: Courier-Prime.ttf
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - fontUI: VarelaRound-Regular.ttf
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - fullScreen: BooleanProperty [value: false]
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - gameDifficulty: MEDIUM
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - gameDifficultyProperty: ObjectProperty [value: MEDIUM]
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - globalMusicVolume: 0.5
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - globalMusicVolumeProperty: DoubleProperty [value: 0.5]
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - globalSoundVolume: 0.5
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - globalSoundVolumeProperty: DoubleProperty [value: 0.5]
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - height: 1000
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - is3D: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isAndroid: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isBrowser: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isClickFeedbackEnabled: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isCloseConfirmation: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isDesktop: true
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isDeveloperMenuEnabled: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isEmbedded: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isEntityPreloadEnabled: true
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isExperimentalTiledLargeMap: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isFileSystemWriteAllowed: true
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isFullScreenAllowed: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isFullScreenFromStart: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isGameMenuEnabled: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isIOS: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isIntroEnabled: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isLinux: false
+20:08:49.189 [FXGL Background Thread 3 ] DEBUG Engine               - isMac: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isMainMenuEnabled: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isManualResizeEnabled: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isMobile: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isNative: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isPauseMusicWhenMinimized: true
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isPreserveResizeRatio: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isProfilingEnabled: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isScaleAffectedOnResize: true
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isSingleStep: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isUserProfileEnabled: false
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - isWindows: true
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - language: ObjectProperty [value: ENGLISH]
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - menuKey: ESCAPE
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - mouseSensitivity: 0.2
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - notificationViewClass: class com.almasb.fxgl.notification.view.XboxNotificationView
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - pixelsPerMeter: 50.0
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - platform: WINDOWS
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - prefHeightProperty: ReadOnlyDoubleProperty [value: 1000.0]
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - prefWidthProperty: ReadOnlyDoubleProperty [value: 1500.0]
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - profileDir: profiles/
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - profileName: StringProperty [value: DEFAULT]
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - randomSeed: -1
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - runtimeInfo: RuntimeInfo(platform=WINDOWS, version=17.3, build=30.03.2023 11.49)
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - saveFileExt: sav
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - scaledHeightProp$fxgl: DoubleProperty [bound, value: 383.4285583496094]
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - scaledWidthProp$fxgl: DoubleProperty [bound, value: 616.5714111328125]
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - sceneFactory: com.almasb.fxgl.app.scene.SceneFactory@3b808229
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - secondsIn24h: 60
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - soundMenuBack: menu/back.wav
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - soundMenuPress: menu/press.wav
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - soundMenuSelect: menu/select.wav
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - soundNotification: core/notification.wav
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - stageStyle: DECORATED
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - supportedLanguages: [ENGLISH, FRENCH, GERMAN, HUNGARIAN, RUSSIAN]
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - ticksPerSecond: -1
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - title: Demo
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - urlGithub: https://github.com/AlmasB/FXGL
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - urlLeaderboard: http://fxgl-top.herokuapp.com/
+20:08:49.190 [FXGL Background Thread 3 ] DEBUG Engine               - urlPOM: https://raw.githubusercontent.com/AlmasB/FXGL/release/README.md
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - userAppClass: class com.Cubicheng.MyTetr.GameApp
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - version: 0.0
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - versionCheckDays: 7
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - width: 1500
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - Logging services
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.FXGLAssetLoaderService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.FXGLApplication$GameApplicationService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.FXGLDialogService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.IOTaskExecutorService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.io.FileSystemService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.localization.LocalizationService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.SystemBundleService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.profile.SaveLoadService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.ui.FXGLUIFactoryServiceProvider
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.ui.FXGLDialogFactoryServiceProvider
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.audio.AudioPlayer
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.notification.impl.NotificationServiceProvider
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.achievement.AchievementService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.cutscene.CutsceneService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.minigames.MiniGameService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.net.NetService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.UpdaterService
+20:08:49.191 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.dev.DevService
+20:08:58.048 [JavaFX Application Thread] DEBUG LoopRunner           - Stopping loop
+20:08:58.049 [JavaFX Application Thread] FATAL FXGLApplication      - Uncaught Exception:
+java.lang.IllegalStateException: showAndWait is not allowed during animation or layout processing
+	at javafx.controls@21.0.1/javafx.scene.control.Dialog.showAndWait(Dialog.java:333)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.Player.on_die(Player.java:49)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent.handle_warning(GameMapComponent.java:146)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent.update_texture(GameMapComponent.java:181)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent.add_piece(GameMapComponent.java:232)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent.hard_drop(MovablePieceComponent.java:206)
+	at MyTetr/com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent.onUpdate(MovablePieceComponent.java:152)
+	at com.almasb.fxgl.entity@17.3/com.almasb.fxgl.entity.Entity$ComponentMap.update(Entity.java:60)
+	at com.almasb.fxgl.entity@17.3/com.almasb.fxgl.entity.Entity.update(Entity.java:248)
+	at com.almasb.fxgl.entity@17.3/com.almasb.fxgl.entity.GameWorld.onUpdate(GameWorld.kt:177)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.scene.GameScene.step(GameScene.kt:228)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.scene.GameScene.onUpdate(GameScene.kt:224)
+	at com.almasb.fxgl.scene@17.3/com.almasb.fxgl.scene.Scene.update(Scene.kt:105)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.scene.GameSubScene.onUpdate(GameSubScene.kt:43)
+	at com.almasb.fxgl.scene@17.3/com.almasb.fxgl.scene.Scene.update(Scene.kt:105)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.MainWindow$update$1.invoke(MainWindow.kt:115)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.MainWindow$update$1.invoke(MainWindow.kt:115)
+	at com.almasb.fxgl.core@17.3/com.almasb.fxgl.core.fsm.StateMachine.runOnActiveStates(StateMachine.kt:69)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.MainWindow.update(MainWindow.kt:115)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.FXGLApplication$GameApplicationService.onUpdate(FXGLApplication.kt:426)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.Engine.loop(Engine.kt:134)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.Engine.access$loop(Engine.kt:24)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.Engine$loop$1.invoke(Engine.kt:28)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.Engine$loop$1.invoke(Engine.kt:28)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.LoopRunner.frame(LoopRunner.kt:103)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.LoopRunner.access$frame(LoopRunner.kt:23)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.LoopRunner$impl$2$1.onTick(LoopRunner.kt:57)
+	at com.almasb.fxgl.all@17.3/com.almasb.fxgl.app.AnimationTimerLoop$timer$1.handle(LoopRunner.kt:137)
+	at javafx.graphics@21.0.1/javafx.animation.AnimationTimer$AnimationTimerReceiver.lambda$handle$0(AnimationTimer.java:58)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@21.0.1/javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(AnimationTimer.java:57)
+	at javafx.graphics@21.0.1/com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(AbstractPrimaryTimer.java:356)
+	at javafx.graphics@21.0.1/com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run(AbstractPrimaryTimer.java:266)
+	at javafx.graphics@21.0.1/com.sun.javafx.tk.quantum.QuantumToolkit.pulse(QuantumToolkit.java:588)
+	at javafx.graphics@21.0.1/com.sun.javafx.tk.quantum.QuantumToolkit.pulse(QuantumToolkit.java:572)
+	at javafx.graphics@21.0.1/com.sun.javafx.tk.quantum.QuantumToolkit.pulseFromQueue(QuantumToolkit.java:565)
+	at javafx.graphics@21.0.1/com.sun.javafx.tk.quantum.QuantumToolkit.lambda$runToolkit$11(QuantumToolkit.java:352)
+	at javafx.graphics@21.0.1/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@21.0.1/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@21.0.1/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+20:08:58.049 [JavaFX Application Thread] FATAL FXGLApplication      - Application will now exit
+20:08:58.058 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - Push state: ErrorSubScene
+20:08:58.058 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+20:08:58.060 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ConcurrentGameSubScene and adding to ErrorSubScene
+20:08:58.060 [JavaFX Application Thread] DEBUG EmbeddedPaneWindow   - ConcurrentGameSubScene -> ErrorSubScene
+20:08:58.220 [JavaFX Application Thread] DEBUG FXGLApplication      - Exiting FXGL
+20:08:58.221 [JavaFX Application Thread] DEBUG Async                - Shutting down background threads
+20:08:58.221 [JavaFX Application Thread] DEBUG Logger               - Closing Logger

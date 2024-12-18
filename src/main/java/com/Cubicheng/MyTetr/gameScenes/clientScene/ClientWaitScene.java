@@ -2,6 +2,7 @@ package com.Cubicheng.MyTetr.gameScenes.clientScene;
 
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.GetService;
+import com.Cubicheng.MyTetr.gameWorld.Player;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.netWork.client.Client;
 import com.almasb.fxgl.app.scene.GameScene;
@@ -79,5 +80,10 @@ public class ClientWaitScene implements PushAndPopGameSubScene, GetService {
     @Override
     public GridPane get_gridpane() {
         return gridpane;
+    }
+
+    @Override
+    public Player get_player(int id) {
+        return null;
     }
 }

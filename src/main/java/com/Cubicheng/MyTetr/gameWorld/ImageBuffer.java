@@ -1,5 +1,7 @@
 package com.Cubicheng.MyTetr.gameWorld;
 
+import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.texture.Texture;
 import com.whitewoodcity.fxgl.app.ImageData;
 
 import static com.Cubicheng.MyTetr.gameWorld.Variables.BLOCK_SIZE;
@@ -15,6 +17,10 @@ public class ImageBuffer {
             new ImageData("block_6.png", BLOCK_SIZE, BLOCK_SIZE),
             new ImageData("block_7.png", BLOCK_SIZE, BLOCK_SIZE),
             new ImageData("block_8.png", BLOCK_SIZE, BLOCK_SIZE),
-            new ImageData("block_9.png", BLOCK_SIZE, BLOCK_SIZE)
+            new ImageData("block_9.png", BLOCK_SIZE, BLOCK_SIZE),
+            new ImageData("block_10.png", BLOCK_SIZE, BLOCK_SIZE),
     };
+
+    public static Texture map_texture = null;
+    public static Texture map_warn_texture = null;
 }

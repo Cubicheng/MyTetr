@@ -2,6 +2,7 @@ package com.Cubicheng.MyTetr.netWork.client;
 
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientPlayScene;
+import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerPlayScene;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.Variables;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
@@ -52,6 +53,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 FXGL.<GameApp>getAppCast().push(ClientPlayScene.SCENE_NAME);
             });
         } else if (msg instanceof UpdateMovablePiecePacket) {
+            if(FXGL.<GameApp>getAppCast().get_last_gameScene().getClass()!= ClientPlayScene.class){
+                return ;
+            }
             Platform.runLater(() -> {
                 var service = FXGL.<GameApp>getAppCast().getFrontlineService();
                 Entity movablePiece = service.get_entity(Type.MovablePiece, 1);

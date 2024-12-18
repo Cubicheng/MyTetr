@@ -50,6 +50,28 @@ public class Player {
                 on_remove();
                 FXGL.<GameApp>getAppCast().pop();
             });
+        } else if (id == 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("输！");
+            alert.initOwner(Application.getStage());
+            alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+            alert.show();
+            alert.setOnHidden(evt -> {
+                FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
+                FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
+                FXGL.<GameApp>getAppCast().pop();
+            });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("赢！");
+            alert.initOwner(Application.getStage());
+            alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+            alert.show();
+            alert.setOnHidden(evt -> {
+                FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
+                FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
+                FXGL.<GameApp>getAppCast().pop();
+            });
         }
     }
 

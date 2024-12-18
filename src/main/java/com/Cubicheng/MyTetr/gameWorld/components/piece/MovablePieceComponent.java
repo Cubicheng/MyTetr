@@ -44,7 +44,9 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     public void setIs_dead(boolean is_dead) {
         this.is_dead = is_dead;
-        down_timer.cancel();
+        if (down_timer != null) {
+            down_timer.cancel();
+        }
     }
 
     public MovablePieceComponent(double x, double y, int id) {
@@ -119,7 +121,9 @@ public class MovablePieceComponent extends OnePieceComponent {
 
     @Override
     public void onRemoved() {
-        down_timer.cancel();
+        if (down_timer != null && !is_dead) {
+            down_timer.cancel();
+        }
     }
 
     private boolean check_bottom_collide() {

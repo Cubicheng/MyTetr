@@ -1,6 +1,7 @@
 package com.Cubicheng.MyTetr.netWork.server;
 
 import com.Cubicheng.MyTetr.GameApp;
+import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerPlayScene;
 import com.Cubicheng.MyTetr.gameWorld.AttackQueue;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.components.GameMapComponent;
@@ -65,6 +66,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof UpdateMovablePiecePacket) {
             Platform.runLater(() -> {
+                if(FXGL.<GameApp>getAppCast().get_last_gameScene().getClass()!= ServerPlayScene.class){
+                    return ;
+                }
                 var service = FXGL.<GameApp>getAppCast().getFrontlineService();
                 Entity movablePiece = service.get_entity(Type.MovablePiece, 1);
                 movablePiece.getComponent(MovablePieceComponent.class).update((UpdateMovablePiecePacket) msg);

@@ -70,7 +70,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         }
 
 
-        var background = FXGL.image("background.jpg");
+        var background = FXGL.image("menu.png");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
         var gridpane = new GridPane();
@@ -78,7 +78,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         gridpane.setPadding(new Insets(10, 10, 10, 10));
 
         var header = new Text("设置");
-        header.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(50));
+        header.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         gridpane.add(header, 1, 0);
 
@@ -108,7 +108,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         hbox1.getChildren().addAll(das_text, das_slider, das_value);
         hbox1.setSpacing(20);
 
-        var arr_text = new Text("快速横移时间间隔   ");
+        var arr_text = new Text("快速横移时间间隔  ");
         arr_text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         var arr_slider = new Slider();
@@ -135,7 +135,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         hbox2.getChildren().addAll(arr_text, arr_slider, arr_value);
         hbox2.setSpacing(20);
 
-        var sfd_arr_text = new Text("快速下降时间间隔   ");
+        var sfd_arr_text = new Text("快速下降时间间隔  ");
         sfd_arr_text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         var sfd_arr_slider = new Slider();
@@ -161,7 +161,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         hbox3.getChildren().addAll(sfd_arr_text, sfd_arr_slider, sfd_arr_value);
         hbox3.setSpacing(20);
 
-        var visibility_text = new Text("幽灵块能见度          ");
+        var visibility_text = new Text("幽灵块能见度       ");
         visibility_text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
 
         var visibility_slider = new Slider();
@@ -193,7 +193,7 @@ public class ConfigScene implements PushAndPopGameSubScene {
         gridpane.add(hbox4, 1, 4);
 
         gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) / 2);
-        gridpane.setTranslateY(FXGL.getAppCenter().getY());
+        gridpane.setTranslateY(FXGL.getAppCenter().getY() + 50);
 
         gridpane.setHgap(30);
         gridpane.setVgap(30);

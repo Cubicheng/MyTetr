@@ -102,7 +102,7 @@ public class MultiPlayerSelector implements PushAndPopGameSubScene {
         gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) / 2);
         gridpane.setTranslateY(FXGL.getAppCenter().getY() * 1.2);
 
-        ImageView map_image = new ImageView(FXGL.image("background.jpg"));
+        ImageView map_image = new ImageView(FXGL.image("menu.png"));
         map_image.setFitWidth(gameScene.getAppWidth());
         map_image.setFitHeight(gameScene.getAppHeight());
 

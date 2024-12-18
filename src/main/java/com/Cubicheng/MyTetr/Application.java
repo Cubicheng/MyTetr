@@ -41,7 +41,7 @@ public class Application extends javafx.application.Application implements FillS
         var stackpane = new StackPane();
         stage.setScene(new Scene(stackpane));
 
-//        stage.setFullScreen(true);
+        stage.setFullScreen(true);
         stage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.SHORTCUT_DOWN));
         stage.setFullScreenExitHint("");
 

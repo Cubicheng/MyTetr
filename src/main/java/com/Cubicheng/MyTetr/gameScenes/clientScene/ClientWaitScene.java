@@ -49,7 +49,7 @@ public class ClientWaitScene implements PushAndPopGameSubScene, GetService {
         text = new Text("连接成功！等待 玩家1 开始...");
         text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
-        ImageView map_image = new ImageView(FXGL.image("background.jpg"));
+        ImageView map_image = new ImageView(FXGL.image("menu.png"));
         map_image.setFitWidth(gameScene.getAppWidth());
         map_image.setFitHeight(gameScene.getAppHeight());
 

@@ -3,9 +3,11 @@ package com.Cubicheng.MyTetr.gameScenes;
 
 import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
+import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.texture.Texture;
 import com.whitewoodcity.fxgl.service.ReplaceableGameScene;
 import com.whitewoodcity.fxgl.service.XInput;
 import javafx.scene.control.ButtonType;
@@ -111,7 +113,7 @@ public class MainMenu implements ReplaceableGameScene {
         gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) / 2);
         gridpane.setTranslateY(FXGL.getAppCenter().getY() * 1.2);
 
-        var background = FXGL.image("background.jpg");
+        var background = FXGL.image("menu.png");
         gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
         gridpane.setHgap(30);

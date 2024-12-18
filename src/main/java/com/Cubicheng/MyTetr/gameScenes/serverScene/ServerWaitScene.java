@@ -73,7 +73,7 @@ public class ServerWaitScene implements PushAndPopGameSubScene, GetService {
             FXGL.<GameApp>getAppCast().push(ServerPlayScene.SCENE_NAME);
         });
 
-        ImageView map_image = new ImageView(FXGL.image("background.jpg"));
+        ImageView map_image = new ImageView(FXGL.image("menu.png"));
         map_image.setFitWidth(gameScene.getAppWidth());
         map_image.setFitHeight(gameScene.getAppHeight());
 

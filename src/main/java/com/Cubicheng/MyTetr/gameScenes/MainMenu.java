@@ -4,10 +4,16 @@ package com.Cubicheng.MyTetr.gameScenes;
 import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.gameWorld.ConfigVars;
 import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
+import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.almasb.fxgl.app.scene.GameScene;
+import com.almasb.fxgl.dsl.EntityBuilder;
+import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.input.Input;
+import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.texture.Texture;
+import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.ReplaceableGameScene;
 import com.whitewoodcity.fxgl.service.XInput;
 import javafx.scene.control.ButtonType;
@@ -24,40 +30,64 @@ import java.util.Optional;
 
 import com.Cubicheng.MyTetr.GameApp;
 
-public class MainMenu implements ReplaceableGameScene {
+public class MainMenu implements PushAndPopGameSubScene {
     public static final String SCENE_NAME = "MainMenu";
+    private GameWorld gameWorld;
+    private Entity background;
 
     @Override
-    public XInput initInput(Map<KeyCode, Runnable> keyPresses, Map<KeyCode, Runnable> keyReleases, Map<KeyCode, Runnable> keyActions) {
-        var input = new XInput(keyPresses, keyReleases, keyActions);
-        List.of(KeyCode.ESCAPE).forEach(keyCode ->
-                input.onActionBegin(keyCode, () -> {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("QWQ");
-                    alert.setHeaderText("所以爱会消失对吗？");
-                    alert.setContentText("");
-                    alert.initOwner(Application.getStage());
-                    alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK) {
-                        System.exit(0);
-                    }
-                })
-        );
+    public XInput initInput(Input input) {
+        input.addAction(new UserAction("Escape") {
+            @Override
+            protected void onActionBegin() {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("QWQ");
+                alert.setHeaderText("所以爱会消失对吗？");
+                alert.initOwner(Application.getStage());
+                alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    System.exit(0);
+                }
+            }
+        }, KeyCode.ESCAPE);
 
-        return input;
+        return new XInput(input);
     }
 
     @Override
     public void initGame(GameWorld gameWorld, XInput input) {
         FXGL.getAssetLoader().clearCache();
         FXGL.getWorldProperties().clear();
+        this.gameWorld = gameWorld;
 
         ConfigVars.update_config_from_json();
     }
 
+    private void init_background(GameScene gameScene){
+        var background_image = FXGL.image("menu.png");
+
+        double new_width = gameScene.getAppHeight() / background_image.getHeight() * background_image.getWidth();
+        double new_height = gameScene.getAppHeight();
+
+        var background_texture = new Texture(background_image);
+
+        background_texture.setFitWidth(new_width);
+        background_texture.setFitHeight(new_height);
+
+        background = new EntityBuilder()
+                .at((gameScene.getAppWidth() - new_width) / 2, 0)
+                .view(background_texture)
+                .zIndex(Integer.MIN_VALUE)
+                .build();
+
+        gameWorld.addEntity(background);
+    }
+
     @Override
     public void initUI(GameScene gameScene, XInput input) {
+        init_background(gameScene);
+
         var gridpane = new GridPane();
         var glow = new Glow(1.0);
 
@@ -65,7 +95,9 @@ public class MainMenu implements ReplaceableGameScene {
         singlePlayerbtn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
 
         var multiPlayerbtn = new Text("多人模式");
-        multiPlayerbtn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
+        multiPlayerbtn.setFont(FXGL.getAssetLoader().loadFont(
+
+                "IPix.ttf").newFont(40));
 
         var configbtn = new Text("设置");
         configbtn.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));
@@ -112,9 +144,6 @@ public class MainMenu implements ReplaceableGameScene {
 
         gridpane.setTranslateX((FXGL.getAppCenter().getX() - gridpane.getBoundsInLocal().getWidth()) / 2);
         gridpane.setTranslateY(FXGL.getAppCenter().getY() * 1.2);
-
-        var background = FXGL.image("menu.png");
-        gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
 
         gridpane.setHgap(30);
         gridpane.setVgap(30);

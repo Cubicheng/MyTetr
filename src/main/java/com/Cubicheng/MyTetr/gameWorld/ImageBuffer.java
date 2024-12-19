@@ -3,6 +3,7 @@ package com.Cubicheng.MyTetr.gameWorld;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.texture.Texture;
 import com.whitewoodcity.fxgl.app.ImageData;
+import javafx.scene.image.Image;
 
 import static com.Cubicheng.MyTetr.gameWorld.Variables.BLOCK_SIZE;
 

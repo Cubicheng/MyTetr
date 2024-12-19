@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr;
 
+import com.Cubicheng.MyTetr.gameScenes.IntroScene;
 import com.Cubicheng.MyTetr.gameScenes.MainMenu;
 import com.whitewoodcity.atlantafx.base.theme.CityDark;
 import com.whitewoodcity.fxgl.service.FillService;
@@ -41,13 +42,13 @@ public class Application extends javafx.application.Application implements FillS
         var stackpane = new StackPane();
         stage.setScene(new Scene(stackpane));
 
-        stage.setFullScreen(true);
+//        stage.setFullScreen(true);
         stage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.SHORTCUT_DOWN));
         stage.setFullScreenExitHint("");
 
         stage.show();
 
-        var gamePane = GameApp.embeddedLaunch(new GameApp(MainMenu.SCENE_NAME));
+        var gamePane = GameApp.embeddedLaunch(new GameApp(IntroScene.SCENE_NAME));
 
         gamePane.setRenderFill(Color.TRANSPARENT);
         stackpane.getChildren().add(gamePane);

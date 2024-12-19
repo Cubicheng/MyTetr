@@ -109,7 +109,7 @@ public class Player {
                 .at((gameScene.getAppWidth() - new_width) / 2 + dx, dy)
                 .type(Type.MapImageEntity)
                 .view(ImageBuffer.map_texture)
-                .zIndex(Integer.MIN_VALUE)
+                .zIndex(Integer.MIN_VALUE + 10)
                 .build();
 
         gameWorld.addEntity(mapImageEntity);

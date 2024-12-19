@@ -56,6 +56,7 @@ public class GameApp extends GameApplication {
     @Override
     protected XGameScene getGameSceneByName(String sceneName, Object... parameters) {
         return switch (sceneName) {
+            case IntroScene.SCENE_NAME -> new IntroScene();
             case MainMenu.SCENE_NAME -> new MainMenu();
             case SinglePlayer.SCENE_NAME -> new SinglePlayer();
             case MultiPlayerSelector.SCENE_NAME -> new MultiPlayerSelector();

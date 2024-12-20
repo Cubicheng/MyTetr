@@ -1,7 +1,9 @@
 package com.Cubicheng.MyTetr.netWork.client;
 
+import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientPlayScene;
+import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientWaitScene;
 import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerPlayScene;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.Variables;
@@ -18,6 +20,7 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
@@ -31,14 +34,34 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("Player 1 left");
         channels.remove(ctx.channel());
         Platform.runLater(
                 () -> {
-                    var service = FXGL.<GameApp>getAppCast().getFrontlineService();
-                    if (service == null) return;
-                    var gridpane = service.get_gridpane();
-                    var text = util.get_text(gridpane, 0, 1);
-                    text.setText("玩家1 退出，房间已解散...");
+                    if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == ClientWaitScene.class) {
+                        var service = FXGL.<GameApp>getAppCast().getFrontlineService();
+                        if (service == null) return;
+                        var gridpane = service.get_gridpane();
+                        var text = util.get_text(gridpane, 0, 1);
+                        text.setText("玩家1 退出，房间已解散，请退出房间重新加入...");
+                    } else if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == ClientPlayScene.class) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("失去了与 玩家1 的连接...");
+                        alert.initOwner(Application.getStage());
+                        alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+                        alert.show();
+                        alert.setOnHidden(evt -> {
+                            FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
+                            FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
+                            FXGL.<GameApp>getAppCast().pop();
+
+                            var service = FXGL.<GameApp>getAppCast().getFrontlineService();
+                            if (service == null) return;
+                            var gridpane = service.get_gridpane();
+                            var text = util.get_text(gridpane, 0, 1);
+                            text.setText("玩家1 退出，房间已解散，请退出房间重新加入...");
+                        });
+                    }
                 }
         );
 
@@ -53,8 +76,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 FXGL.<GameApp>getAppCast().push(ClientPlayScene.SCENE_NAME);
             });
         } else if (msg instanceof UpdateMovablePiecePacket) {
-            if(FXGL.<GameApp>getAppCast().get_last_gameScene().getClass()!= ClientPlayScene.class){
-                return ;
+            if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() != ClientPlayScene.class) {
+                return;
             }
             Platform.runLater(() -> {
                 var service = FXGL.<GameApp>getAppCast().getFrontlineService();
@@ -79,6 +102,19 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 var service = FXGL.<GameApp>getAppCast().getFrontlineService();
                 Entity gameMap = service.get_entity(Type.GameMap, 0);
                 gameMap.getComponent(GameMapComponent.class).add_attack_to_queue(((AttackPacket) msg).getAttack(), ((AttackPacket) msg).getX());
+            });
+        } else if (msg instanceof EscapePacket) {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("玩家1 退出了游戏...");
+                alert.initOwner(Application.getStage());
+                alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+                alert.show();
+                alert.setOnHidden(evt -> {
+                    FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
+                    FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
+                    FXGL.<GameApp>getAppCast().pop();
+                });
             });
         }
     }
@@ -112,6 +148,15 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     public void push_AttackPacket(int attack, int x) {
         var byteBuf = PacketCodec.encode(new AttackPacket(attack, x), null);
+        channels.writeAndFlush(byteBuf).addListener(future -> {
+            if (!future.isSuccess()) {
+                System.out.println("Send message failed: " + future.cause());
+            }
+        });
+    }
+
+    public void push_EscapePacket() {
+        var byteBuf = PacketCodec.encode(new EscapePacket(), null);
         channels.writeAndFlush(byteBuf).addListener(future -> {
             if (!future.isSuccess()) {
                 System.out.println("Send message failed: " + future.cause());

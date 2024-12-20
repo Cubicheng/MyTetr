@@ -6,6 +6,7 @@ public interface Command {
     Byte HARD_DROP = 3;
     Byte HOLD = 4;
     Byte ATTACK = 5;
+    Byte ESCAPE = 6;
 
     static Class<? extends Packet> getRequestByCommand(byte command) {
         if(command == START_RESPONSE){
@@ -22,6 +23,9 @@ public interface Command {
         }
         if(command == ATTACK){
             return AttackPacket.class;
+        }
+        if(command==ESCAPE){
+            return EscapePacket.class;
         }
         return null;
     }

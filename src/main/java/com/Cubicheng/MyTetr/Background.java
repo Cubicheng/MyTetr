@@ -13,7 +13,6 @@ public class Background {
 
     public Background(String url, GameScene gameScene, GameWorld gameWorld, double opacity) {
 
-        System.out.println(url);
         var background_image = FXGL.image(url);
 
         double new_width = gameScene.getAppHeight() / background_image.getHeight() * background_image.getWidth();

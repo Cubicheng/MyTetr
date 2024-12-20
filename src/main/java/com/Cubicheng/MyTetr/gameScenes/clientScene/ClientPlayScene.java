@@ -8,6 +8,7 @@ import com.Cubicheng.MyTetr.gameWorld.Player;
 import com.Cubicheng.MyTetr.gameWorld.Type;
 import com.Cubicheng.MyTetr.gameWorld.Variables;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
+import com.Cubicheng.MyTetr.netWork.client.Client;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
@@ -45,11 +46,12 @@ public class ClientPlayScene implements PushAndPopGameSubScene, GetService {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("警告");
                 alert.setHeaderText("确认退出吗？");
-                alert.setContentText("你将会失去你的进度。");
+                alert.setContentText("退出将导致对战崩溃。");
                 alert.initOwner(Application.getStage());
                 alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
+                    Client.getInstance().getHandler().push_EscapePacket();
                     player0.on_remove();
                     player1.on_remove();
                     FXGL.<GameApp>getAppCast().pop();
@@ -79,7 +81,7 @@ public class ClientPlayScene implements PushAndPopGameSubScene, GetService {
 
         Random random = new Random(Variables.seed);
 
-        background = new Background("back" + random.nextInt(Variables.NUM_BACKGROUND), gameScene, gameWorld, 0.5);
+        background = new Background("back" + random.nextInt(Variables.NUM_BACKGROUND) + ".png", gameScene, gameWorld, 0.5);
 
         player0 = new Player(0, gameScene, gameWorld, -290, 0);
         player1 = new Player(1, gameScene, gameWorld, 290, 0);

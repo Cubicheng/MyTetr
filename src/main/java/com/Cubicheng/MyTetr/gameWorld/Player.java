@@ -94,10 +94,12 @@ public class Player {
         double new_height = gameScene.getAppHeight();
 
         ImageBuffer.map_texture = new Texture(map_image);
+        ImageBuffer.map_texture.setOpacity(0.7);
         ImageBuffer.map_texture.setFitWidth(new_width);
         ImageBuffer.map_texture.setFitHeight(new_height);
 
         ImageBuffer.map_warn_texture = new Texture(map_warn_image);
+        ImageBuffer.map_warn_texture.setOpacity(0.7);
         ImageBuffer.map_warn_texture.setFitWidth(new_width);
         ImageBuffer.map_warn_texture.setFitHeight(new_height);
 

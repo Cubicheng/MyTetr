@@ -1,5 +1,6 @@
 package com.Cubicheng.MyTetr.gameScenes.clientScene;
 
+import com.Cubicheng.MyTetr.Background;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.GetService;
 import com.Cubicheng.MyTetr.gameWorld.Player;
@@ -24,7 +25,7 @@ public class ClientWaitScene implements PushAndPopGameSubScene, GetService {
     public static final String SCENE_NAME = "ClientWaitScene";
 
     private GameWorld gameWorld;
-    private Entity background;
+    private Background background;
 
     @Override
     public XInput initInput(Input input) {
@@ -42,26 +43,6 @@ public class ClientWaitScene implements PushAndPopGameSubScene, GetService {
     private Text client_title;
     private Text text;
 
-    private void init_background(GameScene gameScene){
-        var background_image = FXGL.image("menu.png");
-
-        double new_width = gameScene.getAppHeight() / background_image.getHeight() * background_image.getWidth();
-        double new_height = gameScene.getAppHeight();
-
-        var background_texture = new Texture(background_image);
-
-        background_texture.setFitWidth(new_width);
-        background_texture.setFitHeight(new_height);
-
-        background = new EntityBuilder()
-                .at((gameScene.getAppWidth() - new_width) / 2, 0)
-                .view(background_texture)
-                .zIndex(Integer.MIN_VALUE)
-                .build();
-
-        gameWorld.addEntity(background);
-    }
-
     @Override
     public void initGame(GameWorld gameWorld, XInput input) {
         this.gameWorld = gameWorld;
@@ -69,7 +50,7 @@ public class ClientWaitScene implements PushAndPopGameSubScene, GetService {
 
     @Override
     public void initUI(GameScene gameScene, XInput input) {
-        init_background(gameScene);
+        background = new Background("menu.png", gameScene, gameWorld, 1.0);
 
         Client.getInstance().start();
 

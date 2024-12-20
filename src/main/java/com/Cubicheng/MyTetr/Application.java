@@ -40,6 +40,7 @@ public class Application extends javafx.application.Application implements FillS
         stage.setHeight(height / 4);
 
         var stackpane = new StackPane();
+
         stage.setScene(new Scene(stackpane));
 
 //        stage.setFullScreen(true);

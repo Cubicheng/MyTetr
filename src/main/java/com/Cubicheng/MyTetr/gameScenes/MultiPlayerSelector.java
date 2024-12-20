@@ -1,6 +1,7 @@
 package com.Cubicheng.MyTetr.gameScenes;
 
 import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.Background;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.gameScenes.clientScene.ClientWaitScene;
 import com.Cubicheng.MyTetr.gameScenes.serverScene.ServerWaitScene;
@@ -31,7 +32,7 @@ import javafx.scene.text.Text;
 public class MultiPlayerSelector implements PushAndPopGameSubScene {
     public static final String SCENE_NAME = "Multi_Player_Selector";
     private GameWorld gameWorld;
-    private Entity background;
+    private Background background;
 
     @Override
     public XInput initInput(Input input) {
@@ -48,30 +49,9 @@ public class MultiPlayerSelector implements PushAndPopGameSubScene {
     public void initGame(GameWorld gameWorld, XInput input) {
         this.gameWorld = gameWorld;
     }
-
-    private void init_background(GameScene gameScene){
-        var background_image = FXGL.image("menu.png");
-
-        double new_width = gameScene.getAppHeight() / background_image.getHeight() * background_image.getWidth();
-        double new_height = gameScene.getAppHeight();
-
-        var background_texture = new Texture(background_image);
-
-        background_texture.setFitWidth(new_width);
-        background_texture.setFitHeight(new_height);
-
-        background = new EntityBuilder()
-                .at((gameScene.getAppWidth() - new_width) / 2, 0)
-                .view(background_texture)
-                .zIndex(Integer.MIN_VALUE)
-                .build();
-
-        gameWorld.addEntity(background);
-    }
-
     @Override
     public void initUI(GameScene gameScene, XInput input) {
-        init_background(gameScene);
+        background = new Background("menu.png", gameScene, gameWorld, 1.0);
 
         var gridpane = new GridPane();
         var glow = new Glow(1.0);

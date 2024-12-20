@@ -46,4 +46,6 @@ public class Variables {
     );
 
     public static long seed = 0;
+
+    public static final int NUM_BACKGROUND = 8;
 }

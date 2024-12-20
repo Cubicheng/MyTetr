@@ -1,12 +1,15 @@
 package com.Cubicheng.MyTetr.gameScenes.clientScene;
 
 import com.Cubicheng.MyTetr.Application;
+import com.Cubicheng.MyTetr.Background;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.GetService;
 import com.Cubicheng.MyTetr.gameWorld.Player;
 import com.Cubicheng.MyTetr.gameWorld.Type;
+import com.Cubicheng.MyTetr.gameWorld.Variables;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.almasb.fxgl.app.scene.GameScene;
+import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
@@ -18,18 +21,21 @@ import com.whitewoodcity.fxgl.service.PushAndPopGameSubScene;
 import com.whitewoodcity.fxgl.service.XInput;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class ClientPlayScene implements PushAndPopGameSubScene, GetService {
     public static final String SCENE_NAME = "Client_Play";
 
     private GameWorld gameWorld;
     private Player player0, player1;
+    private Background background;
 
     @Override
     public XInput initInput(Input input) {
@@ -69,8 +75,11 @@ public class ClientPlayScene implements PushAndPopGameSubScene, GetService {
 
     @Override
     public void initUI(GameScene gameScene, XInput input) {
-        var background = FXGL.image("back3.jpg");
-        gameScene.setBackgroundColor(new ImagePattern(background, 0, 0, 1, 1, true));
+        gameScene.getRoot().setStyle("-fx-background-color: #000000;");
+
+        Random random = new Random(Variables.seed);
+
+        background = new Background("back" + random.nextInt(Variables.NUM_BACKGROUND), gameScene, gameWorld, 0.5);
 
         player0 = new Player(0, gameScene, gameWorld, -290, 0);
         player1 = new Player(1, gameScene, gameWorld, 290, 0);

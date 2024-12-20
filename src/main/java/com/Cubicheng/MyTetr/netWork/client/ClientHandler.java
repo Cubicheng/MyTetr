@@ -104,19 +104,27 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 gameMap.getComponent(GameMapComponent.class).add_attack_to_queue(((AttackPacket) msg).getAttack(), ((AttackPacket) msg).getX());
             });
         } else if (msg instanceof EscapePacket) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("玩家1 退出了游戏...");
-                alert.initOwner(Application.getStage());
-                alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
-                alert.show();
-                alert.setOnHidden(evt -> {
-                    FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
-                    FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
-                    FXGL.<GameApp>getAppCast().pop();
-                });
-            });
+            if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == ClientPlayScene.class) {
+                Platform.runLater(this::handle_EscapePacket);
+            }
         }
+    }
+
+    private void handle_EscapePacket() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("玩家1 退出了游戏...");
+        alert.initOwner(Application.getStage());
+        alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+        alert.show();
+        alert.setOnHidden(evt -> {
+            if (FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0) != null) {
+                FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
+            }
+            if (FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1) != null) {
+                FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
+            }
+            FXGL.<GameApp>getAppCast().pop();
+        });
     }
 
     public void push_UpdateMovablePiecePacket(UpdateMovablePiecePacket packet) {

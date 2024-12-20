@@ -6,6 +6,7 @@ import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.FXGL;
 import com.whitewoodcity.fxgl.service.ReplaceableGameScene;
 import com.whitewoodcity.fxgl.service.XInput;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.KeyCode;
@@ -16,20 +17,11 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class IntroScene implements ReplaceableGameScene {
     public static final String SCENE_NAME = "IntroScene";
-
-    @Override
-    public XInput initInput(Map<KeyCode, Runnable> keyPresses, Map<KeyCode, Runnable> keyReleases, Map<KeyCode, Runnable> keyActions) {
-        var input = new XInput(keyPresses, keyReleases, keyActions);
-        List.of(KeyCode.ENTER).forEach(keyCode ->
-                input.onActionBegin(keyCode, () -> {
-                    FXGL.<GameApp>getAppCast().push(MainMenu.SCENE_NAME);
-                })
-        );
-        return input;
-    }
 
     @Override
     public void initUI(GameScene gameScene, XInput input) {
@@ -42,7 +34,7 @@ public class IntroScene implements ReplaceableGameScene {
         text.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(50));
         text.setEffect(glow);
 
-        var hint = new Text("——按下回车进入——");
+        var hint = new Text("——Cubicheng 出品——");
         hint.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(30));
         hint.setEffect(glow);
 
@@ -51,6 +43,21 @@ public class IntroScene implements ReplaceableGameScene {
 
         hint.setTranslateX(FXGL.getAppCenter().getX() - hint.getBoundsInLocal().getWidth() / 2);
         hint.setTranslateY(FXGL.getAppCenter().getY() + 100);
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        FXGL.<GameApp>getAppCast().push(MainMenu.SCENE_NAME);
+                    }
+                });
+            }
+        };
+
+        Timer timer = new Timer();
+        timer.schedule(timerTask, 2000);
 
         gameScene.addUINode(text);
         gameScene.addUINode(hint);

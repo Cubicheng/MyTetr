@@ -63,7 +63,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                         var play_btn = util.get_text(gridpane, 0, 2);
                         play_btn.setText("");
 
-                    }else if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == ServerPlayScene.class) {
+                    } else if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == ServerPlayScene.class) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setHeaderText("失去了与 玩家2 的连接...");
                         alert.initOwner(Application.getStage());
@@ -118,18 +118,26 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             });
         } else if (msg instanceof EscapePacket) {
             Platform.runLater(() -> {
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("玩家2 退出了游戏...");
-                    alert.initOwner(Application.getStage());
-                    alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
-                    alert.show();
-                    alert.setOnHidden(evt -> {
-                        FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
-                        FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
-                        FXGL.<GameApp>getAppCast().pop();
-                    });
-                });
+                Platform.runLater(this::handle_EscapePacket);
+            });
+        }
+    }
+
+    private void handle_EscapePacket() {
+        if (FXGL.<GameApp>getAppCast().get_last_gameScene().getClass() == ServerPlayScene.class) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("玩家2 退出了游戏...");
+            alert.initOwner(Application.getStage());
+            alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
+            alert.show();
+            alert.setOnHidden(evt -> {
+                if (FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0) != null) {
+                    FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
+                }
+                if (FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1) != null) {
+                    FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
+                }
+                FXGL.<GameApp>getAppCast().pop();
             });
         }
     }

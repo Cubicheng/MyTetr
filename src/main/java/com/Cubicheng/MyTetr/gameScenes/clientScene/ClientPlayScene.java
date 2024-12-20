@@ -81,7 +81,13 @@ public class ClientPlayScene implements PushAndPopGameSubScene, GetService {
 
         Random random = new Random(Variables.seed);
 
-        background = new Background("back" + random.nextInt(Variables.NUM_BACKGROUND) + ".png", gameScene, gameWorld, 0.5);
+        int back_id = random.nextInt(Variables.NUM_BACKGROUND);
+
+        if (back_id < 2) {
+            background = new Background("back" + (back_id ^ 1) + ".png", gameScene, gameWorld, 0.5);
+        } else {
+            background = new Background("back" + (random.nextInt(Variables.NUM_BACKGROUND - 2) + 2) + ".png", gameScene, gameWorld, 0.5);
+        }
 
         player0 = new Player(0, gameScene, gameWorld, -290, 0);
         player1 = new Player(1, gameScene, gameWorld, 290, 0);

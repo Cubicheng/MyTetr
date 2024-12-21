@@ -6,6 +6,7 @@ import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.dsl.FXGL;
 import com.whitewoodcity.fxgl.service.ReplaceableGameScene;
 import com.whitewoodcity.fxgl.service.XInput;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.effect.Glow;
@@ -14,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 import java.util.List;
 import java.util.Map;
@@ -61,5 +63,11 @@ public class IntroScene implements ReplaceableGameScene {
 
         gameScene.addUINode(text);
         gameScene.addUINode(hint);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), gameScene.getRoot());
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+
+        fadeTransition.play();
     }
 }

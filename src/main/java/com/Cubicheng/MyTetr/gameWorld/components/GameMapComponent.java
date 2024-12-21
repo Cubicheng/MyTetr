@@ -4,16 +4,12 @@ import com.Cubicheng.MyTetr.Application;
 import com.Cubicheng.MyTetr.ApplicationType;
 import com.Cubicheng.MyTetr.GameApp;
 import com.Cubicheng.MyTetr.Pair;
-import com.Cubicheng.MyTetr.gameWorld.AttackQueue;
-import com.Cubicheng.MyTetr.gameWorld.ImageBuffer;
-import com.Cubicheng.MyTetr.gameWorld.NextQueue;
-import com.Cubicheng.MyTetr.gameWorld.Type;
+import com.Cubicheng.MyTetr.gameWorld.*;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.GhostPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.MovablePieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.NextPieceComponent;
 import com.Cubicheng.MyTetr.gameWorld.components.piece.WarnPieceComponent;
 import com.Cubicheng.MyTetr.netWork.client.Client;
-import com.Cubicheng.MyTetr.netWork.protocol.AttackPacket;
 import com.Cubicheng.MyTetr.netWork.server.Server;
 import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
@@ -36,6 +32,7 @@ public class GameMapComponent extends Component {
     private AttackQueue attack_queue;
     private int y;
     private Random random;
+    private int combo_cnt = 0;
 
     private boolean is_warning = false;
 
@@ -197,8 +194,34 @@ public class GameMapComponent extends Component {
         }
     }
 
+    private boolean is_block(int x, int y) {
+        if (x < 0 || x >= MAP_WIDTH || y < 0 || y >= MAP_HEIGHT) {
+            return true;
+        }
+        return playfiled.get(y).get(x) != -1;
+    }
+
+    private boolean isTspin() {
+        var movablePieceComponent = get_entity(Type.MovablePiece, 0).getComponent(MovablePieceComponent.class);
+        int now_techomino_type = movablePieceComponent.get_techomino_type();
+        if (now_techomino_type != 5) {
+            return false;
+        }
+        int x = movablePieceComponent.getX();
+        int y = movablePieceComponent.getY();
+
+        int block_cnt = 0;
+        if (is_block(x - 1, y - 1)) block_cnt++;
+        if (is_block(x + 1, y - 1)) block_cnt++;
+        if (is_block(x - 1, y + 1)) block_cnt++;
+        if (is_block(x + 1, y + 1)) block_cnt++;
+
+        return block_cnt >= 3;
+    }
+
     private void clear_line() {
         int clear_line_cnt = 0;
+        boolean is_tspin = isTspin();
         for (int i = 0; i < MAP_HEIGHT; i++) {
             boolean is_full = true;
             for (int j = 0; j < MAP_WIDTH; j++) {
@@ -213,12 +236,26 @@ public class GameMapComponent extends Component {
             playfiled.add(generate_new_empty_row());
             i--;
         }
-        //tetris
-        if (clear_line_cnt == 4) {
-            push_AttackPacket(4, random.nextInt(MAP_WIDTH));
+
+        int attack_line_cnt = 0;
+
+        if (clear_line_cnt > 0) {
+            if (is_tspin) {
+                attack_line_cnt = ATTACK_TABLE[clear_line_cnt + 3][combo_cnt];
+            } else {
+                attack_line_cnt = ATTACK_TABLE[clear_line_cnt - 1][combo_cnt];
+            }
         }
 
+        push_AttackPacket(attack_line_cnt, random.nextInt(MAP_WIDTH));
+
         add_garbage();
+
+        if (clear_line_cnt == 0) {
+            combo_cnt = 0;
+        } else {
+            combo_cnt++;
+        }
     }
 
     public void add_piece() {

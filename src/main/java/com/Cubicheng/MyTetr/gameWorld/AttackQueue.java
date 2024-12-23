@@ -21,6 +21,21 @@ public class AttackQueue {
         sum += attack;
     }
 
+    public int clear_attack(int attack) {
+        while (!queue.isEmpty()) {
+            if (queue.getFirst().first() <= attack) {
+                sum -= attack;
+                attack -= queue.getFirst().first();
+                queue.removeFirst();
+            } else {
+                sum -= attack;
+                queue.getFirst().setFirst(queue.getFirst().first() - attack);
+                break;
+            }
+        }
+        return attack;
+    }
+
     public Pair<Integer, Integer> get_front() {
         if (queue.isEmpty()) {
             return null;

@@ -196,8 +196,9 @@ public class GameMapComponent extends Component {
     }
 
     private void push_AttackPacket(int attack, int x) {
+        attack = attack_queue.clear_attack(attack);
+        update_attack_bar();
         if (player_id != 0) return;
-        System.out.println("attack: " + attack + " x: " + x);
         if (Application.getApplicationType() == ApplicationType.Server) {
             Server.getInstance().getHandler().push_AttackPacket(attack, x);
             get_entity(Type.GameMap, 1).getComponent(GameMapComponent.class).add_attack_to_queue(attack, x);

@@ -50,14 +50,23 @@ public class GameMapComponent extends Component {
         update_attack_bar();
     }
 
-    public void add_garbage() {
+    public void add_garbage(int add_maxx) {
+        if (add_maxx == 0) {
+            return;
+        }
         Pair<Integer, Integer> pair = attack_queue.get_front();
         if (pair == null) {
             return;
         }
-        update_attack_bar();
         int attack = pair.first();
         int x = pair.second();
+
+        if (attack <= add_maxx) {
+            attack_queue.pop_front();
+        } else {
+            attack_queue.set_first(attack - add_maxx, x);
+            attack = add_maxx;
+        }
 
         for (int i = MAP_HEIGHT - 1; i >= attack; i--) {
             for (int j = 0; j < MAP_WIDTH; j++) {
@@ -74,7 +83,8 @@ public class GameMapComponent extends Component {
                 }
             }
         }
-        update_texture();
+
+        add_garbage(add_maxx - attack);
     }
 
     @Override
@@ -166,7 +176,7 @@ public class GameMapComponent extends Component {
     private void update_attack_bar() {
         Entity attack_bar = get_entity(Type.AttackBar, 0);
         attack_bar.getViewComponent().clearChildren();
-        var rect = new Rectangle(17, 80 * attack_queue.getSum());
+        var rect = new Rectangle(17, 40 * attack_queue.getSum());
         rect.setFill(Color.RED);
         rect.setOpacity(0.7);
         rect.setLayoutY(-rect.getHeight());
@@ -266,7 +276,9 @@ public class GameMapComponent extends Component {
         }
 
         if (clear_line_cnt == 0) {
-            add_garbage();
+            add_garbage(MAXX_RECIEVED_ATTACK);
+            update_texture();
+            update_attack_bar();
         }
 
         if (clear_line_cnt == 0) {

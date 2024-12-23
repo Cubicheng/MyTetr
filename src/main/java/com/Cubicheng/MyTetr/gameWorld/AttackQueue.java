@@ -36,11 +36,26 @@ public class AttackQueue {
         return attack;
     }
 
+    public void pop_front() {
+        if (queue.isEmpty()) {
+            return;
+        }
+        queue.removeFirst();
+    }
+
+    public void set_first(int attack,int x){
+        if (queue.isEmpty()) {
+            return;
+        }
+        queue.getFirst().setFirst(attack);
+        queue.getFirst().setSecond(x);
+    }
+
     public Pair<Integer, Integer> get_front() {
         if (queue.isEmpty()) {
             return null;
         }
         sum -= queue.getFirst().first();
-        return queue.removeFirst();
+        return queue.getFirst();
     }
 }

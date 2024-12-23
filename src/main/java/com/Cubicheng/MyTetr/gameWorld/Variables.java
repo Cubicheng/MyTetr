@@ -24,6 +24,8 @@ public class Variables {
 
     public static final String config_file_path = "config/config.json";
 
+    public static final int MAXX_RECIEVED_ATTACK = 8;
+
     public static Map<Integer, Techomino> int2techomino = Map.of(
             0, TECHOMINO_I,
             1, TECHOMINO_J,

@@ -98,7 +98,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             });
         } else if (msg instanceof AttackPacket) {
             Platform.runLater(() -> {
-                System.out.println("receive attack");
                 var service = FXGL.<GameApp>getAppCast().getFrontlineService();
                 Entity gameMap = service.get_entity(Type.GameMap, 0);
                 gameMap.getComponent(GameMapComponent.class).add_attack_to_queue(((AttackPacket) msg).getAttack(), ((AttackPacket) msg).getX());

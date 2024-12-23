@@ -42,6 +42,8 @@ public class Variables {
             HoldPiece, 1,
             GameMap, 1,
             WarnPiece, 1,
+            AttackBar, 1,
+            AttackNum, 1,
             MapImageEntity, 1
     );
 

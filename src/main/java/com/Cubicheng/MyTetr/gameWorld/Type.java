@@ -8,5 +8,7 @@ public enum Type {
     HoldPiece,
     WarnPiece,
     GameMap,
+    AttackBar,
+    AttackNum,
     MapImageEntity;
 }

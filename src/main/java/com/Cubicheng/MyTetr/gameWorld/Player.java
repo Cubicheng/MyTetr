@@ -14,17 +14,21 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.texture.Texture;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
 import java.util.Optional;
 
-import static com.Cubicheng.MyTetr.gameWorld.Variables.BLOCK_SIZE;
+import static com.Cubicheng.MyTetr.gameWorld.Variables.*;
 
 public class Player {
     private Entity movablePiece, ghostPiece, holdPiece, warnPiece;
     private Entity gameMap;
     private Entity[] nextPiece;
     private Entity mapImageEntity;
+    private Entity attack_bar;
+    private Entity attack_num;
 
     private int id;
 
@@ -57,8 +61,12 @@ public class Player {
             alert.getDialogPane().setStyle("-fx-font-family: \"IPix\";");
             alert.show();
             alert.setOnHidden(evt -> {
-                FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
-                FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
+                if (FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0) != null) {
+                    FXGL.<GameApp>getAppCast().getFrontlineService().get_player(0).on_remove();
+                }
+                if (FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1) != null) {
+                    FXGL.<GameApp>getAppCast().getFrontlineService().get_player(1).on_remove();
+                }
                 FXGL.<GameApp>getAppCast().pop();
             });
         } else {
@@ -118,6 +126,19 @@ public class Player {
 
         startX = startX * new_width + (gameScene.getAppWidth() - new_width) / 2 + dx;
         startY = startY * new_height + dy;
+
+//        var rect = new Rectangle(17, 100);
+//        rect.setFill(Color.RED);
+//        rect.setOpacity(0.7);
+
+        attack_bar = new EntityBuilder()
+                .at(startX + MAP_WIDTH * BLOCK_SIZE + 4, startY + 20 * BLOCK_SIZE)
+//                .view(rect)
+                .type(Type.AttackBar)
+                .zIndex(Integer.MAX_VALUE)
+                .build();
+
+        gameWorld.addEntity(attack_bar);
 
         gameMap = GameMapComponent.of(new SpawnData(startX, startY + 19 * BLOCK_SIZE).put("id", id).put("seed", Variables.seed));
         movablePiece = MovablePieceComponent.of(new SpawnData(0, 0).put("startX", startX).put("startY", startY).put("id", id));

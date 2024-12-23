@@ -17,7 +17,10 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,8 +46,8 @@ public class GameMapComponent extends Component {
     }
 
     public void add_attack_to_queue(int attack, int x) {
-        System.out.println("attack: " + attack);
         attack_queue.add(attack, x);
+        update_attack_bar();
     }
 
     public void add_garbage() {
@@ -52,6 +55,7 @@ public class GameMapComponent extends Component {
         if (pair == null) {
             return;
         }
+        update_attack_bar();
         int attack = pair.first();
         int x = pair.second();
 
@@ -70,7 +74,6 @@ public class GameMapComponent extends Component {
                 }
             }
         }
-
         update_texture();
     }
 
@@ -160,6 +163,16 @@ public class GameMapComponent extends Component {
         }
     }
 
+    private void update_attack_bar() {
+        Entity attack_bar = get_entity(Type.AttackBar, 0);
+        attack_bar.getViewComponent().clearChildren();
+        var rect = new Rectangle(17, 80 * attack_queue.getSum());
+        rect.setFill(Color.RED);
+        rect.setOpacity(0.7);
+        rect.setLayoutY(-rect.getHeight());
+        attack_bar.getViewComponent().addChild(rect);
+    }
+
     private void update_texture() {
         Entity gameMap = get_entity(Type.GameMap, 0);
         gameMap.getViewComponent().clearChildren();
@@ -247,9 +260,13 @@ public class GameMapComponent extends Component {
             }
         }
 
-        push_AttackPacket(attack_line_cnt, random.nextInt(MAP_WIDTH));
+        if (attack_line_cnt > 0) {
+            push_AttackPacket(attack_line_cnt, random.nextInt(MAP_WIDTH));
+        }
 
-        add_garbage();
+        if (clear_line_cnt == 0) {
+            add_garbage();
+        }
 
         if (clear_line_cnt == 0) {
             combo_cnt = 0;

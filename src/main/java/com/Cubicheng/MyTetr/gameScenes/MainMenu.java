@@ -62,6 +62,8 @@ public class MainMenu implements PushAndPopGameSubScene {
         FXGL.getWorldProperties().clear();
         this.gameWorld = gameWorld;
 
+//        FXGL.loopBGM("bgm.mp3");
+
         ConfigVars.update_config_from_json();
     }
 

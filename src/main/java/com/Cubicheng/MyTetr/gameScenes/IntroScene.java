@@ -59,7 +59,7 @@ public class IntroScene implements ReplaceableGameScene {
         };
 
         Timer timer = new Timer();
-        timer.schedule(timerTask, 0);
+        timer.schedule(timerTask, 2000);
 
         gameScene.addUINode(text);
         gameScene.addUINode(hint);

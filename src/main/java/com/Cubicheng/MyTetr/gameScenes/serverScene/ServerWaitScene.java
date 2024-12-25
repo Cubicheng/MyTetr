@@ -23,6 +23,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+import java.net.UnknownHostException;
+
+import static com.Cubicheng.MyTetr.netWork.GetIp.getLocalHostLANAddress;
+
 public class ServerWaitScene implements PushAndPopGameSubScene, GetService {
     public static final String SCENE_NAME = "ServerWaitScene";
 
@@ -61,6 +65,12 @@ public class ServerWaitScene implements PushAndPopGameSubScene, GetService {
         }
 
         gridpane = new GridPane();
+
+        try {
+            server_ip = String.valueOf(getLocalHostLANAddress()).substring(1);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
 
         var server_title = new Text("房间 IP: " + server_ip);
         server_title.setFont(FXGL.getAssetLoader().loadFont("IPix.ttf").newFont(40));

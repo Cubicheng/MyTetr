@@ -49,6 +49,7 @@ public class MultiPlayerSelector implements PushAndPopGameSubScene {
     public void initGame(GameWorld gameWorld, XInput input) {
         this.gameWorld = gameWorld;
     }
+
     @Override
     public void initUI(GameScene gameScene, XInput input) {
         background = new Background("menu.png", gameScene, gameWorld, 1.0);

@@ -34,5 +34,7 @@ open module MyTetr {
     requires io.netty.transport.rxtx;
     requires io.netty.transport.sctp;
     requires io.netty.transport.udt;
-    requires jdk.jdi;
+//    requires jdk.jdi;
+
+//    requires jdk.unsupported;
 }
